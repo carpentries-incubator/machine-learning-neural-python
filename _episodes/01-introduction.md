@@ -1,15 +1,13 @@
 ---
 title: "Introduction"
-teaching: 0
-exercises: 0
+teaching: 20
+exercises: 10
 questions:
-- "Key question (FIXME)"
+- "What is an artificial neural network?"
 objectives:
-- "First learning objective. (FIXME)"
+- "Recognise a member of the neural network family of algorithms."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Neural networks are a powerful set of algorithms inspired by life."
 ---
-FIXME
 
-{% include links.md %}
-
+## What is an artificial neural network?
