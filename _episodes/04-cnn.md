@@ -1,5 +1,5 @@
 ---
-title: "Convolutional neural networks"
+title: "Convolution neural networks"
 teaching: 20
 exercises: 10
 questions:
@@ -9,9 +9,8 @@ objectives:
 keypoints:
 - "Convolutional neural networks are typically used for imaging tasks."
 ---
-FIXME
 
-## Convolutional neural networks
+## Convolution neural networks
 
 
 
