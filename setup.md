@@ -24,6 +24,7 @@ and in [Anaconda documentation][anaconda-install].
 3. Download [eicu_v2_0_1.sqlite3.gz][eicu-data] from the Files section of the project page.
 4. Move downloaded file to `ml-neural/data`.
 5. Unzip the file.
+6. Install MedMNIST, a Python package of medical datasets for machine learning. `pip install --upgrade git+https://github.com/MedMNIST/MedMNIST.git`
 
 ## Launch Python interface
 
