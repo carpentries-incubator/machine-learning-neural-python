@@ -132,9 +132,9 @@ Now that we have our raw data, we need to prepare it for inputting into our (yet
 [TODO: work out a cleaner way of subsetting the dataset]
 
 ```python
-# add pneumothorax flag
-train_dataset.pneumothorax = (train_dataset.labels[:,7] == 1) & (train_dataset.labels.sum(axis=1) == 1)
-test_dataset.pneumothorax = (test_dataset.labels[:,7] == 1) & (test_dataset.labels.sum(axis=1) == 1)
+# add pneumonia flag
+train_dataset.pneumonia = (train_dataset.labels[:,6] == 1) & (train_dataset.labels.sum(axis=1) == 1)
+test_dataset.pneumonia = (test_dataset.labels[:,6] == 1) & (test_dataset.labels.sum(axis=1) == 1)
 
 # add "normal" flag
 train_dataset.normal = (train_dataset.labels.sum(axis=1) == 0)
@@ -144,12 +144,12 @@ test_dataset.normal = (test_dataset.labels.sum(axis=1) == 0)
 train_dataset.normal = train_dataset.normal & (train_dataset.normal.astype(int).cumsum() < 1000)
 test_dataset.normal = test_dataset.normal & (test_dataset.normal.astype(int).cumsum() < 1000)
 
-# remove anything that isn't pneumothorax or normal
-train_idx_subset = (train_dataset.pneumothorax | train_dataset.normal)
-test_idx_subset = (test_dataset.pneumothorax | test_dataset.normal)
+# remove anything that isn't pneumonia or normal
+train_idx_subset = (train_dataset.pneumonia | train_dataset.normal)
+test_idx_subset = (test_dataset.pneumonia | test_dataset.normal)
 
-train_dataset.pneumothorax = train_dataset.pneumothorax[train_idx_subset]
-test_dataset.pneumothorax = test_dataset.pneumothorax[test_idx_subset]
+train_dataset.pneumonia = train_dataset.pneumonia[train_idx_subset]
+test_dataset.pneumonia = test_dataset.pneumonia[test_idx_subset]
 train_dataset.imgs = train_dataset.imgs[train_idx_subset]
 test_dataset.imgs = test_dataset.imgs[test_idx_subset]
 train_dataset.labels = train_dataset.labels[train_idx_subset]
@@ -221,7 +221,7 @@ model.compile(
 )
 ```
 
-## Plot the model
+## Review the model architecture
 
 [TODO: introduce the plot]
 
@@ -238,7 +238,7 @@ We now call the `fit()` method on the training data to train our network.
 ```python
 model.fit(
     train_dataset.imgs,
-    train_dataset.pneumothorax,
+    train_dataset.pneumonia,
     batch_size=128,
     epochs=400,
     verbose=2,
@@ -246,16 +246,18 @@ model.fit(
 )
 ```
 
+[TODO: plot metrics]
+
 ## Evaluation
 
 As a more robust test, let's evaluate the model on our full test set.
 
 ```python
-score_train = model.evaluate(train_dataset.imgs, train_dataset.pneumothorax, verbose=0)
+score_train = model.evaluate(train_dataset.imgs, train_dataset.pneumonia, verbose=0)
 print("Train loss:", score_train[0])
 print("Train accuracy:", score_train[1])
 
-score_test = model.evaluate(test_dataset.imgs, test_dataset.pneumothorax, verbose=0)
+score_test = model.evaluate(test_dataset.imgs, test_dataset.pneumonia, verbose=0)
 print("Test loss:", score_test[0])
 print("Test accuracy:", score_test[1])
 ```
