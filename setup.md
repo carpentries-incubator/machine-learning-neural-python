@@ -21,8 +21,8 @@ and in [Anaconda documentation][anaconda-install].
 
 1. Create a folder called `ml-neural` on your Desktop.
 2. Create a subfolder called `data`.
-3. Download [eicu_v2_0_1.sqlite3.gz][eicu-data] from the Files section of the project page.
-4. Move downloaded file to `ml-neural/data`.
+3. Download [chest_xrays.zip][data/chest_xrays.zip] from the data section of the project page.
+4. Move the downloaded file to `ml-neural/data`.
 5. Unzip the file.
 
 ## Launch Python interface

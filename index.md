@@ -4,7 +4,7 @@ root: .  # Is the only page that doesn't follow the pattern /:path/index.html
 permalink: index.html  # Is the only page that doesn't follow the pattern /:path/index.html
 ---
 
-This lesson gives an introduction to artificial neural networks. We begin by walking through the steps of creating and training a simple network for prediction. We then explore more sophisticated networks that can be applied for classification of chest x-ray images.
+This lesson gives an introduction to artificial neural networks. We begin by an outlining an important application of machine learning in healthcare: the development of algorithms for classification of chest X-ray images. During the lesson we explore how to prepare and visualise data for algorithm development, and construct a neural net that is able to classify disease.
 
 <!-- this is an html comment -->
 
