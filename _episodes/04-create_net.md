@@ -44,10 +44,6 @@ Different filters allow different aspects of an input image to be emphasised. Fo
 Before training a convolutional neural network, we will first need to define the architecture. We can do this using the Keras and Tensorflow libraries.
 
 ```python
-# NOTE: CONSIDER REPLACING WITH
-# https://www.tensorflow.org/tutorials/images/cnn
-
-
 # In this step we will create the architecture of our convolutional neural network,
 #We will use the Keras library, suitable for Deep Learning in Python
 #Initially, we are going to import the Keras functions that we are going to use:
@@ -117,7 +113,63 @@ model.summary()
 ```
 {: .language-python}
 
-
+```
+Model: "model_39"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_9 (InputLayer)        [(None, 256, 256, 1)]     0         
+                                                                 
+ conv2d_59 (Conv2D)          (None, 256, 256, 8)       80        
+                                                                 
+ max_pooling2d_50 (MaxPoolin  (None, 128, 128, 8)      0         
+ g2D)                                                            
+                                                                 
+ conv2d_60 (Conv2D)          (None, 128, 128, 8)       584       
+                                                                 
+ max_pooling2d_51 (MaxPoolin  (None, 64, 64, 8)        0         
+ g2D)                                                            
+                                                                 
+ conv2d_61 (Conv2D)          (None, 64, 64, 12)        876       
+                                                                 
+ max_pooling2d_52 (MaxPoolin  (None, 32, 32, 12)       0         
+ g2D)                                                            
+                                                                 
+ conv2d_62 (Conv2D)          (None, 32, 32, 12)        1308      
+                                                                 
+ max_pooling2d_53 (MaxPoolin  (None, 16, 16, 12)       0         
+ g2D)                                                            
+                                                                 
+ conv2d_63 (Conv2D)          (None, 16, 16, 20)        6020      
+                                                                 
+ max_pooling2d_54 (MaxPoolin  (None, 8, 8, 20)         0         
+ g2D)                                                            
+                                                                 
+ conv2d_64 (Conv2D)          (None, 8, 8, 20)          10020     
+                                                                 
+ max_pooling2d_55 (MaxPoolin  (None, 4, 4, 20)         0         
+ g2D)                                                            
+                                                                 
+ conv2d_65 (Conv2D)          (None, 4, 4, 50)          25050     
+                                                                 
+ global_average_pooling2d_8   (None, 50)               0         
+ (GlobalAveragePooling2D)                                        
+                                                                 
+ dense_26 (Dense)            (None, 128)               6528      
+                                                                 
+ dropout_8 (Dropout)         (None, 128)               0         
+                                                                 
+ dense_27 (Dense)            (None, 32)                4128      
+                                                                 
+ dense_28 (Dense)            (None, 1)                 33        
+                                                                 
+=================================================================
+Total params: 54,627
+Trainable params: 54,627
+Non-trainable params: 0
+_________________________________________________________________
+```
+{: .output}
 
 {% include links.md %}
  
