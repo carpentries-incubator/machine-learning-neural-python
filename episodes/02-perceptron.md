@@ -12,7 +12,7 @@ keypoints:
 
 ## Perceptron
 
-The single-layer perceptron gives us a helpful foothold for the class of algorithms known as artificial neural networks. The perceptron takes a set of input values (x) which are multiplied by a set of weights (w) and fed into a simple function to produce a binary (True or False) output.
+The single-layer perceptron is a simple introduction to the class of algorithms known as artificial neural networks. The perceptron takes a set of input values (x) which are multiplied by a set of weights (w) and fed into a function to produce a binary (True or False) output.
 
 ![Perceptron algorithm](../fig/section2-fig1.png){: width="600px"}
 
