@@ -3,14 +3,14 @@ title: "Training and evaluation"
 teaching: 20
 exercises: 10
 questions:
-- "What is a convolutional neural network?"
-- "What is a saliency map?"
+- "How do I train a neural network?"
+- "How can I understand what aspects of an image contribute to predictions made by a network?"
 objectives:
 - "Train a convolutational neural network for classification."
 - "Evalute the network's performance on a test set."
 - "Review model performance with saliency maps."
 keypoints:
-- "Saliency maps can be used to highlight the areas of an image that are discriminative with respect to the given class."
+- "We can use tools to highlight the areas of an image that contribute to a model output."
 ---
 
 ## Compile and train your model
@@ -86,7 +86,7 @@ Accuracy in test group: 0.67
 ```
 {: .output}
 
-## Saliency maps
+## Understanding more about how the network makes a prediction
 
 We can use tools to rank the pixels in an image based on their contribution to the network prediction. Here we use GradCAM which looks at the output of the penultimate layer (that is the convolutional layer just before dense layers).
 
