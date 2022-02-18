@@ -28,9 +28,9 @@ checkpointer = ModelCheckpoint(filepath='best_model.hdf5', monitor='val_loss',
                                verbose=1, save_best_only=True)
 
 # Finally let's train our network
-steps_per_epoch = len(dataset_train)//batch_size
+# steps_per_epoch = len(dataset_train)//batch_size
 hist = model.fit_generator(datagen.flow(dataset_train, labels_train, batch_size=16), 
-                                     steps_per_epoch=steps_per_epoch, 
+                                     steps_per_epoch=16, 
                                      epochs=10, 
                                      validation_data= (dataset_val, labels_val), 
                                      callbacks=[checkpointer])
@@ -56,7 +56,7 @@ plt.show()
 ```
 {: .language-python}
 
-![Training curves](../fig/placeholder.png){: width="600px"}
+![Training curves](../fig/training_curves.png){: width="600px"}
 
 ## Evaluating your model on the held-out test set
 
@@ -81,9 +81,14 @@ print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, 
 ```
 {: .language-python}
 
+```
+Accuracy in test group: 0.67
+```
+{: .output}
+
 ## Saliency maps
 
-Saliency maps are used to rank the pixels in an image based on their contribution to the networks prediction. Here we compute saliency maps that highlight the areas of an image that are discriminative with respect to the given class.
+We can use tools to rank the pixels in an image based on their contribution to the network prediction. Here we use GradCAM which looks at the output of the penultimate layer (that is the convolutional layer just before dense layers).
 
 ```python
 # !pip install tf_keras_vis
@@ -132,7 +137,7 @@ for image_id in range(10):
 ```
 {: .language-python}
 
-![Saliency maps](../fig/placeholder.png){: width="600px"}
+![Saliency maps](../fig/saliency.png){: width="600px"}
 
 {% include links.md %}
  
