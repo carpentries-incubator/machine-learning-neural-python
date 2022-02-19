@@ -51,7 +51,7 @@ Consider an image as a matrix in which the value of each pixel corresponds to a 
 import numpy as np 
 
 file_idx = 0
-normal_list[file_idx]
+example = normal_list[file_idx]
 image = cv2.imread(example)
 
 print(image.shape)
@@ -153,6 +153,7 @@ print(f"Matrix Dimensions: {dataset.shape}")
 We could plot the images by indexing them on `dataset`, e.g., we can plot the first image in the dataset with:
 
 ```python
+# If the dataset has been normalised, vmin and vmax need to be updated.
 plt.imshow(dataset[0], cmap='gray', vmin=0, vmax=255)
 ```
 {: .language-python}
