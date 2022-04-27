@@ -23,10 +23,10 @@ We will be using the MedMNIST dataset, a large-scale MNIST-like collection of st
 
 ## Obtain lesson materials
 
-1. Create a folder called `ml-neural` on your Desktop.
-2. Create a subfolder called `data`.
-3. Install the [MedMNIST](https://github.com/MedMNIST/MedMNIST) package by following the instructions in the Readme.
-4. Download the "PneumoniaMNIST" set to the data folder with the following commands:
+1. Create a folder called `carpentries-ml-neural` on your Desktop.
+2. Install the [MedMNIST](https://github.com/MedMNIST/MedMNIST) package by following the instructions in the Readme.
+3. Download the "PneumoniaMNIST" set to the data folder with the following commands below.
+4. Move downloaded files to `carpentries-ml-neural`.
 
 ```python
 import dataset_without_pytorch
