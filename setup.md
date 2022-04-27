@@ -19,31 +19,13 @@ and in [Anaconda documentation][anaconda-install].
 
 ## Obtain lesson materials
 
-We will be using the MedMNIST dataset, a large-scale MNIST-like collection of standardized biomedical images (https://medmnist.com/). All images are pre-processed into 28 x 28 pixels (2D) with the corresponding classification labels. 
+The data that we are going to use for this project consists of 700 chest X-rays. These X-rays are a subset of the public NIH ChestX-ray dataset.
 
-## Obtain lesson materials
+> Xiaosong Wang, Yifan Peng, Le Lu, Zhiyong Lu, Mohammadhadi Bagheri, Ronald Summers, ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases, IEEE CVPR, pp. 3462-3471, 2017
 
+1. Download [chest_xrays.zip](./data/chest_xrays.zip).
 1. Create a folder called `carpentries-ml-neural` on your Desktop.
-2. Install the [MedMNIST](https://github.com/MedMNIST/MedMNIST) package by following the instructions in the Readme.
-3. Download the "PneumoniaMNIST" set to the data folder with the following commands below.
-4. Move downloaded files to `carpentries-ml-neural`.
-
-```python
-import dataset_without_pytorch
-from medmnist import INFO, Evaluator
-from dataset_without_pytorch import get_loader
-
-dataset_name = 'breastmnist'
-download = True
-
-# load the data
-train_dataset = DataClass(split='train', download=download)
-
-# encapsulate data into dataloader form
-train_loader = get_loader(dataset=train_dataset, batch_size=BATCH_SIZE)
-
-print(train_dataset)
-```
+3. Move downloaded files to `carpentries-ml-neural`.
 
 ## Launch Python interface
 
