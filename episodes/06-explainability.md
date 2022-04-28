@@ -11,9 +11,12 @@ keypoints:
 - "We can use tools to highlight the areas of an image that contribute to a model output."
 ---
 
-## Understanding more about how the network makes a prediction
+## Explainability
 
-We can use tools to rank the pixels in an image based on their contribution to the network prediction. Here we use GradCAM which looks at the output of the penultimate layer (that is the convolutional layer just before dense layers).
+If a model is making a prediction, many of us would like to know how the decision was reached. Saliency maps - and related approaches - are popular form of explainability for imaging models. 
+
+Saliency maps use color to illustrate the extent to which a region of an image contributes to a given decision. Let's plot some saliency maps for our model:
+
 
 ```python
 # !pip install tf_keras_vis
@@ -25,8 +28,7 @@ from matplotlib import pyplot as plt
 from tf_keras_vis.gradcam_plus_plus import GradcamPlusPlus
 from tf_keras_vis.utils.scores import CategoricalScore
 
-gradcam = GradcamPlusPlus(best_model,
-                          clone=True)
+gradcam = GradcamPlusPlus(best_model, clone=True)
 
 def plot_map(cam, classe, prediction, img):
     fig, axes = plt.subplots(1,2,figsize=(14,5))
@@ -63,6 +65,17 @@ for image_id in range(10):
 {: .language-python}
 
 ![Saliency maps](../fig/saliency.png){: width="600px"}
+
+## Sanity checks
+
+While saliency maps may offer us interesting insights about regions of an image contributing to a model's output, there are suggestions that this kind of visual assessment can be misleading. For example, the following abstract is from a paper entitled "[Sanity Checks for Saliency Maps](https://arxiv.org/abs/1810.03292)":
+
+> Saliency methods have emerged as a popular tool to highlight features in an input deemed relevant for the prediction of a learned model. Several saliency methods have been proposed, often guided by visual appeal on image data. In this work, we propose an actionable methodology to evaluate what kinds of explanations a given method can and cannot provide. We find that reliance, solely, on visual assessment can be misleading. Through extensive experiments we show that some existing saliency methods are independent both of the model and of the data generating process. Consequently, methods that fail the proposed tests are inadequate for tasks that are sensitive to either data or model, such as, finding outliers in the data, explaining the relationship between inputs and outputs that the model learned, and debugging the model. We interpret our findings through an analogy with edge detection in images, a technique that requires neither training data nor model.
+
+The authors present the following comparison of the output of standard saliency methods with those of an edge detector. They explain that "the edge detector does not depend on model or training data, and yet produces results that bear visual similarity with saliency maps. This goes to show that visual inspection is a poor guide in judging whether an explanation is sensitive to the underlying model and data."
+
+![Saliency maps](../fig/saliency_methods_and_edge_detector.png){: width="800px"}
+
 
 {% include links.md %}
  
