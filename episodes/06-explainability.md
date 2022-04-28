@@ -1,19 +1,20 @@
 ---
-title: "Saliency maps"
+title: "Explainability"
 teaching: 20
 exercises: 10
 questions:
 - "What is a saliency map?"
-- "How can I understand what aspects of an image contribute to predictions made by a network?"
+- "What aspects of an image contribute to predictions?"
 objectives:
 - "Review model performance with saliency maps."
 keypoints:
-- "We can use tools to highlight the areas of an image that contribute to a model output."
+- "Saliency maps are a popular form of explainability for imaging models."
+- "Saliency maps should be used cautiously."
 ---
 
 ## Explainability
 
-If a model is making a prediction, many of us would like to know how the decision was reached. Saliency maps - and related approaches - are popular form of explainability for imaging models. 
+If a model is making a prediction, many of us would like to know how the decision was reached. Saliency maps - and related approaches - are a popular form of explainability for imaging models. 
 
 Saliency maps use color to illustrate the extent to which a region of an image contributes to a given decision. Let's plot some saliency maps for our model:
 

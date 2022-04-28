@@ -8,12 +8,12 @@ objectives:
 - "Train a convolutational neural network for classification."
 - "Evalute the network's performance on a test set."
 keypoints:
-- ""
+- "During the training process we iteratively update the model to minimise error."
 ---
 
 ## Compile and train your model
 
-Now that the model architecture is complete, it is ready to be compiled and trained! The difference between our predictions and the true values is the eror or "loss". The goal of training is to minimise this loss.
+Now that the model architecture is complete, it is ready to be compiled and trained! The difference between our predictions and the true values is the error or "loss". The goal of training is to minimise this loss.
 
 The training process will try to find the optimal model. Using gradient descent, the model's weights are iteratively updated as each batch of data is processed. An epoch means training the neural network with all the training data for one cycle. In an epoch, we use all of the training data once.
 
