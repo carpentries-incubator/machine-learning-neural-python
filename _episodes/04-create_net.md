@@ -53,7 +53,7 @@ from keras.layers.core import Dense, Dropout
 from keras.layers.convolutional import Conv2D
 from keras.layers.pooling import MaxPool2D
 from keras.models import Model
-from keras.layers import Input, add
+from keras.layers import Input, add, GlobalAveragePooling2D
 from keras.callbacks import ModelCheckpoint
 
 import tensorflow as tf
