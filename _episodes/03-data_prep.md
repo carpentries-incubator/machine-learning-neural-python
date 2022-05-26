@@ -33,18 +33,19 @@ dataset_train, dataset_test, labels_train, labels_test = train_test_split(datase
 # Create a validation set
 dataset_train, dataset_val, labels_train, labels_val = train_test_split(dataset_train, labels_train, test_size=0.15, random_state=42)
 
-print("No. images, x_dim, y_dim, colors) (No. labels, 1)")
-print(f"{dataset_train.shape}, {labels_train.shape}")
-print(f"{dataset_val.shape}, {labels_val.shape}")
-print(f"{dataset_test.shape}, {labels_test.shape}")
+print("No. images, x_dim, y_dim, colors) (No. labels, 1)\n")
+print(f"Train: {dataset_train.shape}, {labels_train.shape}")
+print(f"Validation: {dataset_val.shape}, {labels_val.shape}")
+print(f"Test: {dataset_test.shape}, {labels_test.shape}")
 ```
 {: .language-python}
 
 ```
-No. images, x_dim, y_dim, channels) (No. labels, channels)
-(505, 256, 256, 1), (505, 1)
-(90, 256, 256, 1), (90, 1)
-(105, 256, 256, 1), (105, 1)
+No. images, x_dim, y_dim, colors) (No. labels, 1)
+
+Train: (505, 256, 256, 1), (505, 1)
+Validation: (90, 256, 256, 1), (90, 1)
+Test: (105, 256, 256, 1), (105, 1)
 ```
 {: .output}
 
