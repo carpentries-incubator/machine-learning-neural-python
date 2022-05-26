@@ -46,6 +46,11 @@ Before training a convolutional neural network, we will first need to define the
 ```python
 # Create the architecture of our convolutional neural network, using
 # the tensorflow library
+import tensorflow as tf
+
+# set random seed for reproducibility
+tf.random.set_seed(42)
+
 from tensorflow.keras import optimizers
 from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, add, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
@@ -95,9 +100,6 @@ outputs = Dense(1, activation='sigmoid')(x)
 
 # Finally, we will define our network with the input and output of the network
 model = Model(inputs=inputs, outputs=outputs)
-
-# We define the network optimization method: ADAM, with the learning and decay rate
-custom_adam = tf.optimizers.Adam(learning_rate=0.0005, decay=0.0002)
 ```
 {: .language-python}
 
