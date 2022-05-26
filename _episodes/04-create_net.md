@@ -44,17 +44,12 @@ Different filters allow different aspects of an input image to be emphasised. Fo
 Before training a convolutional neural network, we will first need to define the architecture. We can do this using the Keras and Tensorflow libraries.
 
 ```python
-# In this step we will create the architecture of our convolutional neural network,
-# We will use the Keras library, suitable for Deep Learning in Python
-
-from keras import optimizers
-from keras.layers.core import Dense, Dropout
-from keras.layers.convolutional import Conv2D
-from keras.layers.pooling import MaxPool2D
-from keras.models import Model
-from keras.layers import Input, add, GlobalAveragePooling2D
-from keras.callbacks import ModelCheckpoint
-
+# Create the architecture of our convolutional neural network, using
+# the tensorflow library
+from tensorflow.keras import optimizers
+from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, add, GlobalAveragePooling2D
+from tensorflow.keras.models import Model
+from tensorflow.keras.callbacks import ModelCheckpoint
 import tensorflow as tf
  
 # Our input layer should match the input shape of our images.
