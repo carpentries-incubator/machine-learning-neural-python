@@ -21,6 +21,7 @@ In the previous section, we set up a dataset comprising 700 chest X-rays. Half o
 # cv2 is openCV, a popular computer vision library
 import cv2
 from matplotlib import pyplot as plt 
+import random
 
 def plot_example(example, label, loc):
     image = cv2.imread(example)
@@ -32,16 +33,41 @@ fig, ax = plt.subplots(1, 2)
 fig.set_size_inches(10, 10)
 
 # Plot a "normal" record
-# (select a file from the list using its index)
-file_idx = 0
-plot_example(normal_list[file_idx], "Normal", 0)
+plot_example(random.choice(normal_list), "Normal", 0)
 
 # Plot a record labelled with effusion
-plot_example(effusion_list[file_idx], "Effusion", 1)
+plot_example(random.choice(effusion_list), "Effusion", 1)
 ```
 {: .language-python}
 
 ![Example X-rays](../fig/example_records.png){: width="600px"}
+
+## Can we detect effusion?
+
+Run the following code to flip and coin to select an x-ray from our collection.
+
+```python
+print("Effusion or not?")
+
+# flip a coin
+coin_flip = random.choice(["Effusion", "Normal"])
+if coin_flip == "Normal":
+    fn = random.choice(normal_list)
+else:
+    fn = random.choice(effusion_list)
+
+# plot the image
+image = cv2.imread(fn)
+plt.imshow(image)
+```
+
+Show the answer:
+
+```python
+# Jupyter doesn't allow us to print the image until the cell has run,
+# so we'll print in a new cell.
+print(f"The answer is: {coin_flip}!")
+```
 
 ## How does a computer see an image?
 
