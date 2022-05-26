@@ -85,7 +85,7 @@ val_generator = datagen.flow_from_directory(
 def plot_images(images_arr):
     fig, axes = plt.subplots(1, 5, figsize=(20,20))
     axes = axes.flatten()
-    for img, ax in zip( images_arr, axes):
+    for img, ax in zip(images_arr, axes):
         ax.imshow(img.astype('uint8'))
     plt.tight_layout()
     plt.show()

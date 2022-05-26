@@ -45,8 +45,7 @@ Before training a convolutional neural network, we will first need to define the
 
 ```python
 # In this step we will create the architecture of our convolutional neural network,
-#We will use the Keras library, suitable for Deep Learning in Python
-#Initially, we are going to import the Keras functions that we are going to use:
+# We will use the Keras library, suitable for Deep Learning in Python
 
 from keras import optimizers
 from keras.layers.core import Dense, Dropout
@@ -67,7 +66,8 @@ inputs = Input(shape=(256, 256, 1))
 # Let's add the first convolutional layer
 x = Conv2D(8, 3, padding='same', activation='relu')(inputs)
 
-# MaxPool layers are similar to convolution layers. The pooling operation involves sliding a two-dimensional filter over each channel of feature map and summarising the features.
+# MaxPool layers are similar to convolution layers. 
+# The pooling operation involves sliding a two-dimensional filter over each channel of feature map and summarising the features.
 # We do this to reduce the dimensions of the feature maps, helping to limit the amount of computation done by the network.
 x = MaxPool2D()(x)
 
