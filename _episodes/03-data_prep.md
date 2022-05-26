@@ -56,17 +56,16 @@ We have a small dataset, which increases the chance of overfitting our model. If
 To artificially increase the size of our training set, we can use `ImageDataGenerator`. This function generates new data by applying random transformations to our source images while our model is training.
 
 ```python
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Define what kind of transformations we would like to apply
 # such as rotation, crop, zoom, position shift, etc
-
 datagen = ImageDataGenerator(
-    rotation_range=20,
-    width_shift_range=0.2,
-    height_shift_range=0.2,
-    zoom_range=0.2,
-    horizontal_flip=True)
+    rotation_range=0,
+    width_shift_range=0,
+    height_shift_range=0,
+    zoom_range=0,
+    horizontal_flip=False)
 ```
 {: .language-python}
 
