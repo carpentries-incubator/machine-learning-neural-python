@@ -27,11 +27,11 @@ checkpointer = ModelCheckpoint(filepath='best_model.hdf5', monitor='val_loss',
 
 # Now train our network!
 # steps_per_epoch = len(dataset_train)//batch_size
-hist = model.fit_generator(datagen.flow(dataset_train, labels_train, batch_size=16), 
-                                     steps_per_epoch=16, 
-                                     epochs=10, 
-                                     validation_data= (dataset_val, labels_val), 
-                                     callbacks=[checkpointer])
+hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=64), 
+                 steps_per_epoch=7, 
+                 epochs=5, 
+                 validation_data=(dataset_val, labels_val), 
+                 callbacks=[checkpointer])
 ```
 {: .language-python}
 
@@ -61,7 +61,7 @@ plt.show()
 In this step, we will present the entire test dataset for the model we created, in order to calculate the accuracy of our neural network in a group of images that the model has never seen before.
 
 ```python
-from keras.models import load_model 
+from tensorflow.keras.models import load_model 
 
 # Open the best model saved during training
 best_model = load_model('best_model.hdf5')
