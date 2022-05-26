@@ -15,15 +15,27 @@ keypoints:
 
 An artificial neural network, or just “neural network”, is a broad term that describes a family of machine learning models that are (very!) loosely based on the neural circuits found in biology.
 
-The smallest building block of a neural network is a single neuron. A typical neuron receives inputs (x1, x2) which are multiplied by learnable weights (w1, w2), then summed with a bias term (b). An activation function determines the neuron output.
+The smallest building block of a neural network is a single neuron. A typical neuron receives inputs (x1, x2, x3) which are multiplied by learnable weights (w1, w2, w3), then summed with a bias term (b). An activation function (f) determines the neuron output.
 
-![Neuron](../fig/neuron.jpg){: width="600px"}
+![Neuron](../fig/neuron.png){: width="600px"}
 
 From a high level, a neural network is a system that takes input values in an “input layer”, processes these values with a collection of functions in one or more “hidden layers”, and then generates an output such as a prediction. The network has parameters that are systematically tweaked to allow pattern recognition.
 
-![Neuron](../fig/simple_neural_network.jpg){: width="800px"}
+![Neuron](../fig/simple_neural_network.png){: width="800px"}
 
 “Deep learning” is an increasingly popular term used to describe neural networks. When people talk about deep learning they are typically referring to more complex network designs, often with a large number of hidden layers.
+
+## Activation Functions
+
+Part of the concept of a neural network is that each neuron can either be 'active' or 'inactive'. This notion of activity and inactivity is attempted to be replicated by so called activation functions. The original activation function was the sigmoid function (related to its use in logistic regression). This would make each neuron's activation some number between 0 and 1, with the idea that 0 was 'inactive' and 1 was 'active'.
+
+As time went on, different activation functions were used. For example the tanh function (hyperbolic tangent function), where the idea is a neuron can be active in both a positive capacity (close to 1), a negative capacity (close to -1) or can be inactive (close to 0).
+
+The problem with both of these is that they suffered from a problem called [model saturation](http://vigir.missouri.edu/~gdesouza/Research/Conference_CDs/IEEE_SSCI_2015/data/7560b423.pdf). This is where very high or very low values are put into the activation function, where the gradient of the line is almost flat. This leads to very slow learning rates (it can take a long time to train models with these activation functions).
+
+Another very popular activation function that tries to tackle this is the rectified linear unit (ReLU) function. This has 0 if the input is negative (inactive) and just gives back the input if it is positive (a measure of how active it is - the metaphor gets rather stretched here). This is much faster at training and gives very good performance, but still suffers model saturation on the negative side. Researchers have tried to get round this with functions like 'leaky' ReLU, where instead of returning 0, negative inputs are multiplied by a very small number.
+
+![Activation functions](../fig/ActivationFunctions.png){: width="600px"}
 
 ## Convolutional neural networks
 
