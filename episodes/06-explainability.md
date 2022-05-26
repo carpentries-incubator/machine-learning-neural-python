@@ -41,7 +41,6 @@ def plot_map(cam, classe, prediction, img):
     plt.suptitle("Class: {}. Pred = {}".format(classe, prediction))
     
 for image_id in range(10):
-    
     SEED_INPUT = dataset_test[image_id]
     CATEGORICAL_INDEX = [0]
 
@@ -50,18 +49,17 @@ for image_id in range(10):
     class_idx  = 0
 
     cat_score = labels_test[image_id]
-    
     cat_score = CategoricalScore(CATEGORICAL_INDEX)
     cam = gradcam(cat_score, SEED_INPUT, 
                   penultimate_layer = penultimate_layer_idx,
                   normalize_cam=True)
     
-    #Let's show which class it belongs to
-    _classe = 'normal' if labels_test[image_id]==0 else 'effusion'
+    # Display the class
+    _class = 'normal' if labels_test[image_id] == 0 else 'effusion'
 
     _prediction = best_model.predict(dataset_test[image_id][np.newaxis,:,...], verbose=0)
 
-    plot_map(cam, _classe, _prediction[0][0], SEED_INPUT)
+    plot_map(cam, _class, _prediction[0][0], SEED_INPUT)
 ```
 {: .language-python}
 

@@ -25,7 +25,7 @@ model.compile(loss='binary_crossentropy', optimizer=custom_adam, metrics=['acc']
 checkpointer = ModelCheckpoint(filepath='best_model.hdf5', monitor='val_loss',
                                verbose=1, save_best_only=True)
 
-# Finally let's train our network
+# Now train our network!
 # steps_per_epoch = len(dataset_train)//batch_size
 hist = model.fit_generator(datagen.flow(dataset_train, labels_train, batch_size=16), 
                                      steps_per_epoch=16, 
@@ -61,13 +61,11 @@ plt.show()
 In this step, we will present the entire test dataset for the model we created, in order to calculate the accuracy of our neural network in a group of images that the model has never seen before.
 
 ```python
-#Let's import the keras function that opens previously saved models
 from keras.models import load_model 
 
-# We open the best model that we saved in training
-best_model = load_model('best_model.hdf5') 
-
-print ('\nNeural network weights updated to the best epoch.')
+# Open the best model saved during training
+best_model = load_model('best_model.hdf5')
+print('\nNeural network weights updated to the best epoch.')
 ```
 {: .language-python}
 
