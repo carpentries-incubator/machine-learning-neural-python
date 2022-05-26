@@ -69,6 +69,16 @@ Show the answer:
 print(f"The answer is: {coin_flip}!")
 ```
 
+> ## Exercise
+> A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a 
+> reminder of the formula for accuracy, check the solution below).
+> 
+> > ## Solution
+> > A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions). 
+> > If you made 10 predictions and 5 were correct, your accuracy is 50%.  
+> {: .solution}
+{: .challenge}
+
 ## How does a computer see an image?
 
 Consider an image as a matrix in which the value of each pixel corresponds to a number that determines a tone or color. Let's load one of our images:
