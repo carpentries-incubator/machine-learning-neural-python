@@ -64,7 +64,7 @@ import tensorflow as tf
 inputs = Input(shape=(256, 256, 1))
 
 # Let's add the first convolutional layer
-x = Conv2D(8, 3, padding='same', activation='relu')(inputs)
+x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(inputs)
 
 # MaxPool layers are similar to convolution layers. 
 # The pooling operation involves sliding a two-dimensional filter over each channel of feature map and summarising the features.
@@ -72,17 +72,17 @@ x = Conv2D(8, 3, padding='same', activation='relu')(inputs)
 x = MaxPool2D()(x)
 
 # We will add more convolutional layers, followed by MaxPool
-x = Conv2D(8, 3, padding='same', activation='relu')(x)
+x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(x)
 x = MaxPool2D()(x)
-x = Conv2D(12, 3, padding='same', activation='relu')(x)
+x = Conv2D(filters=12, kernel_size=3, padding='same', activation='relu')(x)
 x = MaxPool2D()(x)
-x = Conv2D(12, 3, padding='same', activation='relu')(x)
+x = Conv2D(filters=12, kernel_size=3, padding='same', activation='relu')(x)
 x = MaxPool2D()(x)
-x = Conv2D(20, 5, padding='same', activation='relu')(x)
+x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
 x = MaxPool2D()(x)
-x = Conv2D(20, 5, padding='same', activation='relu')(x)
+x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
 x = MaxPool2D()(x)
-x = Conv2D(50, 5, padding='same', activation='relu')(x)
+x = Conv2D(filters=50, kernel_size=5, padding='same', activation='relu')(x)
 x = GlobalAveragePooling2D()(x)
 
 # Finally we will add two "dense" or "fully connected layers".
