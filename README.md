@@ -1,44 +1,19 @@
-# FIXME Lesson title
+# Introduction to artificial neural networks in Python
 
-[![Create a Slack Account with us](https://img.shields.io/badge/Create_Slack_Account-The_Carpentries-071159.svg)](https://swc-slack-invite.herokuapp.com/)
+This half-day lesson gives an introduction to artificial neural networks. During the lesson we prepare and visualise data for algorithm development, and construct a neural network that is able to classify disease in X-rays.
 
-**Thanks for contributing to The Carpentries Incubator!**
-This repository provides a blank starting point for lessons to be developed here.
+It is the third lesson in the machine learning curriculum. In the final lesson we explore the important area of responsible machine learning.
 
-A member of the [Carpentries Curriculum Team](https://carpentries.org/team/)
-will work with you to get your lesson listed on the
-[Community Developed Lessons page][community-lessons]
-and make sure you have everything you need to begin developing your new lesson.
+1. Introduction to Machine Learning in Python [[Lesson materials](https://carpentries-incubator.github.io/machine-learning-novice-python/); [Code repository](https://github.com/carpentries-incubator/machine-learning-novice-python)]
+2. Introduction to Tree Models in Python [[Lesson materials](https://carpentries-incubator.github.io/machine-learning-trees-python/); [Code repository](https://github.com/carpentries-incubator/machine-learning-trees-python)]
+3. **Introduction to artificial neural networks in Python** [[Lesson materials](https://carpentries-incubator.github.io/machine-learning-neural-python/); [Code repository](https://github.com/carpentries-incubator/machine-learning-neural-python)]
+4. Responsible machine learning in Python [[Lesson materials](https://carpentries-incubator.github.io/machine-learning-responsible-python/); [Code repository](https://github.com/carpentries-incubator/machine-learning-responsible-python)]
 
-## What to do next
+## Workshop schedule
 
-Before you begin developing your new lesson,
-here are a few things we recommend you do:
+These lessons are being run at University of Edinburgh as part of the Ed-DaSH Data Science training programme for Health and Biosciences. 
 
-* [ ] Decide on a title for your new lesson!
-  Once you've chosen a new title, you can set the value for `lesson_title`
-  in [`_config.yml`](_config.yml)
-* [ ] Add the URL to your built lesson pages to the repository description\*
-* [ ] [Add relevant topic tags to your lesson repository][cdh-topic-tags].
-* [ ] Fill in the fields marked `FIXME` in:
-  * this README
-  * [`_config.yml`](_config.yml)
-* [ ] If you're going to be developing lesson material for the first time
-  according to our design principles,
-  consider reading the [Carpentries Curriculum Development Handbook][cdh]
-* [ ] Consult the [Lesson Example][lesson-example] website to find out more about
-  working with the lesson template
-* [ ] If you are planning to write your lesson in RMarkdown,
-  [create a `main` branch and set this as the default branch in your repository settings][change-default-branch]
-* [ ] Update this README with relevant information about your lesson
-  and delete this section
-
-
-\* To set the URL on GitHub, click the gear wheel button next to **About**
-on the right of the repository landing page.
-The lesson URL structure is **https://carpentries-incubator.github.io/<repository-slug\>**:
-a repository at https://github.com/carpentries-incubator/new-lesson/ will have pages at
-the lesson URL https://carpentries-incubator.github.io/new-lesson/.
+The first lessons were taught in May: https://edcarp.github.io/2022-05-24_ed-dash_machine-learning/. For a list of future lessons, see: https://edcarp.github.io/Ed-DaSH/workshops
 
 
 ## Contributing
@@ -59,11 +34,9 @@ Look for the tag ![good_first_issue](https://img.shields.io/badge/-good%20first%
 
 ## Maintainer(s)
 
-Current maintainers of this lesson are
+Current maintainers of this lesson are:
 
-* FIXME
-* FIXME
-* FIXME
+* Tom Pollard ([Website](https://people.csail.mit.edu/tpollard/); [GitHub](https://github.com/tompollard))
 
 
 ## Authors
