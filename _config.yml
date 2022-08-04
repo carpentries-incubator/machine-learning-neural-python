@@ -30,7 +30,7 @@ kind: "lesson"
 repository: <USERNAME>/<PROJECT>
 
 # Email address, no mailto:
-email: "team@carpentries.org" # FIXME
+email: "tpollard@mit.edu" # FIXME
 
 # Sites.
 amy_site: "https://amy.carpentries.org/"
