@@ -53,11 +53,11 @@ Just like other neural networks, a CNN typically consists of an input layer, hid
 
 What makes CNNs special? The name stems from the fact that the architecture includes one or more convolutional layers. These layers apply a mathematical operation called a "convolution" to extract features from arrays such as images.
 
-In a convolutional layer, a matrix of values referred to as a "filter" or "kernel" slides across the input matrix (such as an image). As it slides, the values are multiplied to generate a new set of values referred to as a "feature map" or "activation map".
+In a convolutional layer, a matrix of values referred to as a "filter" or "kernel" slides across the input matrix (in our case, an image). As it slides, values are multiplied to generate a new set of values referred to as a "feature map" or "activation map".
 
 ![2D Convolution Animation by Michael Plotke](../fig/convolution_plotke.gif){: width="500px"}
 
-Filters provide a mechanism for emphasising aspects of an input image. For example, certain filters may help to identify the edges of objects.
+Filters provide a mechanism for emphasising aspects of an input image. For example, a filter may emphasise object edges. See [setosa.io](https://setosa.io/ev/image-kernels/) for a visual demonstration of the effect of different filters.
 
 ## Creating a convolutional neural network
 
