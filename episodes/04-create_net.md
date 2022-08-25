@@ -74,8 +74,6 @@ tf.random.set_seed(42)
 from tensorflow.keras import optimizers
 from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, add, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
-from tensorflow.keras.callbacks import ModelCheckpoint
-import tensorflow as tf
  
 # Our input layer should match the input shape of our images.
 # A CNN takes tensors of shape (image_height, image_width, color_channels)
