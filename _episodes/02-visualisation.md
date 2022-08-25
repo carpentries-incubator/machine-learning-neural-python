@@ -165,9 +165,9 @@ dataset = [cv2.resize(img, (256,256)) for img in dataset]
 # Check the size of the reshaped images
 print(dataset[0].shape)
 
-# Normalization decreases the dataset's variability.
+# Normalize the data
+# Subtract the mean, divide by the standard deviation.
 for i in range(len(dataset)):
-  # we will do the normalization, dividing the mean by the standard deviation
   dataset[i] = (dataset[i] - np.average(dataset[i], axis= (0, 1))) / np.std(dataset[i], axis= (0, 1)) 
 ```
 {: .language-python}
