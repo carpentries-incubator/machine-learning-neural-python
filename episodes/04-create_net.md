@@ -83,7 +83,7 @@ inputs = Input(shape=(256, 256, 1))
 x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(inputs)
 
 # MaxPool layers are similar to convolution layers. 
-# The pooling operation involves sliding a two-dimensional filter over each channel of feature map and summarising the features.
+# The pooling operation involves sliding a two-dimensional filter over each channel of feature map and selecting the max values.
 # We do this to reduce the dimensions of the feature maps, helping to limit the amount of computation done by the network.
 x = MaxPool2D()(x)
 
@@ -99,6 +99,8 @@ x = MaxPool2D()(x)
 x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
 x = MaxPool2D()(x)
 x = Conv2D(filters=50, kernel_size=5, padding='same', activation='relu')(x)
+
+# Global max pooling reduces dimensions back to the input size
 x = GlobalAveragePooling2D()(x)
 
 # Finally we will add two "dense" or "fully connected layers".
