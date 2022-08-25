@@ -18,10 +18,11 @@ Now that the model architecture is complete, it is ready to be compiled and trai
 The training process will try to find the optimal model. Using gradient descent, the model's weights are iteratively updated as each batch of data is processed. An epoch means training the neural network with all the training data for one cycle. In an epoch, we use all of the training data once.
 
 ```python
+from tensorflow.keras import optimizers
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 # We define the network optimization method: ADAM, with the learning and decay rate
-custom_adam = tf.optimizers.Adam()
+custom_adam = optimizers.Adam()
 
 # Compile the model defining the 'loss' function type, optimization and the metric.
 model.compile(loss='binary_crossentropy', optimizer=custom_adam, metrics=['acc'])
