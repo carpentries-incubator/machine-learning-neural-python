@@ -55,9 +55,9 @@ What makes CNNs special? The name stems from the fact that the architecture incl
 
 In a convolutional layer, a matrix of values referred to as a "filter" or "kernel" slides across the input matrix (such as an image). As it slides, the values are multiplied to generate a new set of values referred to as a "feature map" or "activation map".
 
-![Example convolution operation](../fig/placeholder.png){: width="800px"}
+![2D Convolution Animation by Michael Plotke](../fig/convolution_plotke.gif){: width="500px"}
 
-Different filters allow different aspects of an input image to be emphasised. For example, certain filters may help to identify the edges of objects in an image.
+Filters provide a mechanism for emphasising aspects of an input image. For example, certain filters may help to identify the edges of objects.
 
 ## Creating a convolutional neural network
 
