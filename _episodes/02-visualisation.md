@@ -44,7 +44,7 @@ plot_example(random.choice(effusion_list), "Effusion", 1)
 
 ## Can we detect effusion?
 
-Run the following code to flip and coin to select an x-ray from our collection.
+Run the following code to flip a coin to select an x-ray from our collection.
 
 ```python
 print("Effusion or not?")
