@@ -23,7 +23,9 @@ From a high level, a neural network is a system that takes input values in an �
 
 ![Neuron](../fig/simple_neural_network.png){: width="800px"}
 
-“Deep learning” is an increasingly popular term used to describe neural networks. When people talk about deep learning they are typically referring to more complex network designs, often with a large number of hidden layers.
+The layers shown in the network above are "dense" or "fully connected". Each neuron is connected to all neurons in the preceeding layer. Dense layers are a common building block in neural network architectures.
+
+“Deep learning” is an increasingly popular term used to describe certain types of neural network. When people talk about deep learning they are typically referring to more complex network designs, often with a large number of hidden layers.
 
 ## Activation Functions
 
