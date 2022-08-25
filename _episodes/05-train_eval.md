@@ -45,7 +45,7 @@ hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=32),
 ```
 {: .language-python}
 
-We can now plot the results of the training. Our hope is that "loss" drops over successive epochs, while accuracy increases.
+We can now plot the results of the training. "Loss" should drop over successive epochs and accuracy should increase.
 
 ```python
 plt.plot(hist.history['loss'], 'b-', label='train loss')
@@ -68,7 +68,7 @@ plt.show()
 
 ## Evaluating your model on the held-out test set
 
-In this step, we will present the entire test dataset for the model we created, in order to calculate the accuracy of our neural network in a group of images that the model has never seen before.
+In this step, we present the unseen test dataset to our trained network and evaluate the performance.
 
 ```python
 from tensorflow.keras.models import load_model 
