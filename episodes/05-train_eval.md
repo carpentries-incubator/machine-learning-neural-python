@@ -13,9 +13,9 @@ keypoints:
 
 ## Compile and train your model
 
-Now that the model architecture is complete, it is ready to be compiled and trained! The difference between our predictions and the true values is the error or "loss". The goal of training is to minimise this loss.
+Now that the model architecture is complete, it is ready to be compiled and trained! The distance between our predictions and the true values is the error or "loss". The goal of training is to minimise this loss.
 
-The training process will try to find the optimal model. Using gradient descent, the model's weights are iteratively updated as each batch of data is processed.
+Through training, we seek an optimal set of model parameters. Using an optimization algorithm such as gradient descent, we our model weights are iteratively updated as each batch of data is processed.
 
 Batch size is the number of training examples processed before the model parameters are updated. An epoch is one complete pass through all of the training data. In an epoch, we use all of the training examples once.
 
@@ -23,7 +23,9 @@ Batch size is the number of training examples processed before the model paramet
 from tensorflow.keras import optimizers
 from tensorflow.keras.callbacks import ModelCheckpoint
 
-# We define the network optimization method: ADAM, with the learning and decay rate
+# Define the network optimization method. 
+# Adam is a popular gradient descent algorithm
+# with adaptive, per-parameter learning rates.
 custom_adam = optimizers.Adam()
 
 # Compile the model defining the 'loss' function type, optimization and the metric.
@@ -86,7 +88,7 @@ print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, 
 {: .language-python}
 
 ```
-Accuracy in test group: 0.67
+Accuracy in test group: 0.80
 ```
 {: .output}
 
