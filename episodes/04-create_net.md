@@ -66,14 +66,12 @@ Before training a convolutional neural network, we will first need to define the
 ```python
 # Create the architecture of our convolutional neural network, using
 # the tensorflow library
-import tensorflow as tf
+from tensorflow.random import set_seed
+from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, GlobalAveragePooling2D
+from tensorflow.keras.models import Model
 
 # set random seed for reproducibility
-tf.random.set_seed(42)
-
-from tensorflow.keras import optimizers
-from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, add, GlobalAveragePooling2D
-from tensorflow.keras.models import Model
+set_seed(42)
  
 # Our input layer should match the input shape of our images.
 # A CNN takes tensors of shape (image_height, image_width, color_channels)
