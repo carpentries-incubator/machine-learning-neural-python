@@ -23,7 +23,10 @@ from sklearn.model_selection import train_test_split
 
 # Our Tensorflow model requires the input to be:
 # [batch, height, width, n_channels]
-# So we need to add a dimension to the dataset and labels
+# So we need to add a dimension to the dataset and labels.
+# 
+# Ellipsis (...) is shorthand for selecting with ":" across dimensions. 
+# np.newaxis expands the selection by one dimension.
 dataset = dataset[..., np.newaxis]
 labels = labels[..., np.newaxis]
 

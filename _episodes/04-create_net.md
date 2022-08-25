@@ -4,10 +4,16 @@ teaching: 20
 exercises: 10
 questions:
 - "What is a neural network?"
+- "What are the characteristics of a dense layer?"
+- "What is an activation function?"
 - "What is a convolutional neural network?"
 objectives:
+- "Become familiar with key components of a neural network."
 - "Create the architecture for a convolutational neural network."
 keypoints:
+- "Dense layers, also known as fully connected layers, are an important building block in most neural network architectures. In a dense layer, each neuron is connected to every neuron in the preceeding layer."
+- "Dropout is a method that helps to prevent overfitting by temporarily removing neurons from the network."
+- "The Rectified Linear Unit (ReLU) is an activation function that outputs an input if it is positive, and outputs zero if it is not."
 - "Convolutional neural networks are typically used for imaging tasks."
 ---
 
@@ -23,7 +29,9 @@ From a high level, a neural network is a system that takes input values in an �
 
 ![Neuron](../fig/simple_neural_network.png){: width="800px"}
 
-“Deep learning” is an increasingly popular term used to describe neural networks. When people talk about deep learning they are typically referring to more complex network designs, often with a large number of hidden layers.
+The layers shown in the network above are "dense" or "fully connected". Each neuron is connected to all neurons in the preceeding layer. Dense layers are a common building block in neural network architectures.
+
+“Deep learning” is an increasingly popular term used to describe certain types of neural network. When people talk about deep learning they are typically referring to more complex network designs, often with a large number of hidden layers.
 
 ## Activation Functions
 
@@ -58,16 +66,12 @@ Before training a convolutional neural network, we will first need to define the
 ```python
 # Create the architecture of our convolutional neural network, using
 # the tensorflow library
-import tensorflow as tf
+from tensorflow.random import set_seed
+from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, GlobalAveragePooling2D
+from tensorflow.keras.models import Model
 
 # set random seed for reproducibility
-tf.random.set_seed(42)
-
-from tensorflow.keras import optimizers
-from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, add, GlobalAveragePooling2D
-from tensorflow.keras.models import Model
-from tensorflow.keras.callbacks import ModelCheckpoint
-import tensorflow as tf
+set_seed(42)
  
 # Our input layer should match the input shape of our images.
 # A CNN takes tensors of shape (image_height, image_width, color_channels)
