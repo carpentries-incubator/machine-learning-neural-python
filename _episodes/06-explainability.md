@@ -121,6 +121,18 @@ for image_id in range(10):
 ```
 {: .language-python}
 
+You can see that some of the time, these different methods largely agree
+
+![saliency_agreement](../fig/saliency-agreement.png)
+
+But some of the time they disagree wildly
+
+![saliency_disagreement](../fig/saliency-disagreement.png)
+
+This raises the question, should these algorithms be used at all?
+
+This is part of a larger problem with explainability of complex models in machine learning. The generally accepted answer is to know **how your model works** and to know **how your explainability algorithm works** as well as to **understand your data**. With these three pieces of knowledge it is generally possible to identify the best algorithm to use, as well as to analyse the outputs keeping in mind any shortcomings arising from this disagreement.
+
 {% include links.md %}
  
 
