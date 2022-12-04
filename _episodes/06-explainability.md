@@ -67,17 +67,11 @@ for image_id in range(10):
 
 ![Saliency maps](../fig/saliency.png){: width="600px"}
 
-## Sanity checks
+## Sanity checks for saliency maps
 
 While saliency maps may offer us interesting insights about regions of an image contributing to a model's output, there are suggestions that this kind of visual assessment can be misleading. For example, the following abstract is from a paper entitled "[Sanity Checks for Saliency Maps](https://arxiv.org/abs/1810.03292)":
 
-> Saliency methods have emerged as a popular tool to highlight features in an input deemed relevant for the prediction of a learned model. Several saliency methods have been proposed, often guided by visual appeal on image data. In this work, we propose an actionable methodology to evaluate what kinds of explanations a given method can and cannot provide. We find that reliance, solely, on visual assessment can be misleading. Through extensive experiments we show that some existing saliency methods are independent both of the model and of the data generating process. Consequently, methods that fail the proposed tests are inadequate for tasks that are sensitive to either data or model, such as, finding outliers in the data, explaining the relationship between inputs and outputs that the model learned, and debugging the model. We interpret our findings through an analogy with edge detection in images, a technique that requires neither training data nor model.
-
-The authors present the following comparison of the output of standard saliency methods with those of an edge detector. They explain that "the edge detector does not depend on model or training data, and yet produces results that bear visual similarity with saliency maps. This goes to show that visual inspection is a poor guide in judging whether an explanation is sensitive to the underlying model and data."
-
-![Saliency maps](../fig/saliency_methods_and_edge_detector.png){: width="800px"}
-
-## Don't Take Saliency Maps As Gospel
+> Saliency methods have emerged as a popular tool to highlight features in an input deemed relevant for the prediction of a learned model. Several saliency methods have been proposed, often guided by visual appeal on image data. ... Through extensive experiments we show that some existing saliency methods are independent both of the model and of the data generating process. Consequently, methods that fail the proposed tests are inadequate for tasks that are sensitive to either data or model, such as, finding outliers in the data, explaining the relationship between inputs and outputs that the model learned, and debugging the model. 
 
 There are multiple methods for producing saliency maps to explain how a particular model is making predictions. The method we have been using is called GradCam++, but how does this method compare to another? Use this code to compare GradCam++ with ScoreCam.
 
@@ -121,17 +115,19 @@ for image_id in range(10):
 ```
 {: .language-python}
 
-You can see that some of the time, these different methods largely agree
+Some of the time these methods largely agree:
 
 ![saliency_agreement](../fig/saliency-agreement.png)
 
-But some of the time they disagree wildly
+But some of the time they disagree wildly:
 
 ![saliency_disagreement](../fig/saliency-disagreement.png)
 
 This raises the question, should these algorithms be used at all?
 
-This is part of a larger problem with explainability of complex models in machine learning. The generally accepted answer is to know **how your model works** and to know **how your explainability algorithm works** as well as to **understand your data**. With these three pieces of knowledge it is generally possible to identify the best algorithm to use, as well as to analyse the outputs keeping in mind any shortcomings arising from this disagreement.
+This is part of a larger problem with explainability of complex models in machine learning. The generally accepted answer is to know **how your model works** and to know **how your explainability algorithm works** as well as to **understand your data**. 
+
+With these three pieces of knowledge it should be possible to identify algorithms appropriate for your task, and to understand any shortcomings in their approaches.
 
 {% include links.md %}
  
