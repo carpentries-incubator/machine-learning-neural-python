@@ -30,18 +30,24 @@ from tf_keras_vis.gradcam_plus_plus import GradcamPlusPlus
 from tf_keras_vis.scorecam import Scorecam
 from tf_keras_vis.utils.scores import CategoricalScore
 
+# Select two differing explainability algorithms
 gradcam = GradcamPlusPlus(best_model, clone=True)
 scorecam = Scorecam(best_model, clone=True)
 
+
 def plot_map(cam, classe, prediction, img):
-    fig, axes = plt.subplots(1,2,figsize=(14,5))
+    """
+    Plot the image.
+    """
+    fig, axes = plt.subplots(1,2, figsize=(14, 5))
     axes[0].imshow(np.squeeze(img), cmap='gray')
     axes[1].imshow(np.squeeze(img), cmap='gray')
     heatmap = np.uint8(cm.jet(cam[0])[..., :3] * 255)
-    i = axes[1].imshow(heatmap,cmap="jet",alpha=0.5)
+    i = axes[1].imshow(heatmap, cmap="jet", alpha=0.5)
     fig.colorbar(i)
     plt.suptitle("Class: {}. Pred = {}".format(classe, prediction))
-    
+
+# Plot each image with accompanying saliency map
 for image_id in range(10):
     SEED_INPUT = dataset_test[image_id]
     CATEGORICAL_INDEX = [0]
@@ -58,8 +64,7 @@ for image_id in range(10):
     
     # Display the class
     _class = 'normal' if labels_test[image_id] == 0 else 'effusion'
-
-    _prediction = best_model.predict(dataset_test[image_id][np.newaxis,:,...], verbose=0)
+    _prediction = best_model.predict(dataset_test[image_id][np.newaxis, :, ...], verbose=0)
     
     plot_map(cam, _class, _prediction[0][0], SEED_INPUT)
 ```
@@ -77,17 +82,21 @@ There are multiple methods for producing saliency maps to explain how a particul
 
 ```python
 def plot_map2(cam1, cam2, classe, prediction, img):
-    fig, axes = plt.subplots(1,3,figsize=(14,5))
+    """
+    Plot the image.
+    """
+    fig, axes = plt.subplots(1, 3, figsize=(14, 5))
     axes[0].imshow(np.squeeze(img), cmap='gray')
     axes[1].imshow(np.squeeze(img), cmap='gray')
     axes[2].imshow(np.squeeze(img), cmap='gray')
     heatmap1 = np.uint8(cm.jet(cam1[0])[..., :3] * 255)
     heatmap2 = np.uint8(cm.jet(cam2[0])[..., :3] * 255)
-    i = axes[1].imshow(heatmap1,cmap="jet",alpha=0.5)
-    j = axes[2].imshow(heatmap2,cmap="jet",alpha=0.5)
+    i = axes[1].imshow(heatmap1, cmap="jet", alpha=0.5)
+    j = axes[2].imshow(heatmap2, cmap="jet", alpha=0.5)
     fig.colorbar(i)
     plt.suptitle("Class: {}. Pred = {}".format(classe, prediction))
-    
+
+# Plot each image with accompanying saliency map
 for image_id in range(10):
     SEED_INPUT = dataset_test[image_id]
     CATEGORICAL_INDEX = [0]
@@ -108,8 +117,7 @@ for image_id in range(10):
     
     # Display the class
     _class = 'normal' if labels_test[image_id] == 0 else 'effusion'
-
-    _prediction = best_model.predict(dataset_test[image_id][np.newaxis,:,...], verbose=0)
+    _prediction = best_model.predict(dataset_test[image_id][np.newaxis, : ,...], verbose=0)
     
     plot_map2(cam, cam2, _class, _prediction[0][0], SEED_INPUT)
 ```
