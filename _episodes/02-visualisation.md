@@ -106,7 +106,11 @@ For more detail on image representation in Python, take a look at the [Data Carp
 
 ![RGB image](../fig/chair-layers-rgb.png){: width="600px"}
 
-For simplicity, we'll instead load the images in greyscale. A greyscale image has two dimensions: height and width. Each value in the matrix represents a tone between black (0) and white (255).
+For simplicity, we'll instead load the images in greyscale. 
+A greyscale image has two dimensions: height and width.
+Greyscale images have only one channel.
+Most greyscale images are 8 bits per channel or 16 bits per channel.
+For a greyscale image with 8 bits per channel, each value in the matrix represents a tone between black (0) and white (255).
 
 ```python
 image = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
