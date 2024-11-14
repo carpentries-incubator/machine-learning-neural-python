@@ -1,25 +1,29 @@
 ---
-title: "Explainability"
+title: Explainability
 teaching: 20
 exercises: 10
-questions:
-- "What is a saliency map?"
-- "What aspects of an image contribute to predictions?"
-objectives:
-- "Review model performance with saliency maps."
-keypoints:
-- "Saliency maps are a popular form of explainability for imaging models."
-- "Saliency maps should be used cautiously."
 ---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Review model performance with saliency maps.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What is a saliency map?
+- What aspects of an image contribute to predictions?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Explainability
 
-If a model is making a prediction, many of us would like to know how the decision was reached. Saliency maps - and related approaches - are a popular form of explainability for imaging models. 
+If a model is making a prediction, many of us would like to know how the decision was reached. Saliency maps - and related approaches - are a popular form of explainability for imaging models.
 
 Saliency maps use color to illustrate the extent to which a region of an image contributes to a given decision. Let's plot some saliency maps for our model:
 
-
-```python
+```python, python
 # !pip install tf_keras_vis
 from matplotlib import cm
 from tf_keras_vis.gradcam import Gradcam
@@ -68,19 +72,18 @@ for image_id in range(10):
     
     plot_map(cam, _class, _prediction[0][0], SEED_INPUT)
 ```
-{: .language-python}
 
-![Saliency maps](../fig/saliency.png){: width="600px"}
+![](fig/saliency.png){alt='Saliency maps' width="600px"}
 
 ## Sanity checks for saliency maps
 
 While saliency maps may offer us interesting insights about regions of an image contributing to a model's output, there are suggestions that this kind of visual assessment can be misleading. For example, the following abstract is from a paper entitled "[Sanity Checks for Saliency Maps](https://arxiv.org/abs/1810.03292)":
 
-> Saliency methods have emerged as a popular tool to highlight features in an input deemed relevant for the prediction of a learned model. Several saliency methods have been proposed, often guided by visual appeal on image data. ... Through extensive experiments we show that some existing saliency methods are independent both of the model and of the data generating process. Consequently, methods that fail the proposed tests are inadequate for tasks that are sensitive to either data or model, such as, finding outliers in the data, explaining the relationship between inputs and outputs that the model learned, and debugging the model. 
+> Saliency methods have emerged as a popular tool to highlight features in an input deemed relevant for the prediction of a learned model. Several saliency methods have been proposed, often guided by visual appeal on image data. ... Through extensive experiments we show that some existing saliency methods are independent both of the model and of the data generating process. Consequently, methods that fail the proposed tests are inadequate for tasks that are sensitive to either data or model, such as, finding outliers in the data, explaining the relationship between inputs and outputs that the model learned, and debugging the model.
 
 There are multiple methods for producing saliency maps to explain how a particular model is making predictions. The method we have been using is called GradCam++, but how does this method compare to another? Use this code to compare GradCam++ with ScoreCam.
 
-```python
+```python, python
 def plot_map2(cam1, cam2, classe, prediction, img):
     """
     Plot the image.
@@ -121,24 +124,28 @@ for image_id in range(10):
     
     plot_map2(cam, cam2, _class, _prediction[0][0], SEED_INPUT)
 ```
-{: .language-python}
 
 Some of the time these methods largely agree:
 
-![saliency_agreement](../fig/saliency-agreement.png)
+![](fig/saliency-agreement.png){alt='saliency\_agreement'}
 
 But some of the time they disagree wildly:
 
-![saliency_disagreement](../fig/saliency-disagreement.png)
+![](fig/saliency-disagreement.png){alt='saliency\_disagreement'}
 
 This raises the question, should these algorithms be used at all?
 
-This is part of a larger problem with explainability of complex models in machine learning. The generally accepted answer is to know **how your model works** and to know **how your explainability algorithm works** as well as to **understand your data**. 
+This is part of a larger problem with explainability of complex models in machine learning. The generally accepted answer is to know **how your model works** and to know **how your explainability algorithm works** as well as to **understand your data**.
 
 With these three pieces of knowledge it should be possible to identify algorithms appropriate for your task, and to understand any shortcomings in their approaches.
 
-{% include links.md %}
- 
 
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Saliency maps are a popular form of explainability for imaging models.
+- Saliency maps should be used cautiously.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 

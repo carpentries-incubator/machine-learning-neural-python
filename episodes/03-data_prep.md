@@ -1,16 +1,22 @@
 ---
-title: "Data preparation"
+title: Data preparation
 teaching: 20
 exercises: 10
-questions:
-- "What is the purpose of data augmentation?"
-- "What types of transform can be applied in data augmentation?"
-objectives:
-- "Generate an augmented dataset"
-- "Partition data into training and test sets."
-keypoints:
-- "Data augmentation can help to avoid overfitting."
 ---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Generate an augmented dataset
+- Partition data into training and test sets.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What is the purpose of data augmentation?
+- What types of transform can be applied in data augmentation?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Partitioning into training and test sets
 
@@ -18,7 +24,7 @@ As we have done in previous projects, we will want to split our data into subset
 
 To ensure reproducibility, we should set the random state of the splitting method. This means that Python's random number generator will produce the same "random" split in future.
 
-```python
+```python, python
 from sklearn.model_selection import train_test_split
 
 # Our Tensorflow model requires the input to be:
@@ -41,16 +47,14 @@ print(f"Train: {dataset_train.shape}, {labels_train.shape}")
 print(f"Validation: {dataset_val.shape}, {labels_val.shape}")
 print(f"Test: {dataset_test.shape}, {labels_test.shape}")
 ```
-{: .language-python}
 
-```
+```output
 No. images, x_dim, y_dim, colors) (No. labels, 1)
 
 Train: (505, 256, 256, 1), (505, 1)
 Validation: (90, 256, 256, 1), (90, 1)
 Test: (105, 256, 256, 1), (105, 1)
 ```
-{: .output}
 
 ## Data Augmentation
 
@@ -58,7 +62,7 @@ We have a small dataset, which increases the chance of overfitting our model. If
 
 To artificially increase the size of our training set, we can use `ImageDataGenerator`. This function generates new data by applying random transformations to our source images while our model is training.
 
-```python
+```python, python
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Define what kind of transformations we would like to apply
@@ -70,11 +74,10 @@ datagen = ImageDataGenerator(
     zoom_range=0,
     horizontal_flip=False)
 ```
-{: .language-python}
 
 For the sake of interest, let's take a look at some examples of the augmented images!
 
-```python
+```python, python
 # specify path to source data
 path = os.path.join("chest_xrays")
 batch_size=5
@@ -95,16 +98,19 @@ def plot_images(images_arr):
 augmented_images = [val_generator[0][0][0] for i in range(batch_size)]
 plot_images(augmented_images)
 ```
-{: .language-python}
 
-![X-ray augmented](../fig/xray_augmented.png){: width="1200px"}
+![](fig/xray_augmented.png){alt='X-ray augmented' width="1200px"}
 
-The images look a little strange, but that's the idea! When our model sees something unusual in real-life, it will be better adapted to deal with it. 
+The images look a little strange, but that's the idea! When our model sees something unusual in real-life, it will be better adapted to deal with it.
 
 Now we have some data to work with, let's start building our model.
 
-{% include links.md %}
- 
 
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Data augmentation can help to avoid overfitting.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 

@@ -1,23 +1,29 @@
 ---
-title: "Visualisation"
+title: Visualisation
 teaching: 20
 exercises: 10
-questions:
-- "How does an image with pleural effusion differ from one without?"
-- "How is image data represented in a NumPy array?"
-objectives:
-- "Visually compare normal X-rays with those labelled with pleural effusion."
-- "Understand how to use NumPy to store and manipulate image data."
-- "Compare a slice of numerical data to its corresponding image."
-keypoints:
-- "In NumPy, RGB images are usually stored as 3-dimensional arrays."
 ---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Visually compare normal X-rays with those labelled with pleural effusion.
+- Understand how to use NumPy to store and manipulate image data.
+- Compare a slice of numerical data to its corresponding image.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How does an image with pleural effusion differ from one without?
+- How is image data represented in a NumPy array?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Visualising the X-rays
 
 In the previous section, we set up a dataset comprising 700 chest X-rays. Half of the X-rays are labelled "normal" and half are labelled as "pleural effusion". Let's take a look at some of the images.
 
-```python
+```python, python
 # cv2 is openCV, a popular computer vision library
 import cv2
 from matplotlib import pyplot as plt 
@@ -38,9 +44,8 @@ plot_example(random.choice(normal_list), "Normal", 0)
 # Plot a record labelled with effusion
 plot_example(random.choice(effusion_list), "Effusion", 1)
 ```
-{: .language-python}
 
-![Example X-rays](../fig/example_records.png){: width="600px"}
+![](fig/example_records.png){alt='Example X-rays' width="600px"}
 
 ## Can we detect effusion?
 
@@ -69,21 +74,31 @@ Show the answer:
 print(f"The answer is: {coin_flip}!")
 ```
 
-> ## Exercise
-> A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a 
-> reminder of the formula for accuracy, check the solution below).
-> 
-> > ## Solution
-> > A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions). 
-> > If you made 10 predictions and 5 were correct, your accuracy is 50%.  
-> {: .solution}
-{: .challenge}
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a
+reminder of the formula for accuracy, check the solution below).
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions).
+If you made 10 predictions and 5 were correct, your accuracy is 50%.  
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## How does a computer see an image?
 
 Consider an image as a matrix in which the value of each pixel corresponds to a number that determines a tone or color. Let's load one of our images:
 
-```python
+```python, python
 import numpy as np 
 
 file_idx = 56
@@ -92,60 +107,54 @@ image = cv2.imread(example)
 
 print(image.shape)
 ```
-{: .language-python}
 
-```
+```output
 (512, 512, 3)
 ```
-{: .output}
 
-Here we see that the image has 3 dimensions. The first dimension is height (512 pixels) and the second is width (also 512 pixels). 
+Here we see that the image has 3 dimensions. The first dimension is height (512 pixels) and the second is width (also 512 pixels).
 The presence of a third dimension indicates that we are looking at a color image ("RGB", or Red, Green, Blue).
 
 For more detail on image representation in Python, take a look at the [Data Carpentry course on Image Processing with Python](https://datacarpentry.org/image-processing/). The following image is reproduced from the [section on Image Representation](https://datacarpentry.org/image-processing/03-skimage-images/index.html).
 
-![RGB image](../fig/chair-layers-rgb.png){: width="600px"}
+![](fig/chair-layers-rgb.png){alt='RGB image' width="600px"}
 
-For simplicity, we'll instead load the images in greyscale. 
+For simplicity, we'll instead load the images in greyscale.
 A greyscale image has two dimensions: height and width.
 Greyscale images have only one channel.
 Most greyscale images are 8 bits per channel or 16 bits per channel.
 For a greyscale image with 8 bits per channel, each value in the matrix represents a tone between black (0) and white (255).
 
-```python
+```python, python
 image = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
 print(image.shape)
 ```
-{: .language-python}
 
-```
+```output
 (512, 512)
 ```
-{: .output}
 
 Let's briefly display the matrix of values, and then see how these same values are rendered as an image.
 
-```python
+```python, python
 # Print a 10 by 10 chunk of the matrix
 print(image[35:45, 30:40])
 ```
-{: .language-python}
 
-![Example greyscale numpy array](../fig/greyscale_example_numpy.png){: width="400px"}
+![](fig/greyscale_example_numpy.png){alt='Example greyscale numpy array' width="400px"}
 
-```python
+```python, python
 # Plot the same chunk as an image
 plt.imshow(image[35:45, 30:40], cmap='gray', vmin=0, vmax=255)
 ```
-{: .language-python}
 
-![Example greyscale image](../fig/greyscale_example.png){: width="400px"}
+![](fig/greyscale_example.png){alt='Example greyscale image' width="400px"}
 
 ## Image pre-processing
 
 In the next episode, we'll be building and training a model. Let's prepare our data for the modelling phase. For convenience, we'll begin by loading all of the images and corresponding labels and assigning them to a list.
 
-```python
+```python, python
 # create a list of effusion images and labels
 dataset_effusion = [cv2.imread(fn, cv2.IMREAD_GRAYSCALE) for fn in effusion_list]
 label_effusion = np.ones(len(dataset_effusion))
@@ -158,11 +167,10 @@ label_normal = np.zeros(len(dataset_normal))
 dataset = dataset_effusion + dataset_normal
 labels = np.concatenate([label_effusion, label_normal])
 ```
-{: .language-python}
 
 Let's also downsample the images, reducing the size from (512, 512) to (256,256).
 
-```python
+```python, python
 # Downsample the images from (512,512) to (256,256)
 dataset = [cv2.resize(img, (256,256)) for img in dataset]
 
@@ -174,12 +182,10 @@ print(dataset[0].shape)
 for i in range(len(dataset)):
   dataset[i] = (dataset[i] - np.average(dataset[i], axis= (0, 1))) / np.std(dataset[i], axis= (0, 1)) 
 ```
-{: .language-python}
 
-```
+```output
 (256, 256)
 ```
-{: .output}
 
 Finally, we'll convert our dataset from a list to an array. We are expecting it to be (700, 256, 256). That is 700 images (350 effusion cases and 350 normal),  each with a dimension of 256 by 256.
 
@@ -188,24 +194,26 @@ dataset = np.asarray(dataset, dtype=np.float32)
 print(f"Matrix Dimensions: {dataset.shape}")
 ```
 
-```
+```output
 (700, 256, 256)
 ```
-{: .output}
 
 We could plot the images by indexing them on `dataset`, e.g., we can plot the first image in the dataset with:
 
-```python
+```python, python
 idx = 0
 vals = dataset[idx].flatten()
 plt.imshow(dataset[idx], cmap='gray', vmin=min(vals), vmax=max(vals))
 ```
-{: .language-python}
 
-![Example greyscale image](../fig/final_example_image.png){: width="400px"}
+![](fig/final_example_image.png){alt='Example greyscale image' width="400px"}
 
-{% include links.md %}
- 
 
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- In NumPy, RGB images are usually stored as 3-dimensional arrays.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 

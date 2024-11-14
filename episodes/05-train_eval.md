@@ -1,15 +1,21 @@
 ---
-title: "Training and evaluation"
+title: Training and evaluation
 teaching: 20
 exercises: 10
-questions:
-- "How do I train a neural network?"
-objectives:
-- "Train a convolutational neural network for classification."
-- "Evalute the network's performance on a test set."
-keypoints:
-- "During the training process we iteratively update the model to minimise error."
 ---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Train a convolutational neural network for classification.
+- Evalute the network's performance on a test set.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- How do I train a neural network?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Compile and train your model
 
@@ -19,7 +25,7 @@ Through training, we seek an optimal set of model parameters. Using an optimizat
 
 Batch size is the number of training examples processed before the model parameters are updated. An epoch is one complete pass through all of the training data. In an epoch, we use all of the training examples once.
 
-```python
+```python, python
 from tensorflow.keras import optimizers
 from tensorflow.keras.callbacks import ModelCheckpoint
 
@@ -43,11 +49,10 @@ hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=32),
                  validation_data=(dataset_val, labels_val), 
                  callbacks=[checkpointer])
 ```
-{: .language-python}
 
 We can now plot the results of the training. "Loss" should drop over successive epochs and accuracy should increase.
 
-```python
+```python, python
 plt.plot(hist.history['loss'], 'b-', label='train loss')
 plt.plot(hist.history['val_loss'], 'r-', label='val loss')
 plt.ylabel('Loss')
@@ -62,38 +67,38 @@ plt.xlabel('Epoch')
 plt.legend(loc='lower right')
 plt.show()
 ```
-{: .language-python}
 
-![Training curves](../fig/training_curves.png){: width="600px"}
+![](fig/training_curves.png){alt='Training curves' width="600px"}
 
 ## Evaluating your model on the held-out test set
 
 In this step, we present the unseen test dataset to our trained network and evaluate the performance.
 
-```python
+```python, python
 from tensorflow.keras.models import load_model 
 
 # Open the best model saved during training
 best_model = load_model('best_model.hdf5')
 print('\nNeural network weights updated to the best epoch.')
 ```
-{: .language-python}
 
 Now that we've loaded the best model, we can evaluate the accuracy on our test data.
 
-```python
+```python, python
 # We use the evaluate function to evaluate the accuracy of our model in the test group
 print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, verbose=0)[1]}")
 ```
-{: .language-python}
 
-```
+```output
 Accuracy in test group: 0.80
 ```
-{: .output}
 
-{% include links.md %}
- 
 
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- During the training process we iteratively update the model to minimise error.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 

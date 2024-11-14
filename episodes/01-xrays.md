@@ -1,16 +1,22 @@
 ---
-title: "Introduction"
+title: Introduction
 teaching: 20
 exercises: 10
-questions:
-- "What kinds of diseases can be observed in chest X-rays?"
-- "What is pleural effusion?"
-objectives:
-- "Gain awareness of the NIH ChestX-ray dataset."
-- "Load a subset of labelled chest X-rays."
-keypoints:
-- "Algorithms can be used to detect disease in chest X-rays."
 ---
+
+::::::::::::::::::::::::::::::::::::::: objectives
+
+- Gain awareness of the NIH ChestX-ray dataset.
+- Load a subset of labelled chest X-rays.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: questions
+
+- What kinds of diseases can be observed in chest X-rays?
+- What is pleural effusion?
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Chest X-rays
 
@@ -25,11 +31,11 @@ In recent years, organisations like the [National Institutes of Health](https://
 
 The following figure is from a study by [Xiaosong Wang et al](https://openaccess.thecvf.com/content_cvpr_2017/papers/Wang_ChestX-ray8_Hospital-Scale_Chest_CVPR_2017_paper.pdf). It illustrates eight common diseases that the authors noted could be be detected and even spatially-located in front chest x-rays with the use of modern machine learning algorithms.
 
-![Chest X-ray diseases](../fig/wang_et_al.png){: width="600px"}
+![](fig/wang_et_al.png){alt='Chest X-ray diseases' width="600px"}
 
 ## Pleural effusion
 
-Thin membranes called "pleura" line the lungs and facilitate breathing. Normally there is a small amount of fluid present in the pleura, but certain conditions can cause excess build-up of fluid. This build-up is known as pleural effusion, sometimes referred to as “water on the lungs”.  
+Thin membranes called "pleura" line the lungs and facilitate breathing. Normally there is a small amount of fluid present in the pleura, but certain conditions can cause excess build-up of fluid. This build-up is known as pleural effusion, sometimes referred to as "water on the lungs".
 
 Causes of pleural effusion vary widely, ranging from mild viral infections to serious conditions such as congestive heart failure and cancer. In an upright patient, fluid gathers in the lowest part of the chest, and this build up is visible to an expert.
 
@@ -43,7 +49,7 @@ The data that we are going to use for this project consists of 350 "normal" ches
 
 Let's begin by loading the dataset.
 
-```python
+```python, python
 # The glob module finds all the pathnames matching a specified pattern
 from glob import glob
 import os
@@ -63,14 +69,18 @@ normal_list = glob(normal_path)
 print('Number of cases with pleural effusion: ', len(effusion_list)) 
 print('Number of normal cases: ', len(normal_list))
 ```
-{: .language-python}
 
-```
+```output
 Number of cases with pleural effusion:  350
 Number of normal cases:  350
 ```
-{: .output}
 
 
-{% include links.md %}
+
+:::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Algorithms can be used to detect disease in chest X-rays.
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
