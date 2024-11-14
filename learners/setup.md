@@ -1,15 +1,13 @@
 ---
 title: Setup
 ---
-
-## Overview
+## Software Setup
 
 This lesson is designed to be run on a personal computer.
 All of the software and data used in this lesson are freely available online,
 and instructions on how to obtain them are provided below.
 
 ## Install Python
-
 In this lesson, we will be using Python 3 with some of its most popular scientific libraries.
 Although one can install a plain-vanilla Python and all required libraries by hand, we recommend installing [Anaconda][anaconda-website],
 a Python distribution that comes with everything we need for the lesson.
@@ -37,38 +35,36 @@ you like.
 A Jupyter Notebook provides a browser-based interface for working with Python.
 If you installed Anaconda, you can launch a notebook in two ways:
 
-:::::::::::::::  solution
+:::  spoiler
 
 ## Anaconda Navigator
 
 1. Launch Anaconda Navigator.
   It might ask you if you'd like to send anonymized usage information to Anaconda developers:
-  ![Anaconda Navigator first launch](
-  {{ page.root }}{% link fig/anaconda-navigator-first-launch.png %})
+  ![Anaconda Navigator first launch](fig/anaconda-navigator-first-launch.png){width='100%'}
   Make your choice and click "Ok, and don't show again" button.
 2. Find the "Notebook" tab and click on the "Launch" button:
-  ![Anaconda Navigator Notebook launch](
-  {{ page.root }}{% link fig/anaconda-navigator-notebook-launch.png %})
+  ![Anaconda Navigator Notebook launch](fig/anaconda-navigator-notebook-launch.png)
   Anaconda will open a new browser window or tab with a Notebook Dashboard showing you the
   contents of your Home (or User) folder.
 3. Navigate to the `data` directory by clicking on the directory names leading to it:
   `Desktop`, `swc-python`, then `data`:
-  ![Anaconda Navigator Notebook directory](
-  {{ page.root }}{% link fig/jupyter-notebook-data-directory.png %})
+  ![Anaconda Navigator Notebook directory](fig/jupyter-notebook-data-directory.png)
 4. Launch the notebook by clicking on the "New" button and then selecting "Python 3":
-  ![Anaconda Navigator Notebook directory](
-  {{ page.root }}{% link fig/jupyter-notebook-launch-notebook.png %})
+  ![Anaconda Navigator Notebook directory](fig/jupyter-notebook-launch-notebook.png)
   
 
-:::::::::::::::::::::::::
+:::
 
-:::::::::::::::  solution
+:::  spoiler
 
 ## Command line (Terminal)
 
 1\. Navigate to the `data` directory:
 
-:::::::::::::::  solution
+
+
+::::::::::::::  spoiler
 
 ## Unix shell
 
@@ -81,7 +77,7 @@ cd ~/Desktop/swc-python/data
 
 :::::::::::::::::::::::::
 
-:::::::::::::::  solution
+::::::::::::  spoiler
 
 ## Command Prompt (Windows)
 
@@ -98,7 +94,7 @@ cd /D %userprofile%\Desktop\swc-python\data
 
 2\. Start Jupyter server
 
-:::::::::::::::  solution
+::::::::::::  spoiler
 
 ## Unix shell
 
@@ -108,33 +104,29 @@ jupyter notebook
 
 :::::::::::::::::::::::::
 
-:::::::::::::::  solution
+:::::::::::::  spoiler
 
 ## Command Prompt (Windows)
 
 ```source
 python -m notebook
 ```
-
 :::::::::::::::::::::::::
+
 
 3\. Launch the notebook by clicking on the "New" button on the right and selecting "Python 3"
 from the drop-down menu:
-![Anaconda Navigator Notebook directory](
-{{ page.root }}{% link fig/jupyter-notebook-launch-notebook2.png %})
+![Anaconda Navigator Notebook directory](fig/jupyter-notebook-launch-notebook2.png)
 
 
-:::::::::::::::::::::::::
+:::
 
-  <!-- vertical spacer -->
 
 ## Option B: Cloud Notebook
 
 Colaboratory, or "Colab", is a cloud service that allows you to run a Jupyter-like Notebook in a web browser. To open a notebook, visit the [Colaboratory website][google-colab]. You can upload your datasets using the "Files" panel on the left side of the page.
 
 ![](fig/colab_files.png){alt='Google Colab'}
-
-
 
 [anaconda-website]: https://www.anaconda.com/
 [anaconda-instructions]: https://carpentries.github.io/workshop-template/#python

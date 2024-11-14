@@ -23,7 +23,7 @@ If a model is making a prediction, many of us would like to know how the decisio
 
 Saliency maps use color to illustrate the extent to which a region of an image contributes to a given decision. Let's plot some saliency maps for our model:
 
-```python, python
+```python
 # !pip install tf_keras_vis
 from matplotlib import cm
 from tf_keras_vis.gradcam import Gradcam
@@ -83,7 +83,7 @@ While saliency maps may offer us interesting insights about regions of an image 
 
 There are multiple methods for producing saliency maps to explain how a particular model is making predictions. The method we have been using is called GradCam++, but how does this method compare to another? Use this code to compare GradCam++ with ScoreCam.
 
-```python, python
+```python
 def plot_map2(cam1, cam2, classe, prediction, img):
     """
     Plot the image.

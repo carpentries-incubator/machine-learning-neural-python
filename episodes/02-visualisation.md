@@ -23,7 +23,7 @@ exercises: 10
 
 In the previous section, we set up a dataset comprising 700 chest X-rays. Half of the X-rays are labelled "normal" and half are labelled as "pleural effusion". Let's take a look at some of the images.
 
-```python, python
+```python
 # cv2 is openCV, a popular computer vision library
 import cv2
 from matplotlib import pyplot as plt 
@@ -98,7 +98,7 @@ If you made 10 predictions and 5 were correct, your accuracy is 50%.
 
 Consider an image as a matrix in which the value of each pixel corresponds to a number that determines a tone or color. Let's load one of our images:
 
-```python, python
+```python
 import numpy as np 
 
 file_idx = 56
@@ -125,7 +125,7 @@ Greyscale images have only one channel.
 Most greyscale images are 8 bits per channel or 16 bits per channel.
 For a greyscale image with 8 bits per channel, each value in the matrix represents a tone between black (0) and white (255).
 
-```python, python
+```python
 image = cv2.imread(example, cv2.IMREAD_GRAYSCALE)
 print(image.shape)
 ```
@@ -136,14 +136,14 @@ print(image.shape)
 
 Let's briefly display the matrix of values, and then see how these same values are rendered as an image.
 
-```python, python
+```python
 # Print a 10 by 10 chunk of the matrix
 print(image[35:45, 30:40])
 ```
 
 ![](fig/greyscale_example_numpy.png){alt='Example greyscale numpy array' width="400px"}
 
-```python, python
+```python
 # Plot the same chunk as an image
 plt.imshow(image[35:45, 30:40], cmap='gray', vmin=0, vmax=255)
 ```
@@ -154,7 +154,7 @@ plt.imshow(image[35:45, 30:40], cmap='gray', vmin=0, vmax=255)
 
 In the next episode, we'll be building and training a model. Let's prepare our data for the modelling phase. For convenience, we'll begin by loading all of the images and corresponding labels and assigning them to a list.
 
-```python, python
+```python
 # create a list of effusion images and labels
 dataset_effusion = [cv2.imread(fn, cv2.IMREAD_GRAYSCALE) for fn in effusion_list]
 label_effusion = np.ones(len(dataset_effusion))
@@ -170,7 +170,7 @@ labels = np.concatenate([label_effusion, label_normal])
 
 Let's also downsample the images, reducing the size from (512, 512) to (256,256).
 
-```python, python
+```python
 # Downsample the images from (512,512) to (256,256)
 dataset = [cv2.resize(img, (256,256)) for img in dataset]
 
@@ -200,7 +200,7 @@ print(f"Matrix Dimensions: {dataset.shape}")
 
 We could plot the images by indexing them on `dataset`, e.g., we can plot the first image in the dataset with:
 
-```python, python
+```python
 idx = 0
 vals = dataset[idx].flatten()
 plt.imshow(dataset[idx], cmap='gray', vmin=min(vals), vmax=max(vals))

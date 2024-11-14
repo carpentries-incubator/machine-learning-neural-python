@@ -66,7 +66,7 @@ Filters provide a mechanism for emphasising aspects of an input image. For examp
 
 Before training a convolutional neural network, we will first need to define the architecture. We can do this using the Keras and Tensorflow libraries.
 
-```python, python
+```python
 # Create the architecture of our convolutional neural network, using
 # the tensorflow library
 from tensorflow.random import set_seed
@@ -125,7 +125,7 @@ model = Model(inputs=inputs, outputs=outputs)
 
 We can view the architecture of the model:
 
-```python, python
+```python
 model.summary()
 ```
 

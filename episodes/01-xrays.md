@@ -49,7 +49,7 @@ The data that we are going to use for this project consists of 350 "normal" ches
 
 Let's begin by loading the dataset.
 
-```python, python
+```python
 # The glob module finds all the pathnames matching a specified pattern
 from glob import glob
 import os

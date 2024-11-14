@@ -25,7 +25,7 @@ Through training, we seek an optimal set of model parameters. Using an optimizat
 
 Batch size is the number of training examples processed before the model parameters are updated. An epoch is one complete pass through all of the training data. In an epoch, we use all of the training examples once.
 
-```python, python
+```python
 from tensorflow.keras import optimizers
 from tensorflow.keras.callbacks import ModelCheckpoint
 
@@ -52,7 +52,7 @@ hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=32),
 
 We can now plot the results of the training. "Loss" should drop over successive epochs and accuracy should increase.
 
-```python, python
+```python
 plt.plot(hist.history['loss'], 'b-', label='train loss')
 plt.plot(hist.history['val_loss'], 'r-', label='val loss')
 plt.ylabel('Loss')
@@ -74,7 +74,7 @@ plt.show()
 
 In this step, we present the unseen test dataset to our trained network and evaluate the performance.
 
-```python, python
+```python
 from tensorflow.keras.models import load_model 
 
 # Open the best model saved during training
@@ -84,7 +84,7 @@ print('\nNeural network weights updated to the best epoch.')
 
 Now that we've loaded the best model, we can evaluate the accuracy on our test data.
 
-```python, python
+```python
 # We use the evaluate function to evaluate the accuracy of our model in the test group
 print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, verbose=0)[1]}")
 ```

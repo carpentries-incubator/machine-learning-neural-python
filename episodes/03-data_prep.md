@@ -24,7 +24,7 @@ As we have done in previous projects, we will want to split our data into subset
 
 To ensure reproducibility, we should set the random state of the splitting method. This means that Python's random number generator will produce the same "random" split in future.
 
-```python, python
+```python
 from sklearn.model_selection import train_test_split
 
 # Our Tensorflow model requires the input to be:
@@ -62,7 +62,7 @@ We have a small dataset, which increases the chance of overfitting our model. If
 
 To artificially increase the size of our training set, we can use `ImageDataGenerator`. This function generates new data by applying random transformations to our source images while our model is training.
 
-```python, python
+```python
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 # Define what kind of transformations we would like to apply
@@ -77,7 +77,7 @@ datagen = ImageDataGenerator(
 
 For the sake of interest, let's take a look at some examples of the augmented images!
 
-```python, python
+```python
 # specify path to source data
 path = os.path.join("chest_xrays")
 batch_size=5
