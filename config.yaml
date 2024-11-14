@@ -33,7 +33,7 @@ life_cycle: 'beta'
 license: 'CC-BY 4.0'
 
 # Link to the source repository for this lesson
-source: 'https://github.com/fishtree-attempt/machine-learning-neural-python/'
+source: 'https://github.com/carpentries-incubator/machine-learning-neural-python'
 
 # Default branch of your lesson
 branch: 'main'
@@ -88,7 +88,6 @@ profiles:
 
 
 carpentry_description: Lesson Description
-url: https://preview.carpentries.org/machine-learning-neural-python
+url: 'https://carpentries-incubator.github.io/machine-learning-neural-python'
 analytics: carpentries
 lang: en
-workbench-beta: yes
