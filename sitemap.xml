@@ -28,7 +28,13 @@
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/aio.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/discuss.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/images.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/index.html</loc>
@@ -61,16 +67,34 @@
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/aio.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/discuss.html</loc>
   </url>
   <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor/reference.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/key-points.html</loc>
   </url>
   <url>
     <loc>https://carpentries-incubator.github.io/machine-learning-neural-python/profiles.html</loc>
