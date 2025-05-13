@@ -21,7 +21,7 @@ The data that we are going to use for this project consists of 700 chest X-rays.
 
 > Xiaosong Wang, Yifan Peng, Le Lu, Zhiyong Lu, Mohammadhadi Bagheri, Ronald Summers, ChestX-ray8: Hospital-scale Chest X-ray Database and Benchmarks on Weakly-Supervised Classification and Localization of Common Thorax Diseases, IEEE CVPR, pp. 3462-3471, 2017
 
-1. Download [chest\_xrays.zip](./data/chest_xrays.zip).
+1. Download [chest\_xrays.zip](https://github.com/carpentries-incubator/machine-learning-neural-python/raw/refs/heads/main/episodes/data/chest_xrays.zip).
 2. Create a folder called `carpentries-ml-neural` on your Desktop.
 3. Move downloaded files to `carpentries-ml-neural`.
 
