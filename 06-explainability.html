@@ -427,7 +427,41 @@ for our model:</p>
 <span id="cb1-46"><a href="#cb1-46" tabindex="-1"></a>    </span>
 <span id="cb1-47"><a href="#cb1-47" tabindex="-1"></a>    plot_map(cam, _class, _prediction[<span class="dv">0</span>][<span class="dv">0</span>], SEED_INPUT)</span></code></pre>
 </div>
-<figure><img src="fig/saliency.png" alt="Saliency maps" width="600" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="sanity-checks-for-saliency-maps">Sanity checks for saliency maps<a class="anchor" aria-label="anchor" href="#sanity-checks-for-saliency-maps"></a></h2>
+<figure><img src="fig/saliency.png" alt="Saliency maps" width="600" class="figure mx-auto d-block"></figure><div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<ol style="list-style-type: upper-alpha"><li>Choose three saliency maps from your outputs and describe:</li>
+</ol><ul><li>Where the model focused its attention</li>
+<li>Whether this attention seems clinically meaningful</li>
+<li>Any surprising or questionable results</li>
+</ul><p>Discuss with a partner: does the model seem to be making decisions
+for the right reasons?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha"><li>You may find that some maps highlight areas around the lungs,
+suggesting the model is learning useful clinical features. Other maps
+might focus on irrelevant regions (e.g., borders or artifacts), which
+could suggest model overfitting or dataset biases.</li>
+</ol><p>Interpreting these results requires domain knowledge and critical
+thinking. This exercise is designed to foster discussion rather than
+provide a single right answer.</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="sanity-checks-for-saliency-maps">Sanity checks for saliency maps<a class="anchor" aria-label="anchor" href="#sanity-checks-for-saliency-maps"></a></h2>
 <hr class="half-width"><p>While saliency maps may offer us interesting insights about regions
 of an image contributing to a model’s output, there are suggestions that
 this kind of visual assessment can be misleading. For example, the
