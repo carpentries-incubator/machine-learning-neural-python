@@ -958,39 +958,52 @@ generalization.</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="partitioning-into-training-and-test-sets">Partitioning into training and test sets<a class="anchor" aria-label="anchor" href="#partitioning-into-training-and-test-sets"></a>
+<section><h2 class="section-heading" id="partitioning-the-dataset">Partitioning the dataset<a class="anchor" aria-label="anchor" href="#partitioning-the-dataset"></a>
 </h2>
 <hr class="half-width">
-<p>As we have done in previous projects, we will want to split our data
-into subsets for training and testing. The training set is used for
-building our model and our test set is used for evaluation.</p>
-<p>To ensure reproducibility, we should set the random state of the
-splitting method. This means that Python’s random number generator will
-produce the same “random” split in future.</p>
+<p>Before training our model, we must split the dataset into three
+subsets:</p>
+<ul>
+<li>
+<strong>Training set</strong>: Used to train the model.</li>
+<li>
+<strong>Validation set</strong>: Used to tune parameters and monitor
+for overfitting.</li>
+<li>
+<strong>Test set</strong>: Used for final performance
+evaluation.</li>
+</ul>
+<p>This separation helps ensure that our model generalizes to new,
+unseen data.</p>
+<p>To ensure reproducibility, we set a <code>random_state</code>, which
+controls the random number generator and guarantees the same split every
+time we run the code.</p>
+<p>TensorFlow expects image input in the format:</p>
+<p><code>[batch_size, height, width, channels]</code></p>
+<p>So we’ll also expand our image and label arrays to include the final
+channel dimension (grayscale images have 1 channel).</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Our Tensorflow model requires the input to be:</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># [batch, height, width, n_channels]</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># So we need to add a dimension to the dataset and labels.</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co"># </span></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co"># Ellipsis (...) is shorthand for selecting with ":" across dimensions. </span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># np.newaxis expands the selection by one dimension.</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>dataset <span class="op">=</span> dataset[..., np.newaxis]</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>labels <span class="op">=</span> labels[..., np.newaxis]</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Reshape arrays to include a channel dimension:</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># [height, width] → [height, width, 1]</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>dataset_expanded <span class="op">=</span> dataset[..., np.newaxis]</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>labels_expanded <span class="op">=</span> labels[..., np.newaxis]</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co"># Create training and test sets (85% train, 15% test)</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>dataset_train, dataset_test, labels_train, labels_test <span class="op">=</span> train_test_split(</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    dataset_expanded, labels_expanded, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Create training and test sets</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>dataset_train, dataset_test, labels_train, labels_test <span class="op">=</span> train_test_split(dataset, labels, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co"># Create a validation set</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>dataset_train, dataset_val, labels_train, labels_val <span class="op">=</span> train_test_split(dataset_train, labels_train, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"No. images, x_dim, y_dim, colors) (No. labels, 1)</span><span class="ch">\n</span><span class="st">"</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train: </span><span class="sc">{</span>dataset_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>labels_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation: </span><span class="sc">{</span>dataset_val<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>labels_val<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test: </span><span class="sc">{</span>dataset_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>labels_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co"># Further split training set to create validation set (15% of remaining data)</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>dataset_train, dataset_val, labels_train, labels_val <span class="op">=</span> train_test_split(</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    dataset_train, labels_train, test_size<span class="op">=</span><span class="fl">0.15</span>, random_state<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"No. images, x_dim, y_dim, colors) (No. labels, 1)</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Train: </span><span class="sc">{</span>dataset_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>labels_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Validation: </span><span class="sc">{</span>dataset_val<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>labels_val<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test: </span><span class="sc">{</span>dataset_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">, </span><span class="sc">{</span>labels_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1004,13 +1017,15 @@ Test: (105, 256, 256, 1), (105, 1)</code></pre>
 </section><section><h2 class="section-heading" id="data-augmentation">Data Augmentation<a class="anchor" aria-label="anchor" href="#data-augmentation"></a>
 </h2>
 <hr class="half-width">
-<p>We have a small dataset, which increases the chance of overfitting
-our model. If our model is overfitted, it becomes less able to
-generalize to data outside the training data.</p>
-<p>To artificially increase the size of our training set, we can use
-<code>ImageDataGenerator</code>. This function generates new data by
-applying random transformations to our source images while our model is
-training.</p>
+<p>Our dataset is small, which increases the risk of
+<strong>overfitting</strong>, when a model learns patterns specific to
+the training set but performs poorly on new data.</p>
+<p><strong>Data augmentation</strong> helps address this by creating
+modified versions of the training images on-the-fly using random
+transformations. This teaches the model to become more robust to
+variations it might encounter in real-world data.</p>
+<p>We can use <code>ImageDataGenerator</code> to define the types of
+augmentation to apply.</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -1034,14 +1049,13 @@ training.</p>
 <div class="callout-content">
 <ol style="list-style-type: upper-alpha">
 <li>Modify the <code>ImageDataGenerator</code> to include one or more of
-the following:
+the following:</li>
+</ol>
 <ul>
 <li><code>rotation_range=20</code></li>
 <li><code>zoom_range=0.2</code></li>
 <li><code>horizontal_flip=True</code></li>
 </ul>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -1050,7 +1064,7 @@ the following:
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Here’s an example:</li>
@@ -1112,15 +1126,17 @@ Can you still tell they are chest X-rays?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
-<li>You should see images that are rotated, flipped, or zoomed. While
-they may look distorted, these changes are realistic enough to help the
-model learn robustness. However, for medical images, care must be taken
-— some transformations (like flipping) may alter anatomical meaning if
-not used correctly.</li>
+<li>The augmented images may appear rotated, zoomed, or flipped.<br>
+While they might look distorted, they remain visually recognizable as
+chest X-rays. These augmentations help the model generalize better to
+real-world variability.</li>
 </ol>
+<p>In medical imaging, always consider clinical context. Some
+transformations, like left-right flipping, could lead to anatomically
+incorrect inputs if not handled carefully.</p>
 </div>
 </div>
 </div>
