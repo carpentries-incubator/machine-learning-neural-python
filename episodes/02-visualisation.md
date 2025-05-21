@@ -156,7 +156,7 @@ plt.imshow(image[35:45, 30:40], cmap='gray', vmin=0, vmax=255)
 
 ## Image pre-processing
 
-In the next episode, we'll be building and training a model. Let's prepare our data for the modelling phase. For convenience, we'll begin by loading all of the images and corresponding labels and assigning them to a list.
+In the next section, we'll be building and training a model. Let's prepare our data for the modelling phase. For convenience, we'll begin by loading all of the images and corresponding labels and assigning them to a list.
 
 ```python
 # create a list of effusion images and labels
@@ -172,7 +172,15 @@ dataset = dataset_effusion + dataset_normal
 labels = np.concatenate([label_effusion, label_normal])
 ```
 
-Let's also downsample the images, reducing the size from (512, 512) to (256,256).
+### Downsampling
+
+X-ray images are often high resolution, which can be useful for detailed clinical interpretation. However, for training a machine learning model, especially in an educational or prototype setting, using smaller images can reduce:
+
+- Memory usage: smaller images require less RAM and storage.
+- Computation time: smaller images train faster.
+- Overfitting risk: smaller inputs reduce the number of parameters and complexity.
+
+For these reasons, we will downsample each image from 512×512 pixels to 256×256 pixels. This still preserves important features (like fluid in the lungs) while reducing the computational cost.
 
 ```python
 # Downsample the images from (512,512) to (256,256)
@@ -186,6 +194,8 @@ print(dataset[0].shape)
 (256, 256)
 ```
 
+### Standardisation
+
 Before training a model, it's important to scale input data. A common approach is standardization, which adjusts the pixel values so that each image has zero mean and unit variance. This helps neural networks learn more effectively by ensuring that the input data is centered and scaled.
 
 ```python
@@ -194,6 +204,8 @@ Before training a model, it's important to scale input data. A common approach i
 for i in range(len(dataset)):
   dataset[i] = (dataset[i] - np.mean(dataset[i])) / np.std(dataset[i])
 ```
+
+### Reshaping
 
 Finally, we'll convert our dataset from a list to an array. We are expecting it to be (700, 256, 256), representing 700 images (350 effusion and 350 normal), each with dimensions 256×256.
 
