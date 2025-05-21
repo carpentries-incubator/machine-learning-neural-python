@@ -96,6 +96,8 @@ Later, we'll use it as baseline for evaluating a neural network.
 
 :::::::::::::::::::::::::
 
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## How does a computer see an image?
 
 Consider an image as a matrix in which the value of each pixel corresponds to a number that determines a tone or color. Let's load one of our images:
@@ -186,7 +188,7 @@ print(dataset[0].shape)
 
 Before training a model, it's important to scale input data. A common approach is standardization, which adjusts the pixel values so that each image has zero mean and unit variance. This helps neural networks learn more effectively by ensuring that the input data is centered and scaled.
 
-```
+```python
 # Standardize the data
 # For each image: subtract the mean and divide by the standard deviation
 for i in range(len(dataset)):
