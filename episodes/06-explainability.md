@@ -6,16 +6,22 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Review model performance with saliency maps.
+- Understand how saliency maps highlight regions that influence model predictions.
+- Generate saliency maps using GradCAM++ and ScoreCAM.
+- Compare explainability methods and assess their reliability.
+- Reflect on the strengths and limitations of visual explanation techniques.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- What is a saliency map?
-- What aspects of an image contribute to predictions?
+- What is a saliency map, and how is it used to explain model predictions?
+- How do different explainability methods (e.g., GradCAM++ vs. ScoreCAM) compare?
+- What are the limitations of saliency maps in practice?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Explainability
 
@@ -143,9 +149,12 @@ With these three pieces of knowledge it should be possible to identify algorithm
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Saliency maps are a popular form of explainability for imaging models.
-- Saliency maps should be used cautiously.
+- Saliency maps visualize which parts of an image contribute most to a model’s prediction.
+- GradCAM++ and ScoreCAM are commonly used techniques for generating saliency maps in convolutional models.
+- Saliency maps can help build trust in a model, but they may not always reflect true model behavior.
+- Explainability methods should be interpreted cautiously and validated carefully.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
