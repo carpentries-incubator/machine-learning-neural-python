@@ -48,7 +48,7 @@ As time went on, different activation functions were used. For example the tanh 
 
 The problem with both of these is that they suffered from a problem called [model saturation](https://vigir.missouri.edu/~gdesouza/Research/Conference_CDs/IEEE_SSCI_2015/data/7560b423.pdf). This is where very high or very low values are put into the activation function, where the gradient of the line is almost flat. This leads to very slow learning rates (it can take a long time to train models with these activation functions).
 
-Another very popular activation function that tries to tackle this is the rectified linear unit (ReLU) function. This has 0 if the input is negative (inactive) and just gives back the input if it is positive (a measure of how active it is - the metaphor gets rather stretched here). This is much faster at training and gives very good performance, but still suffers model saturation on the negative side. Researchers have tried to get round this with functions like 'leaky' ReLU, where instead of returning 0, negative inputs are multiplied by a very small number.
+One popular activation function that tries to tackle this is the rectified linear unit (ReLU) function. This has 0 if the input is negative (inactive) and just gives back the input if it is positive (a measure of how active it is - the metaphor gets rather stretched here). This is much faster at training and gives very good performance, but still suffers model saturation on the negative side. Researchers have tried to get round this with functions like 'leaky' ReLU, where instead of returning 0, negative inputs are multiplied by a very small number.
 
 ![](fig/ActivationFunctions.png){alt='Activation functions' width="600px"}
 
@@ -70,22 +70,22 @@ Filters provide a mechanism for emphasising aspects of an input image. For examp
 
 Convolutional layers often produce large feature maps — one for each filter. To reduce the size of these maps while retaining the most important features, we use **pooling**.
 
-The most common type is **max pooling**. It works by sliding a small window (usually 2×2) across the feature map and taking the **maximum value** in each region. This reduces the resolution of the feature map by a factor of 2 while keeping the strongest responses.
+The most common type is **max pooling**. It works by sliding a small window (often 2×2) across the feature map and taking the **maximum value** in each region. This reduces the resolution of the feature map (for a 2x2 window by a factor of 2) while keeping the strongest responses.
 
 For example, if we apply max pooling to the following 4×4 matrix:
 
 ```
-[[1, 3, 2, 1],
+[1, 3, 2, 1],
 [5, 6, 1, 2],
 [4, 2, 9, 8],
-[3, 1, 2, 0]]
+[3, 1, 2, 0]
 ```
 
 We get this 2×2 output:
 
 ```
-[[6, 2],
-[4, 9]]
+[6, 2],
+[4, 9]
 ```
 
 Each value in the output is the maximum from a 2×2 window in the input.
@@ -100,7 +100,17 @@ In TensorFlow, max pooling is implemented with the `MaxPool2D()` layer. You'll s
 
 ## Creating a convolutional neural network
 
-Before training a convolutional neural network, we will first define its architecture. To make this process modular and reusable, we’ll write a function called `build_model()` using TensorFlow and Keras.
+Before training a convolutional neural network, we will first define its architecture. The architecture we use in this lesson is intentionally simple. It follows common CNN design principles:
+
+- Repeated use of small convolutional filters (3×3 or 5×5)
+- Max pooling to reduce dimensionality
+- Fully connected layers at the end for classification
+
+This architecture is loosely inspired by classic CNNs such as LeNet-5 and VGGNet. It strikes a balance between performance and clarity. It’s small enough to train on a CPU, but expressive enough to learn meaningful features from medical images.
+
+More complex architectures (like DenseNet) are used in real-world medical imaging applications. But for a small dataset and classroom setting, our custom architecture is ideal for learning.
+
+To make this process modular and reusable, we’ll write a function called `build_model()` using TensorFlow and Keras.
 
 ```python
 from tensorflow.keras.models import Model
