@@ -249,8 +249,6 @@
 <li><a href="#max-pooling">Max pooling</a></li>
 <li><a href="#dropout">Dropout</a></li>
 <li><a href="#creating-a-convolutional-neural-network">Creating a convolutional neural network</a></li>
-<li><a href="#choosing-and-modifying-the-architecture">Choosing and modifying the architecture</a></li>
-<li><a href="#batch-normalization">Batch normalization</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -756,123 +754,6 @@ learning capacity?</li>
 therefore increases the number of learnable parameters. The model may be
 able to capture more features, improving learning, but it also risks
 overfitting and will take longer to train.</p>
-</div>
-</div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="choosing-and-modifying-the-architecture">Choosing and modifying the architecture<a class="anchor" aria-label="anchor" href="#choosing-and-modifying-the-architecture"></a></h2>
-<hr class="half-width"><p>There is no single “correct” architecture for a neural network. The
-best design depends on your data, task, and computational constraints.
-Here is a systematic approach to designing and improving your model
-architecture:</p>
-<div class="section level3">
-<h3 id="start-simple">Start simple<a class="anchor" aria-label="anchor" href="#start-simple"></a></h3>
-<p>Begin with a basic model and verify that it can learn from your data.
-It is better to get a simple model working than to over-complicate
-things early.</p>
-</div>
-<div class="section level3">
-<h3 id="use-proven-patterns">Use proven patterns<a class="anchor" aria-label="anchor" href="#use-proven-patterns"></a></h3>
-<p>Borrow ideas from successful models:</p>
-<ul><li>LeNet-5: good for small grayscale images.</li>
-<li>VGG: uses repeated 3×3 convolutions and pooling.</li>
-<li>ResNet or DenseNet: useful for deep networks with skip
-connections.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="tune-hyperparameters-systematically">Tune hyperparameters systematically<a class="anchor" aria-label="anchor" href="#tune-hyperparameters-systematically"></a></h3>
-<p>To improve performance in a structured way, try:</p>
-<ul><li>Manual tuning: Change one variable at a time (e.g., number of
-filters, dropout rate) and observe its effect on validation
-performance.</li>
-<li>Grid search: Define a grid of parameters (e.g., filter sizes,
-learning rates, dropout values) and test all combinations. This is slow
-but thorough.</li>
-<li>Automated tuning: Use tools like <a href="https://keras.io/keras_tuner/" class="external-link">Keras Tuner</a> to automate the
-search for the best architecture.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="evaluate-and-iterate">Evaluate and iterate<a class="anchor" aria-label="anchor" href="#evaluate-and-iterate"></a></h3>
-<p>Use validation performance to guide decisions:</p>
-<ul><li>Does adding filters or layers improve accuracy?</li>
-<li>Is the model overfitting (training accuracy much higher than
-validation)?</li>
-<li>Is training time manageable?</li>
-</ul></div>
-<div class="section level3">
-<h3 id="use-regularization">Use regularization<a class="anchor" aria-label="anchor" href="#use-regularization"></a></h3>
-<p>To reduce overfitting, consider:</p>
-<ul><li>Dropout layers</li>
-<li>Data augmentation</li>
-<li>Early stopping</li>
-</ul></div>
-</section><section><h2 class="section-heading" id="batch-normalization">Batch normalization<a class="anchor" aria-label="anchor" href="#batch-normalization"></a></h2>
-<hr class="half-width"><p><a href="https://keras.io/api/layers/normalization_layers/batch_normalization/" class="external-link">Batch
-normalization</a> is a technique that standardizes the output of a layer
-across each training batch. This helps stabilize and speed up
-training.</p>
-<p>It works by:</p>
-<ul><li>Subtracting the batch mean</li>
-<li>Dividing by the batch standard deviation</li>
-<li>Applying a learnable scale and shift</li>
-</ul><p>You typically insert <code>BatchNormalization()</code> after a
-convolutional or dense layer, and before the activation function:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(<span class="dv">32</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>)(x)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>x <span class="op">=</span> BatchNormalization()(x)</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>x <span class="op">=</span> Activation(<span class="st">'relu'</span>)(x)</span></code></pre>
-</div>
-<p>Benefits can include:</p>
-<ul><li>Faster training</li>
-<li>Reduced sensitivity to weight initialization</li>
-<li>Helps prevent overfitting</li>
-</ul><div id="challenge4" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
-<div class="callout-content">
-<ol style="list-style-type: upper-alpha"><li>Try inserting a BatchNormalization() layer after the first
-convolutional layer in your model, and re-run the training.
-Compare:</li>
-</ol><ul><li>Training time</li>
-<li>Accuracy</li>
-<li>Validation performance</li>
-</ul><p>What changes do you notice?</p>
-</div>
-</div>
-</div>
-<div id="accordionSolution4" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution4" aria-expanded="false" aria-controls="collapseSolution4">
-  <h4 class="accordion-header" id="headingSolution4"> Show me the solution </h4>
-</button>
-<div id="collapseSolution4" class="accordion-collapse collapse" aria-labelledby="headingSolution4" data-bs-parent="#accordionSolution4">
-<div class="accordion-body">
-<ol style="list-style-type: upper-alpha"><li>Adding batch normalization can improve training stability and
-accuracy. Find this line in your model:</li>
-</ol><div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span></code></pre>
-</div>
-<p>Split it into two lines, and insert <code>BatchNormalization()</code>
-before the activation:</p>
-<div class="codewrapper sourceCode" id="cb11">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>)(inputs)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>x <span class="op">=</span> BatchNormalization()(x)</span>
-<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>x <span class="op">=</span> Activation(<span class="st">'relu'</span>)(x)</span></code></pre>
-</div>
-<p>You may notice:</p>
-<ul><li>Smoother training curves</li>
-<li>Higher validation accuracy</li>
-<li>Slightly faster convergence</li>
-</ul><p>Remember to retrain your model after making this change.</p>
 </div>
 </div>
 </div>
