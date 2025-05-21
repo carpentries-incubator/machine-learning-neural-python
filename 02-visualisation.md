@@ -49,6 +49,26 @@ plot_example(random.choice(effusion_list), "Effusion", 1)
 
 ![](fig/example_records.png){alt='Example X-rays' width="600px"}
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a
+reminder of the formula for accuracy, check the solution below).
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions).
+If you made 10 predictions and 5 were correct, your accuracy is 50%.  
+
+
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 ## Can we detect effusion?
 
 Run the following code to flip a coin to select an x-ray from our collection.
@@ -75,26 +95,6 @@ Show the answer:
 # so we'll print in a new cell.
 print(f"The answer is: {coin_flip}!")
 ```
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Exercise
-
-A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a
-reminder of the formula for accuracy, check the solution below).
-
-:::::::::::::::  solution
-
-## Solution
-
-A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions).
-If you made 10 predictions and 5 were correct, your accuracy is 50%.  
-
-
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## How does a computer see an image?
 
