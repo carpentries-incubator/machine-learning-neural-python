@@ -32,6 +32,7 @@ Through training, we seek an optimal set of model parameters. Using an optimizat
 Batch size is the number of training examples processed before the model parameters are updated. An epoch is one complete pass through all of the training data. In an epoch, we use all of the training examples once.
 
 ```python
+import time
 from tensorflow.keras import optimizers
 from tensorflow.keras.callbacks import ModelCheckpoint
 
@@ -47,6 +48,9 @@ model.compile(loss='binary_crossentropy', optimizer=custom_adam, metrics=['acc']
 checkpointer = ModelCheckpoint(filepath='best_model.keras', monitor='val_loss',
                                verbose=1, save_best_only=True)
 
+# Start the timer
+start_time = time.time()
+
 # Now train our network!
 # steps_per_epoch = len(dataset_train)//batch_size
 hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=32), 
@@ -54,6 +58,11 @@ hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=32),
                  epochs=10, 
                  validation_data=(dataset_val, labels_val), 
                  callbacks=[checkpointer])
+
+# End the timer
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(f"Training completed in {elapsed_time:.2f} seconds.")
 ```
 
 We can now plot the results of the training. "Loss" should drop over successive epochs and accuracy should increase.
