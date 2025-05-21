@@ -44,6 +44,33 @@ Causes of pleural effusion vary widely, ranging from mild viral infections to se
 
 For the remainder of this lesson, we will develop an algorithm to detect pleural effusion in chest X-rays. Specifically, using a set of chest X-rays labelled as either "normal" or "pleural effusion", we will train a neural network to classify unseen chest X-rays into one of these classes.
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+A) What are some possible challenges when working with real chest X-ray data?  
+Think about issues related to the data itself (e.g. image quality, labels), as well as how the data might be used in a clinical or machine learning setting.
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Possible challenges include:
+
+- **Label noise**: Labels are often derived from radiology reports using automated tools, and may not be 100% accurate.
+- **Ambiguity in diagnosis**: Even expert radiologists may disagree on the interpretation of an image.
+- **Variability in image quality**: X-rays may be over- or under-exposed, blurry, or taken from non-standard angles.
+- **Presence of confounders**: Images may include pacemakers, tubes, or other devices that distract or bias a model.
+- **Data imbalance**: In real-world datasets, some conditions (like pleural effusion) may be much less common than others.
+- **Generalization**: A model trained on one dataset may not perform well on data from a different hospital or population.
+
+These challenges highlight why data curation, domain expertise, and robust validation are critical in medical machine learning.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Loading the dataset
 
 The data that we are going to use for this project consists of 350 "normal" chest X-rays and 350 X-rays that are labelled as showing evidence pleural effusion. These X-rays are a subset of the public NIH ChestX-ray dataset.
