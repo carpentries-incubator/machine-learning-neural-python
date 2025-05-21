@@ -199,9 +199,8 @@ def build_model(input_shape=(256, 256, 1), dropout_rate=0.6):
     x = GlobalAveragePooling2D()(x)
 
     # Dense (fully connected) layer with 128 neurons for classification
+    # Dropout applied to the 128 activations from the Dense layer
     x = Dense(128, activation='relu')(x)
-
-    # Dropout randomly disables 60% of neurons during training to reduce overfitting
     x = Dropout(dropout_rate)(x)
 
     # Another dense layer with 32 neurons
@@ -337,7 +336,45 @@ This increases the number of filters (feature detectors), and therefore increase
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Choosing and modifying the architecture
 
+There is no single “correct” architecture for a neural network. The best design depends on your data, task, and computational constraints. Here is a systematic approach to designing and improving your model architecture:
+
+### Start simple
+
+Begin with a basic model and verify that it can learn from your data. It is better to get a simple model working than to over-complicate things early.
+
+### Use proven patterns
+
+Borrow ideas from successful models:
+
+- LeNet-5: good for small grayscale images.
+- VGG: uses repeated 3×3 convolutions and pooling.
+- ResNet or DenseNet: useful for deep networks with skip connections.
+
+### Tune hyperparameters systematically
+
+To improve performance in a structured way, try:
+
+- Manual tuning: Change one variable at a time (e.g., number of filters, dropout rate) and observe its effect on validation performance.
+- Grid search: Define a grid of parameters (e.g., filter sizes, learning rates, dropout values) and test all combinations. This is slow but thorough.
+- Automated tuning: Use tools like [Keras Tuner](https://keras.io/keras_tuner/) to automate the search for the best architecture.
+
+### Evaluate and iterate
+
+Use validation performance to guide decisions:
+
+- Does adding filters or layers improve accuracy?
+- Is the model overfitting (training accuracy much higher than validation)?
+- Is training time manageable?
+
+### Use regularization
+
+To reduce overfitting, consider:
+
+- Dropout layers
+- Data augmentation
+- Early stopping
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
