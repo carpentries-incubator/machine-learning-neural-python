@@ -370,17 +370,45 @@ validation loss and accuracy.</li>
 </div>
 </div>
 <section><h2 class="section-heading" id="compile-and-train-your-model">Compile and train your model<a class="anchor" aria-label="anchor" href="#compile-and-train-your-model"></a></h2>
-<hr class="half-width"><p>Now that the model architecture is complete, it is ready to be
-compiled and trained! The distance between our predictions and the true
-values is the error or “loss”. The goal of training is to minimise this
-loss.</p>
-<p>Through training, we seek an optimal set of model parameters. Using
-an optimization algorithm such as gradient descent, our model weights
-are iteratively updated as each batch of data is processed.</p>
-<p>Batch size is the number of training examples processed before the
-model parameters are updated. An epoch is one complete pass through all
-of the training data. In an epoch, we use all of the training examples
-once.</p>
+<hr class="half-width"><p>Now that we’ve defined the architecture of our neural network, the
+next step is to compile and train it.</p>
+<div class="section level3">
+<h3 id="what-does-compiling-a-model-mean">What does “compiling” a model mean?<a class="anchor" aria-label="anchor" href="#what-does-compiling-a-model-mean"></a></h3>
+<p>Compiling sets up the model for training by specifying:</p>
+<ul><li>A loss function, which measures the difference between the model’s
+predictions and the actual labels.</li>
+<li>An optimizer, such as gradient descent, which adjusts the model’s
+internal weights to minimize the loss.</li>
+<li>One or more metrics, such as accuracy, to evaluate performance
+during training.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="what-happens-during-training">What happens during training?<a class="anchor" aria-label="anchor" href="#what-happens-during-training"></a></h3>
+<p>Training is the process of finding the best set of weights to
+minimize the loss. This is done by:</p>
+<ul><li>Making predictions on a batch of training data.</li>
+<li>Comparing those predictions to the true labels using the loss
+function.</li>
+<li>Adjusting the weights to reduce the error, using the optimizer.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="what-are-batch-size-steps-per-epoch-and-epochs">What are batch size, steps per epoch, and epochs?<a class="anchor" aria-label="anchor" href="#what-are-batch-size-steps-per-epoch-and-epochs"></a></h3>
+<ul><li>Batch size is the number of training examples processed together
+before updating the model’s weights.
+<ul><li>Smaller batch sizes use less memory and may generalize better but
+take longer to train.</li>
+<li>Larger batch sizes make faster progress per step but may require
+more memory and can sometimes overfit.</li>
+</ul></li>
+<li>Steps per epoch defines how many batches the model processes in one
+epoch. A typical setting is:
+<code>steps_per_epoch = len(dataset_train) // batch_size</code>
+</li>
+<li>Epochs refers to how many times the model sees the entire training
+dataset.</li>
+</ul><p>Choosing these parameters is a tradeoff between speed, memory usage,
+and performance. You can experiment to find values that work best for
+your data and hardware.</p>
 <div class="codewrapper sourceCode" id="cb1">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -400,21 +428,26 @@ once.</p>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>checkpointer <span class="op">=</span> ModelCheckpoint(filepath<span class="op">=</span><span class="st">'best_model.keras'</span>, monitor<span class="op">=</span><span class="st">'val_loss'</span>,</span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>                               verbose<span class="op">=</span><span class="dv">1</span>, save_best_only<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co"># Start the timer</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co"># Now train our network!</span></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="co"># steps_per_epoch = len(dataset_train)//batch_size</span></span>
-<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>hist <span class="op">=</span> model.fit(datagen.flow(dataset_train, labels_train, batch_size<span class="op">=</span><span class="dv">32</span>), </span>
-<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>                 steps_per_epoch<span class="op">=</span><span class="dv">15</span>, </span>
-<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>                 epochs<span class="op">=</span><span class="dv">10</span>, </span>
-<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>                 validation_data<span class="op">=</span>(dataset_val, labels_val), </span>
-<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>                 callbacks<span class="op">=</span>[checkpointer])</span>
-<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="co"># End the timer</span></span>
-<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
-<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>elapsed_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
-<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training completed in </span><span class="sc">{</span>elapsed_time<span class="sc">:.2f}</span><span class="ss"> seconds."</span>)</span></code></pre>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co"># Training parameters</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>batch_size <span class="op">=</span> <span class="dv">32</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>steps_per_epoch <span class="op">=</span> <span class="bu">len</span>(dataset_train) <span class="op">//</span> batch_size</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>epochs<span class="op">=</span><span class="dv">10</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co"># Start the timer</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>start_time <span class="op">=</span> time.time()</span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co"># Now train our network!</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="co"># steps_per_epoch = len(dataset_train)//batch_size</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>hist <span class="op">=</span> model.fit(datagen.flow(dataset_train, labels_train, batch_size<span class="op">=</span>batch_size), </span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>                 steps_per_epoch<span class="op">=</span>steps_per_epoch, </span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>                 epochs<span class="op">=</span>epochs, </span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a>                 validation_data<span class="op">=</span>(dataset_val, labels_val), </span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a>                 callbacks<span class="op">=</span>[checkpointer])</span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co"># End the timer</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>end_time <span class="op">=</span> time.time()</span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>elapsed_time <span class="op">=</span> end_time <span class="op">-</span> start_time</span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training completed in </span><span class="sc">{</span>elapsed_time<span class="sc">:.2f}</span><span class="ss"> seconds."</span>)</span></code></pre>
 </div>
 <p>We can now plot the results of the training. “Loss” should drop over
 successive epochs and accuracy should increase.</p>
@@ -475,6 +508,7 @@ dropout rate)</li>
 generalization. Always compare the training and validation accuracy/loss
 to decide.</li>
 </ol></div>
+</div>
 </div>
 </div>
 </div>
