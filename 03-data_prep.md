@@ -120,7 +120,7 @@ datagen = ImageDataGenerator(
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
-Now let's view the affect on our X-rays!:
+Now let's view the effect on our X-rays!:
 
 ```python
 # specify path to source data
