@@ -81,6 +81,26 @@ for image_id in range(10):
 
 ![](fig/saliency.png){alt='Saliency maps' width="600px"}
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+A) Choose three saliency maps from your outputs and describe:
+
+- Where the model focused its attention
+- Whether this attention seems clinically meaningful
+- Any surprising or questionable results
+
+Discuss with a partner: does the model seem to be making decisions for the right reasons?
+
+:::::::::::::::  solution
+
+A) You may find that some maps highlight areas around the lungs, suggesting the model is learning useful clinical features. Other maps might focus on irrelevant regions (e.g., borders or artifacts), which could suggest model overfitting or dataset biases.
+
+Interpreting these results requires domain knowledge and critical thinking. This exercise is designed to foster discussion rather than provide a single right answer.
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::
+
 ## Sanity checks for saliency maps
 
 While saliency maps may offer us interesting insights about regions of an image contributing to a model's output, there are suggestions that this kind of visual assessment can be misleading. For example, the following abstract is from a paper entitled "[Sanity Checks for Saliency Maps](https://arxiv.org/abs/1810.03292)":
@@ -144,7 +164,6 @@ This raises the question, should these algorithms be used at all?
 This is part of a larger problem with explainability of complex models in machine learning. The generally accepted answer is to know **how your model works** and to know **how your explainability algorithm works** as well as to **understand your data**.
 
 With these three pieces of knowledge it should be possible to identify algorithms appropriate for your task, and to understand any shortcomings in their approaches.
-
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
