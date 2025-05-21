@@ -6,16 +6,22 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Train a convolutational neural network for classification.
-- Evalute the network's performance on a test set.
+- Compile a neural network with a suitable loss function and optimizer.
+- Train a convolutional neural network using batches of data.
+- Monitor model performance during training using training and validation loss and accuracy.
+- Evaluate a trained model on a held-out test set.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How do I train a neural network?
+- How is a neural network trained to make better predictions?
+- What do training loss and accuracy tell us?
+- How do we evaluate a model’s performance on unseen data?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Compile and train your model
 
@@ -97,7 +103,11 @@ Accuracy in test group: 0.80
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- During the training process we iteratively update the model to minimise error.
+- Neural networks are trained by adjusting weights to minimize a loss function using optimization algorithms like Adam.
+- Training is done in batches over multiple epochs to gradually improve performance.
+- Validation data helps detect overfitting and track generalization during training.
+- The best model can be selected by monitoring validation loss and saved for future use.
+- Final performance should be evaluated on a separate test set that the model has not seen during training.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
