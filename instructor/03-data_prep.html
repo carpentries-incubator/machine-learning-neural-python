@@ -434,34 +434,96 @@ training.</p>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    zoom_range<span class="op">=</span><span class="dv">0</span>,</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>    horizontal_flip<span class="op">=</span><span class="va">False</span>)</span></code></pre>
 </div>
-<p>For the sake of interest, let’s take a look at some examples of the
-augmented images!</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div id="exercise" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise" class="callout-inner">
+<h3 class="callout-title">Exercise</h3>
+<div class="callout-content">
+<ol style="list-style-type: upper-alpha"><li>Modify the <code>ImageDataGenerator</code> to include one or more of
+the following:
+<ul><li><code>rotation_range=20</code></li>
+<li><code>zoom_range=0.2</code></li>
+<li><code>horizontal_flip=True</code></li>
+</ul></li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha"><li>Here’s an example:</li>
+</ol><div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># specify path to source data</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>path <span class="op">=</span> os.path.join(<span class="st">"chest_xrays"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>batch_size<span class="op">=</span><span class="dv">5</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>val_generator <span class="op">=</span> datagen.flow_from_directory(</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>        path, color_mode<span class="op">=</span><span class="st">"rgb"</span>,</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>        target_size<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>),</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>        batch_size<span class="op">=</span>batch_size)</span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="kw">def</span> plot_images(images_arr):</span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">20</span>))</span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a>    axes <span class="op">=</span> axes.flatten()</span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a>    <span class="cf">for</span> img, ax <span class="kw">in</span> <span class="bu">zip</span>(images_arr, axes):</span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a>        ax.imshow(img.astype(<span class="st">'uint8'</span>))</span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a>    plt.show()</span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>augmented_images <span class="op">=</span> [val_generator[<span class="dv">0</span>][<span class="dv">0</span>][<span class="dv">0</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(batch_size)]</span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>plot_images(augmented_images)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>datagen <span class="op">=</span> ImageDataGenerator(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    rotation_range<span class="op">=</span><span class="dv">20</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    zoom_range<span class="op">=</span><span class="fl">0.2</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    horizontal_flip<span class="op">=</span><span class="va">True</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span></code></pre>
 </div>
-<figure><img src="../fig/xray_augmented.png" alt="X-ray augmented" width="1200" class="figure mx-auto d-block"></figure><p>The images look a little strange, but that’s the idea! When our model
-sees something unusual in real-life, it will be better adapted to deal
-with it.</p>
+</div>
+</div>
+</div>
+</div>
+<p>Now let’s view the affect on our X-rays!:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># specify path to source data</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>path <span class="op">=</span> os.path.join(<span class="st">"chest_xrays"</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>batch_size<span class="op">=</span><span class="dv">5</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>val_generator <span class="op">=</span> datagen.flow_from_directory(</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>        path, color_mode<span class="op">=</span><span class="st">"rgb"</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>        target_size<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>        batch_size<span class="op">=</span>batch_size)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a><span class="kw">def</span> plot_images(images_arr):</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">20</span>,<span class="dv">20</span>))</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>    axes <span class="op">=</span> axes.flatten()</span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>    <span class="cf">for</span> img, ax <span class="kw">in</span> <span class="bu">zip</span>(images_arr, axes):</span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>        ax.imshow(img.astype(<span class="st">'uint8'</span>))</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>    plt.show()</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>augmented_images <span class="op">=</span> [val_generator[<span class="dv">0</span>][<span class="dv">0</span>][<span class="dv">0</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(batch_size)]</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>plot_images(augmented_images)</span></code></pre>
+</div>
+<figure><img src="../fig/xray_augmented.png" alt="X-ray augmented" width="1200" class="figure mx-auto d-block"></figure><div id="exercise-1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-1" class="callout-inner">
+<h3 class="callout-title">Exercise</h3>
+<div class="callout-content">
+<ol style="list-style-type: upper-alpha"><li>How do the new augmentations affect the appearance of the
+X-rays?<br>
+Can you still tell they are chest X-rays?</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha"><li>You should see images that are rotated, flipped, or zoomed. While
+they may look distorted, these changes are realistic enough to help the
+model learn robustness. However, for medical images, care must be taken
+— some transformations (like flipping) may alter anatomical meaning if
+not used correctly.</li>
+</ol></div>
+</div>
+</div>
+</div>
 <p>Now we have some data to work with, let’s start building our
 model.</p>
 <div id="keypoints1" class="callout keypoints">

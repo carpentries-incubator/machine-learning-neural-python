@@ -426,7 +426,50 @@ successive epochs and accuracy should increase.</p>
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">'lower right'</span>)</span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>plt.show()</span></code></pre>
 </div>
-<figure><img src="../fig/training_curves.png" alt="Training curves" width="600" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="evaluating-your-model-on-the-held-out-test-set">Evaluating your model on the held-out test set<a class="anchor" aria-label="anchor" href="#evaluating-your-model-on-the-held-out-test-set"></a></h2>
+<figure><img src="../fig/training_curves.png" alt="Training curves" width="600" class="figure mx-auto d-block"></figure><div id="exercise" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise" class="callout-inner">
+<h3 class="callout-title">Exercise</h3>
+<div class="callout-content">
+<p>Examine the training and validation curves.</p>
+<ol style="list-style-type: upper-alpha"><li>What does it mean if the training loss continues to decrease, but
+the validation loss starts increasing?<br></li>
+<li>Suggest two actions you could take to reduce overfitting in this
+situation.<br></li>
+<li>Bonus: Try increasing the dropout rate in your model. What happens
+to the validation accuracy?</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha"><li><p>If the training loss decreases while the validation loss
+increases, the model is <strong>overfitting</strong> — it’s learning the
+training data too well and struggling to generalize to unseen
+data.</p></li>
+<li><p>You could:</p></li>
+</ol><ul><li>
+<strong>Increase regularization</strong> (e.g. by raising the
+dropout rate)</li>
+<li><strong>Add more training data</strong></li>
+<li><strong>Use data augmentation</strong></li>
+<li>
+<strong>Simplify the model</strong> to reduce capacity</li>
+</ul><ol start="3" style="list-style-type: upper-alpha"><li>Increasing dropout may lower performance slightly but improve
+generalization. Always compare the training and validation accuracy/loss
+to decide.</li>
+</ol></div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="evaluating-your-model-on-the-held-out-test-set">Evaluating your model on the held-out test set<a class="anchor" aria-label="anchor" href="#evaluating-your-model-on-the-held-out-test-set"></a></h2>
 <hr class="half-width"><p>In this step, we present the unseen test dataset to our trained
 network and evaluate the performance.</p>
 <div class="codewrapper sourceCode" id="cb3">

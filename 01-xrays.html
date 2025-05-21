@@ -408,6 +408,55 @@ detect pleural effusion in chest X-rays. Specifically, using a set of
 chest X-rays labelled as either “normal” or “pleural effusion”, we will
 train a neural network to classify unseen chest X-rays into one of these
 classes.</p>
+<div id="exercise" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise" class="callout-inner">
+<h3 class="callout-title">Exercise</h3>
+<div class="callout-content">
+<ol style="list-style-type: upper-alpha"><li>What are some possible challenges when working with real chest X-ray
+data?<br>
+Think about issues related to the data itself (e.g. image quality,
+labels), as well as how the data might be used in a clinical or machine
+learning setting.</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha"><li>Possible challenges include:</li>
+</ol><ul><li>
+<strong>Label noise</strong>: Labels are often derived from
+radiology reports using automated tools, and may not be 100%
+accurate.</li>
+<li>
+<strong>Ambiguity in diagnosis</strong>: Even expert radiologists
+may disagree on the interpretation of an image.</li>
+<li>
+<strong>Variability in image quality</strong>: X-rays may be over-
+or under-exposed, blurry, or taken from non-standard angles.</li>
+<li>
+<strong>Presence of confounders</strong>: Images may include
+pacemakers, tubes, or other devices that distract or bias a model.</li>
+<li>
+<strong>Data imbalance</strong>: In real-world datasets, some
+conditions (like pleural effusion) may be much less common than
+others.</li>
+<li>
+<strong>Generalization</strong>: A model trained on one dataset may
+not perform well on data from a different hospital or population.</li>
+</ul><p>These challenges highlight why data curation, domain expertise, and
+robust validation are critical in medical machine learning.</p>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="loading-the-dataset">Loading the dataset<a class="anchor" aria-label="anchor" href="#loading-the-dataset"></a></h2>
 <hr class="half-width"><p>The data that we are going to use for this project consists of 350
 “normal” chest X-rays and 350 X-rays that are labelled as showing
