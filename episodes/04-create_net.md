@@ -66,6 +66,38 @@ In a convolutional layer, a matrix of values referred to as a "filter" or "kerne
 
 Filters provide a mechanism for emphasising aspects of an input image. For example, a filter may emphasise object edges. See [setosa.io](https://setosa.io/ev/image-kernels/) for a visual demonstration of the effect of different filters.
 
+## Max pooling
+
+Convolutional layers often produce large feature maps — one for each filter. To reduce the size of these maps while retaining the most important features, we use **pooling**.
+
+The most common type is **max pooling**. It works by sliding a small window (usually 2×2) across the feature map and taking the **maximum value** in each region. This reduces the resolution of the feature map by a factor of 2 while keeping the strongest responses.
+
+For example, if we apply max pooling to the following 4×4 matrix:
+
+```
+[[1, 3, 2, 1],
+[5, 6, 1, 2],
+[4, 2, 9, 8],
+[3, 1, 2, 0]]
+```
+
+We get this 2×2 output:
+
+```
+[[6, 2],
+[4, 9]]
+```
+
+Each value in the output is the maximum from a 2×2 window in the input.
+
+### Why use max pooling?
+
+- **Reduces computation** by shrinking the feature maps
+- **Adds translation tolerance** — the model is less sensitive to small shifts in the image
+- **Keeps the strongest features** while discarding low-importance details
+
+In TensorFlow, max pooling is implemented with the `MaxPool2D()` layer. You'll see it applied multiple times in our network to gradually reduce the size of the feature maps and focus on the most prominent features.
+
 ## Creating a convolutional neural network
 
 Before training a convolutional neural network, we will first define its architecture. To make this process modular and reusable, we’ll write a function called `build_model()` using TensorFlow and Keras.
