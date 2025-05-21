@@ -1,7 +1,7 @@
 ---
 title: Training and evaluation
-teaching: 20
-exercises: 10
+teaching: 40
+exercises: 20
 ---
 
 ::::::::::::::::::::::::::::::::::::::: objectives
