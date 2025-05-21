@@ -1458,20 +1458,19 @@ called <code>build_model()</code> using TensorFlow and Keras.</p>
 <span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a>    x <span class="op">=</span> GlobalAveragePooling2D()(x)</span>
 <span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a></span>
 <span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a>    <span class="co"># Dense (fully connected) layer with 128 neurons for classification</span></span>
-<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a></span>
-<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>    <span class="co"># Dropout randomly disables 60% of neurons during training to reduce overfitting</span></span>
-<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a>    x <span class="op">=</span> Dropout(dropout_rate)(x)</span>
-<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a>    <span class="co"># Another dense layer with 32 neurons</span></span>
-<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a></span>
-<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a>    <span class="co"># Final output layer: a single neuron with sigmoid activation (for binary classification)</span></span>
-<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a>    outputs <span class="op">=</span> Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>)(x)</span>
-<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a>    <span class="co"># Build the model</span></span>
-<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a>    model <span class="op">=</span> Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs)</span>
-<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>    <span class="co"># Dropout applied to the 128 activations from the Dense layer</span></span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>    x <span class="op">=</span> Dropout(dropout_rate)(x)</span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a>    <span class="co"># Another dense layer with 32 neurons</span></span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a></span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a>    <span class="co"># Final output layer: a single neuron with sigmoid activation (for binary classification)</span></span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a>    outputs <span class="op">=</span> Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>)(x)</span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a>    <span class="co"># Build the model</span></span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a>    model <span class="op">=</span> Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs)</span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre>
 </div>
 <div id="exercise" class="callout challenge">
 <div class="callout-square">
@@ -1625,6 +1624,66 @@ overfitting and will take longer to train.</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="choosing-and-modifying-the-architecture">Choosing and modifying the architecture<a class="anchor" aria-label="anchor" href="#choosing-and-modifying-the-architecture"></a>
+</h2>
+<hr class="half-width">
+<p>There is no single “correct” architecture for a neural network. The
+best design depends on your data, task, and computational constraints.
+Here is a systematic approach to designing and improving your model
+architecture:</p>
+<div class="section level3">
+<h3 id="start-simple">Start simple<a class="anchor" aria-label="anchor" href="#start-simple"></a>
+</h3>
+<p>Begin with a basic model and verify that it can learn from your data.
+It is better to get a simple model working than to over-complicate
+things early.</p>
+</div>
+<div class="section level3">
+<h3 id="use-proven-patterns">Use proven patterns<a class="anchor" aria-label="anchor" href="#use-proven-patterns"></a>
+</h3>
+<p>Borrow ideas from successful models:</p>
+<ul>
+<li>LeNet-5: good for small grayscale images.</li>
+<li>VGG: uses repeated 3×3 convolutions and pooling.</li>
+<li>ResNet or DenseNet: useful for deep networks with skip
+connections.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="tune-hyperparameters-systematically">Tune hyperparameters systematically<a class="anchor" aria-label="anchor" href="#tune-hyperparameters-systematically"></a>
+</h3>
+<p>To improve performance in a structured way, try:</p>
+<ul>
+<li>Manual tuning: Change one variable at a time (e.g., number of
+filters, dropout rate) and observe its effect on validation
+performance.</li>
+<li>Grid search: Define a grid of parameters (e.g., filter sizes,
+learning rates, dropout values) and test all combinations. This is slow
+but thorough.</li>
+<li>Automated tuning: Use tools like <a href="https://keras.io/keras_tuner/" class="external-link">Keras Tuner</a> to automate the
+search for the best architecture.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="evaluate-and-iterate">Evaluate and iterate<a class="anchor" aria-label="anchor" href="#evaluate-and-iterate"></a>
+</h3>
+<p>Use validation performance to guide decisions:</p>
+<ul>
+<li>Does adding filters or layers improve accuracy?</li>
+<li>Is the model overfitting (training accuracy much higher than
+validation)?</li>
+<li>Is training time manageable?</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="use-regularization">Use regularization<a class="anchor" aria-label="anchor" href="#use-regularization"></a>
+</h3>
+<p>To reduce overfitting, consider:</p>
+<ul>
+<li>Dropout layers</li>
+<li>Data augmentation</li>
+<li>Early stopping</li>
+</ul>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1644,6 +1703,7 @@ images and are the core of convolutional neural networks (CNNs).</li>
 <li>Dropout helps reduce overfitting by randomly disabling neurons
 during training.</li>
 </ul>
+</div>
 </div>
 </div>
 </div>
