@@ -207,6 +207,37 @@ Non-trainable params: 0
 _________________________________________________________________
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Increase the number of filters in the first convolutional layer from 8 to 16.  
+
+- How does this affect the number of parameters in the model?
+- What effect do you expect this change to have on the model’s learning capacity?
+
+:::::::::::::::  solution
+
+## Solution
+
+In the `build_model()` function, locate this line:
+
+```python
+x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(inputs)
+```
+
+Change it to:
+
+```python
+x = Conv2D(filters=16, kernel_size=3, padding='same', activation='relu')(inputs)
+```
+
+This increases the number of filters (feature detectors), and therefore increases the number of learnable parameters. The model may be able to capture more features, improving learning, but it also risks overfitting and will take longer to train.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
