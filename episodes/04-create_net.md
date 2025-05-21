@@ -68,68 +68,85 @@ Filters provide a mechanism for emphasising aspects of an input image. For examp
 
 ## Creating a convolutional neural network
 
-Before training a convolutional neural network, we will first need to define the architecture. We can do this using the Keras and Tensorflow libraries.
+Before training a convolutional neural network, we will first define its architecture. To make this process modular and reusable, we’ll write a function called `build_model()` using TensorFlow and Keras.
 
 ```python
-# Create the architecture of our convolutional neural network, using
-# the tensorflow library
-from tensorflow.random import set_seed
-from tensorflow.keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Input, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
+from tensorflow.keras.layers import (
+    Input, Conv2D, MaxPool2D,
+    GlobalAveragePooling2D, Dense, Dropout
+)
 
-# set random seed for reproducibility
-set_seed(42)
- 
-# Our input layer should match the input shape of our images.
-# A CNN takes tensors of shape (image_height, image_width, color_channels)
-# We ignore the batch size when describing the input layer
-# Our input images are 256 by 256, plus a single colour channel.
-inputs = Input(shape=(256, 256, 1))
+def build_model(input_shape=(256, 256, 1), dropout_rate=0.6):
+    """
+    Build and return a convolutional neural network with explanatory comments.
 
-# Let's add the first convolutional layer
-x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(inputs)
+    Args:
+        input_shape (tuple): Shape of the input images (H, W, Channels).
+        dropout_rate (float): Dropout rate to use before final dense layers.
 
-# MaxPool layers are similar to convolution layers. 
-# The pooling operation involves sliding a two-dimensional filter over each channel of feature map and selecting the max values.
-# We do this to reduce the dimensions of the feature maps, helping to limit the amount of computation done by the network.
-x = MaxPool2D()(x)
+    Returns:
+        model (tf.keras.Model): Compiled Keras model.
+    """
+    # Define the input layer matching the shape of the images.
+    inputs = Input(shape=input_shape)
 
-# We will add more convolutional layers, followed by MaxPool
-x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(x)
-x = MaxPool2D()(x)
-x = Conv2D(filters=12, kernel_size=3, padding='same', activation='relu')(x)
-x = MaxPool2D()(x)
-x = Conv2D(filters=12, kernel_size=3, padding='same', activation='relu')(x)
-x = MaxPool2D()(x)
-x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
-x = MaxPool2D()(x)
-x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
-x = MaxPool2D()(x)
-x = Conv2D(filters=50, kernel_size=5, padding='same', activation='relu')(x)
+    # First convolutional layer: applies 8 filters (3x3), followed by max pooling
+    # Padding='same' keeps the output size the same as the input.
+    x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(inputs)
+    x = MaxPool2D()(x)
 
-# Global max pooling reduces dimensions back to the input size
-x = GlobalAveragePooling2D()(x)
+    # Add a second convolutional layer + pooling
+    x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(x)
+    x = MaxPool2D()(x)
 
-# Finally we will add two "dense" or "fully connected layers".
-# Dense layers help with the classification task, after features are extracted.
-x = Dense(128, activation='relu')(x)
+    # Add two more convolutional layers with 12 filters, extracting more complex features
+    x = Conv2D(filters=12, kernel_size=3, padding='same', activation='relu')(x)
+    x = MaxPool2D()(x)
+    x = Conv2D(filters=12, kernel_size=3, padding='same', activation='relu')(x)
+    x = MaxPool2D()(x)
 
-# Dropout is a technique to help prevent overfitting that involves deleting neurons.
-x = Dropout(0.6)(x)
+    # Increase the filter size and depth (20 filters, 5x5 kernel)
+    x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
+    x = MaxPool2D()(x)
+    x = Conv2D(filters=20, kernel_size=5, padding='same', activation='relu')(x)
+    x = MaxPool2D()(x)
 
-x = Dense(32, activation='relu')(x)
+    # Final convolutional layer with 50 filters
+    x = Conv2D(filters=50, kernel_size=5, padding='same', activation='relu')(x)
 
-# Our final dense layer has a single output to match the output classes.
-# If we had multi-classes we would match this number to the number of classes.
-outputs = Dense(1, activation='sigmoid')(x)
+    # Global average pooling reduces each feature map to a single value
+    x = GlobalAveragePooling2D()(x)
 
-# Finally, we will define our network with the input and output of the network
-model = Model(inputs=inputs, outputs=outputs)
+    # Dense (fully connected) layer with 128 neurons for classification
+    x = Dense(128, activation='relu')(x)
+
+    # Dropout randomly disables 60% of neurons during training to reduce overfitting
+    x = Dropout(dropout_rate)(x)
+
+    # Another dense layer with 32 neurons
+    x = Dense(32, activation='relu')(x)
+
+    # Final output layer: a single neuron with sigmoid activation (for binary classification)
+    outputs = Dense(1, activation='sigmoid')(x)
+
+    # Build the model
+    model = Model(inputs=inputs, outputs=outputs)
+    return model
 ```
 
-We can view the architecture of the model:
+Now let's build the model and view its architecture:
 
 ```python
+from tensorflow.random import set_seed
+
+# Set the seed for reproducibility
+set_seed(42)
+
+# Call the build_model function to create the model
+model = build_model(input_shape=(256, 256, 1), dropout_rate=0.6)
+
+# View the model architecture
 model.summary()
 ```
 
