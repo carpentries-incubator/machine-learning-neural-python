@@ -38,7 +38,7 @@ custom_adam = optimizers.Adam()
 model.compile(loss='binary_crossentropy', optimizer=custom_adam, metrics=['acc'])
 
 # Save the best model found during training
-checkpointer = ModelCheckpoint(filepath='best_model.hdf5', monitor='val_loss',
+checkpointer = ModelCheckpoint(filepath='best_model.keras', monitor='val_loss',
                                verbose=1, save_best_only=True)
 
 # Now train our network!
@@ -78,7 +78,7 @@ In this step, we present the unseen test dataset to our trained network and eval
 from tensorflow.keras.models import load_model 
 
 # Open the best model saved during training
-best_model = load_model('best_model.hdf5')
+best_model = load_model('best_model.keras')
 print('\nNeural network weights updated to the best epoch.')
 ```
 
