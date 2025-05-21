@@ -100,6 +100,7 @@ datagen = ImageDataGenerator(
     zoom_range=0.2,
     horizontal_flip=True
 )
+```
 
 :::::::::::::::::::::::::
 
