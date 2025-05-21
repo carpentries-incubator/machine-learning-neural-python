@@ -22,29 +22,40 @@ exercises: 10
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
-## Partitioning into training and test sets
+## Partitioning the dataset
 
-As we have done in previous projects, we will want to split our data into subsets for training and testing. The training set is used for building our model and our test set is used for evaluation.
+Before training our model, we must split the dataset into three subsets:
 
-To ensure reproducibility, we should set the random state of the splitting method. This means that Python's random number generator will produce the same "random" split in future.
+- **Training set**: Used to train the model.
+- **Validation set**: Used to tune parameters and monitor for overfitting.
+- **Test set**: Used for final performance evaluation.
+
+This separation helps ensure that our model generalizes to new, unseen data.
+
+To ensure reproducibility, we set a `random_state`, which controls the random number generator and guarantees the same split every time we run the code.
+
+TensorFlow expects image input in the format:  
+
+`[batch_size, height, width, channels]`  
+
+So we’ll also expand our image and label arrays to include the final channel dimension (grayscale images have 1 channel).
+
 
 ```python
 from sklearn.model_selection import train_test_split
 
-# Our Tensorflow model requires the input to be:
-# [batch, height, width, n_channels]
-# So we need to add a dimension to the dataset and labels.
-# 
-# Ellipsis (...) is shorthand for selecting with ":" across dimensions. 
-# np.newaxis expands the selection by one dimension.
-dataset = dataset[..., np.newaxis]
-labels = labels[..., np.newaxis]
+# Reshape arrays to include a channel dimension:
+# [height, width] → [height, width, 1]
+dataset_expanded = dataset[..., np.newaxis]
+labels_expanded = labels[..., np.newaxis]
 
-# Create training and test sets
-dataset_train, dataset_test, labels_train, labels_test = train_test_split(dataset, labels, test_size=0.15, random_state=42)
+# Create training and test sets (85% train, 15% test)
+dataset_train, dataset_test, labels_train, labels_test = train_test_split(
+    dataset_expanded, labels_expanded, test_size=0.15, random_state=42)
 
-# Create a validation set
-dataset_train, dataset_val, labels_train, labels_val = train_test_split(dataset_train, labels_train, test_size=0.15, random_state=42)
+# Further split training set to create validation set (15% of remaining data)
+dataset_train, dataset_val, labels_train, labels_val = train_test_split(
+    dataset_train, labels_train, test_size=0.15, random_state=42)
 
 print("No. images, x_dim, y_dim, colors) (No. labels, 1)\n")
 print(f"Train: {dataset_train.shape}, {labels_train.shape}")
@@ -62,9 +73,11 @@ Test: (105, 256, 256, 1), (105, 1)
 
 ## Data Augmentation
 
-We have a small dataset, which increases the chance of overfitting our model. If our model is overfitted, it becomes less able to generalize to data outside the training data.
+Our dataset is small, which increases the risk of **overfitting**, when a model learns patterns specific to the training set but performs poorly on new data.
 
-To artificially increase the size of our training set, we can use `ImageDataGenerator`. This function generates new data by applying random transformations to our source images while our model is training.
+**Data augmentation** helps address this by creating modified versions of the training images on-the-fly using random transformations. This teaches the model to become more robust to variations it might encounter in real-world data.
+
+We can use `ImageDataGenerator` to define the types of augmentation to apply.
 
 ```python
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
@@ -84,9 +97,10 @@ datagen = ImageDataGenerator(
 ## Exercise
 
 A) Modify the `ImageDataGenerator` to include one or more of the following:
-   - `rotation_range=20`
-   - `zoom_range=0.2`
-   - `horizontal_flip=True`
+
+- `rotation_range=20`
+- `zoom_range=0.2`
+- `horizontal_flip=True`
 
 :::::::::::::::  solution
 
@@ -143,9 +157,10 @@ Can you still tell they are chest X-rays?
 
 ## Solution
 
-A) You should see images that are rotated, flipped, or zoomed.
-While they may look distorted, these changes are realistic enough to help the model learn robustness.
-However, for medical images, care must be taken — some transformations (like flipping) may alter anatomical meaning if not used correctly.
+A) The augmented images may appear rotated, zoomed, or flipped.  
+While they might look distorted, they remain visually recognizable as chest X-rays. These augmentations help the model generalize better to real-world variability.
+
+In medical imaging, always consider clinical context. Some transformations, like left-right flipping, could lead to anatomically incorrect inputs if not handled carefully.
 
 :::::::::::::::::::::::::
 
