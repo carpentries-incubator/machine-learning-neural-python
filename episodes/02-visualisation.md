@@ -6,16 +6,18 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Visually compare normal X-rays with those labelled with pleural effusion.
-- Understand how to use NumPy to store and manipulate image data.
-- Compare a slice of numerical data to its corresponding image.
+- Visually compare chest X-rays with and without pleural effusion.
+- Understand how images are represented as arrays in NumPy.
+- Learn to load and preprocess image data for use in machine learning.
+- Practice displaying image slices and understanding their pixel-level structure.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- How does an image with pleural effusion differ from one without?
-- How is image data represented in a NumPy array?
+- How does a chest X-ray with pleural effusion differ from a normal X-ray?
+- How is an image represented and manipulated as a NumPy array?
+- What steps are needed to prepare images for machine learning?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -212,8 +214,10 @@ plt.imshow(dataset[idx], cmap='gray', vmin=min(vals), vmax=max(vals))
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- In NumPy, RGB images are usually stored as 3-dimensional arrays.
+- Chest X-rays can be visualized and interpreted using standard image libraries like OpenCV and Matplotlib.
+- In NumPy, grayscale images are stored as 2D arrays and RGB images as 3D arrays.
+- Visual inspection helps us understand how disease features appear in imaging data.
+- Preprocessing steps such as resizing and normalization are essential before training models.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
