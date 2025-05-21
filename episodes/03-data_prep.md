@@ -6,17 +6,21 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Generate an augmented dataset
-- Partition data into training and test sets.
+- Split the dataset into training, validation, and test sets.
+- Prepare image and label arrays in the format expected by TensorFlow.
+- Apply basic image augmentation to increase training data diversity.
+- Understand the role of data preprocessing in model generalization.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- What is the purpose of data augmentation?
-- What types of transform can be applied in data augmentation?
+- Why do we divide data into training, validation, and test sets?
+- What is data augmentation, and why is it useful for small datasets?
+- How can random transformations help improve model performance?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## Partitioning into training and test sets
 
@@ -106,11 +110,14 @@ The images look a little strange, but that's the idea! When our model sees somet
 Now we have some data to work with, let's start building our model.
 
 
-
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Data augmentation can help to avoid overfitting.
+- Data should be split into separate sets for training, validation, and testing to fairly evaluate model performance.
+- TensorFlow expects input images in the shape (batch, height, width, channels).
+- Data augmentation increases the variety of training data by applying random transformations.
+- Augmented images help reduce overfitting and improve generalization to new data.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 
