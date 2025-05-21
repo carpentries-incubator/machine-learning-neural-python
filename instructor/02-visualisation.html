@@ -518,7 +518,7 @@ same values are rendered as an image.</p>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>plt.imshow(image[<span class="dv">35</span>:<span class="dv">45</span>, <span class="dv">30</span>:<span class="dv">40</span>], cmap<span class="op">=</span><span class="st">'gray'</span>, vmin<span class="op">=</span><span class="dv">0</span>, vmax<span class="op">=</span><span class="dv">255</span>)</span></code></pre>
 </div>
 <figure><img src="../fig/greyscale_example.png" alt="Example greyscale image" width="400" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="image-pre-processing">Image pre-processing<a class="anchor" aria-label="anchor" href="#image-pre-processing"></a></h2>
-<hr class="half-width"><p>In the next episode, we’ll be building and training a model. Let’s
+<hr class="half-width"><p>In the next section, we’ll be building and training a model. Let’s
 prepare our data for the modelling phase. For convenience, we’ll begin
 by loading all of the images and corresponding labels and assigning them
 to a list.</p>
@@ -537,8 +537,19 @@ to a list.</p>
 <span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a>dataset <span class="op">=</span> dataset_effusion <span class="op">+</span> dataset_normal</span>
 <span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>labels <span class="op">=</span> np.concatenate([label_effusion, label_normal])</span></code></pre>
 </div>
-<p>Let’s also downsample the images, reducing the size from (512, 512)
-to (256,256).</p>
+<div class="section level3">
+<h3 id="downsampling">Downsampling<a class="anchor" aria-label="anchor" href="#downsampling"></a></h3>
+<p>X-ray images are often high resolution, which can be useful for
+detailed clinical interpretation. However, for training a machine
+learning model, especially in an educational or prototype setting, using
+smaller images can reduce:</p>
+<ul><li>Memory usage: smaller images require less RAM and storage.</li>
+<li>Computation time: smaller images train faster.</li>
+<li>Overfitting risk: smaller inputs reduce the number of parameters and
+complexity.</li>
+</ul><p>For these reasons, we will downsample each image from 512×512 pixels
+to 256×256 pixels. This still preserves important features (like fluid
+in the lungs) while reducing the computational cost.</p>
 <div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -553,6 +564,9 @@ to (256,256).</p>
 </h3>
 <pre class="output" tabindex="0"><code>(256, 256)</code></pre>
 </div>
+</div>
+<div class="section level3">
+<h3 id="standardisation">Standardisation<a class="anchor" aria-label="anchor" href="#standardisation"></a></h3>
 <p>Before training a model, it’s important to scale input data. A common
 approach is standardization, which adjusts the pixel values so that each
 image has zero mean and unit variance. This helps neural networks learn
@@ -566,6 +580,9 @@ scaled.</p>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(dataset)):</span>
 <span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  dataset[i] <span class="op">=</span> (dataset[i] <span class="op">-</span> np.mean(dataset[i])) <span class="op">/</span> np.std(dataset[i])</span></code></pre>
 </div>
+</div>
+<div class="section level3">
+<h3 id="reshaping">Reshaping<a class="anchor" aria-label="anchor" href="#reshaping"></a></h3>
 <p>Finally, we’ll convert our dataset from a list to an array. We are
 expecting it to be (700, 256, 256), representing 700 images (350
 effusion and 350 normal), each with dimensions 256×256.</p>
@@ -579,6 +596,34 @@ effusion and 350 normal), each with dimensions 256×256.</p>
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="output" tabindex="0"><code>(700, 256, 256)</code></pre>
+</div>
+<div id="exercise-1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise-1" class="callout-inner">
+<h3 class="callout-title">Exercise</h3>
+<div class="callout-content">
+<p>Pick any grayscale image from your dataset (hint:
+<code>dataset[idx]</code>) and inspect the following:</p>
+<ol style="list-style-type: upper-alpha"><li>What is the new shape of the image array?<br></li>
+<li>What are the mean and standard deviation of the pixel values?</li>
+</ol></div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha"><li>Shape after resizing: <code>dataset[0].shape</code> (256, 256)</li>
+<li>The mean is 0 (<code>dataset[0].mean()</code>) and the standard
+deviation is 1 (<code>dataset[0].std()</code>)</li>
+</ol></div>
+</div>
+</div>
 </div>
 <p>We could plot the images by indexing them on <code>dataset</code>,
 e.g., we can plot the first image in the dataset with:</p>
@@ -604,6 +649,7 @@ imaging data.</li>
 <li>Preprocessing steps like resizing and standardization prepare data
 for machine learning.</li>
 </ul></div>
+</div>
 </div>
 </div>
 </section></div> <!-- / div.lesson-content -->
