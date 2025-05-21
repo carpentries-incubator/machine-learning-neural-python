@@ -98,6 +98,44 @@ Each value in the output is the maximum from a 2×2 window in the input.
 
 In TensorFlow, max pooling is implemented with the `MaxPool2D()` layer. You'll see it applied multiple times in our network to gradually reduce the size of the feature maps and focus on the most prominent features.
 
+## Dropout
+
+When training neural networks, a common problem is overfitting — the model learns to perform very well on the training data but fails to generalize to new, unseen examples.
+
+Dropout is a regularization technique that helps reduce overfitting. During training, dropout temporarily "drops out" (sets to zero) a random subset of neurons in a layer. This forces the network to learn redundant representations and prevents it from becoming too reliant on any single path through the network.
+
+In practice:
+
+- During training: a random set of neurons is deactivated at each step.
+- During inference (prediction), all neurons are used, and the outputs are scaled accordingly.
+
+For example:
+
+```python
+from tensorflow.keras.layers import Dropout
+
+x = Dense(128, activation='relu')(x)
+# Drop 50% of neurons during training
+x = Dropout(0.5)(x)
+```
+
+The value 0.5 is the dropout rate — the fraction of neurons to disable.
+
+::::::::::::::::::::::::::::::::::::::: challenge
+
+A) Why is dropout helpful during training?
+B) What effect do you expect from reducing or removing the dropout rate during training?
+
+::::::::::::::: solution
+
+A) Dropout randomly disables neurons during training, forcing the network to not rely too heavily on any one path. This helps prevent overfitting and improves generalization.
+
+B) With lower or no dropout, training accuracy may rise faster, but validation accuracy may stagnate or decline, indicating overfitting.
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::
+
 ## Creating a convolutional neural network
 
 Before training a convolutional neural network, we will first define its architecture. The architecture we use in this lesson is intentionally simple. It follows common CNN design principles:
@@ -177,6 +215,25 @@ def build_model(input_shape=(256, 256, 1), dropout_rate=0.6):
     return model
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+A) What is the purpose of using multiple convolutional layers in a neural network?  
+B) What would happen if you skipped the pooling layers entirely?  
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Stacking convolutional layers allows the network to learn increasingly abstract features — early layers detect edges and textures, while later layers detect shapes or patterns.
+
+B) Skipping pooling layers means the model retains high-resolution spatial information, but it increases computational cost and can lead to overfitting.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
 Now let's build the model and view its architecture:
 
 ```python
@@ -248,26 +305,6 @@ Trainable params: 54,627
 Non-trainable params: 0
 _________________________________________________________________
 ```
-
-:::::::::::::::::::::::::::::::::::::::  challenge
-
-## Exercise
-
-A) What is the purpose of using multiple convolutional layers in a neural network?  
-B) What would happen if you skipped the pooling layers entirely?  
-
-:::::::::::::::  solution
-
-## Solution
-
-A) Stacking convolutional layers allows the network to learn increasingly abstract features — early layers detect edges and textures, while later layers detect shapes or patterns.
-
-B) Skipping pooling layers means the model retains high-resolution spatial information, but it increases computational cost and can lead to overfitting.
-
-:::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 
 :::::::::::::::::::::::::::::::::::::::  challenge
 
