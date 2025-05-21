@@ -25,11 +25,33 @@ exercises: 20
 
 ## Compile and train your model
 
-Now that the model architecture is complete, it is ready to be compiled and trained! The distance between our predictions and the true values is the error or "loss". The goal of training is to minimise this loss.
+Now that we've defined the architecture of our neural network, the next step is to compile and train it. 
 
-Through training, we seek an optimal set of model parameters. Using an optimization algorithm such as gradient descent, our model weights are iteratively updated as each batch of data is processed.
+### What does "compiling" a model mean?
 
-Batch size is the number of training examples processed before the model parameters are updated. An epoch is one complete pass through all of the training data. In an epoch, we use all of the training examples once.
+Compiling sets up the model for training by specifying:
+
+- A loss function, which measures the difference between the model’s predictions and the actual labels.
+- An optimizer, such as gradient descent, which adjusts the model's internal weights to minimize the loss.
+- One or more metrics, such as accuracy, to evaluate performance during training.
+
+### What happens during training?
+
+Training is the process of finding the best set of weights to minimize the loss. This is done by:
+
+- Making predictions on a batch of training data.
+- Comparing those predictions to the true labels using the loss function.
+- Adjusting the weights to reduce the error, using the optimizer.
+
+### What are batch size, steps per epoch, and epochs?
+
+- Batch size is the number of training examples processed together before updating the model's weights. 
+  - Smaller batch sizes use less memory and may generalize better but take longer to train.
+  - Larger batch sizes make faster progress per step but may require more memory and can sometimes overfit.
+- Steps per epoch defines how many batches the model processes in one epoch. A typical setting is: `steps_per_epoch = len(dataset_train) // batch_size`
+- Epochs refers to how many times the model sees the entire training dataset.
+
+Choosing these parameters is a tradeoff between speed, memory usage, and performance. You can experiment to find values that work best for your data and hardware.
 
 ```python
 import time
@@ -48,14 +70,19 @@ model.compile(loss='binary_crossentropy', optimizer=custom_adam, metrics=['acc']
 checkpointer = ModelCheckpoint(filepath='best_model.keras', monitor='val_loss',
                                verbose=1, save_best_only=True)
 
+# Training parameters
+batch_size = 32
+steps_per_epoch = len(dataset_train) // batch_size
+epochs=10
+
 # Start the timer
 start_time = time.time()
 
 # Now train our network!
 # steps_per_epoch = len(dataset_train)//batch_size
-hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=32), 
-                 steps_per_epoch=15, 
-                 epochs=10, 
+hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=batch_size), 
+                 steps_per_epoch=steps_per_epoch, 
+                 epochs=epochs, 
                  validation_data=(dataset_val, labels_val), 
                  callbacks=[checkpointer])
 
