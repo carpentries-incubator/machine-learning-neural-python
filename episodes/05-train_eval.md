@@ -128,6 +128,108 @@ print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, 
 Accuracy in test group: 0.80
 ```
 
+## Choosing and modifying the architecture
+
+There is no single “correct” architecture for a neural network. The best design depends on your data, task, and computational constraints. Here is a systematic approach to designing and improving your model architecture:
+
+### Start simple
+
+Begin with a basic model and verify that it can learn from your data. It is better to get a simple model working than to over-complicate things early.
+
+### Use proven patterns
+
+Borrow ideas from successful models:
+
+- LeNet-5: good for small grayscale images.
+- VGG: uses repeated 3×3 convolutions and pooling.
+- ResNet or DenseNet: useful for deep networks with skip connections.
+
+### Tune hyperparameters systematically
+
+To improve performance in a structured way, try:
+
+- Manual tuning: Change one variable at a time (e.g., number of filters, dropout rate) and observe its effect on validation performance.
+- Grid search: Define a grid of parameters (e.g., filter sizes, learning rates, dropout values) and test all combinations. This is slow but thorough.
+- Automated tuning: Use tools like [Keras Tuner](https://keras.io/keras_tuner/) to automate the search for the best architecture.
+
+### Evaluate and iterate
+
+Use validation performance to guide decisions:
+
+- Does adding filters or layers improve accuracy?
+- Is the model overfitting (training accuracy much higher than validation)?
+- Is training time manageable?
+
+### Use regularization
+
+To reduce overfitting, consider:
+
+- Dropout layers
+- Data augmentation
+- Early stopping
+
+## Batch normalization
+
+[Batch normalization](https://keras.io/api/layers/normalization_layers/batch_normalization/) is a technique that standardizes the output of a layer across each training batch. This helps stabilize and speed up training.
+
+It works by:
+
+- Subtracting the batch mean
+- Dividing by the batch standard deviation
+- Applying a learnable scale and shift
+
+You typically insert `BatchNormalization()` after a convolutional or dense layer, and before the activation function:
+
+```python
+x = Conv2D(32, kernel_size=3, padding='same')(x)
+x = BatchNormalization()(x)
+x = Activation('relu')(x)
+```
+
+Benefits can include:
+
+- Faster training
+- Reduced sensitivity to weight initialization
+- Helps prevent overfitting
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+A) Try inserting a BatchNormalization() layer after the first convolutional layer in your model, and re-run the training. Compare:
+
+- Training time
+- Accuracy
+- Validation performance
+
+What changes do you notice?
+
+:::::::::::::::  solution
+
+A) Adding batch normalization can improve training stability and accuracy. Find this line in your model:
+
+```python
+x = Conv2D(filters=8, kernel_size=3, padding='same', activation='relu')(inputs)
+```
+
+Split it into two lines, and insert `BatchNormalization()` before the activation:
+
+```python
+x = Conv2D(filters=8, kernel_size=3, padding='same')(inputs)
+x = BatchNormalization()(x)
+x = Activation('relu')(x)
+```
+
+You may notice:
+
+- Smoother training curves
+- Higher validation accuracy
+- Slightly faster convergence
+
+Remember to retrain your model after making this change.
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::
+
 
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
