@@ -553,8 +553,8 @@ called <code>build_model()</code> using TensorFlow and Keras.</p>
 </h3>
 <pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Model</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> (</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    BatchNormalization, Conv2D, Dense, Dropout,</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    GlobalAveragePooling2D, Input, MaxPool2D, </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    Activation, BatchNormalization, Conv2D, Dense,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    Dropout, GlobalAveragePooling2D, Input, MaxPool2D</span>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="kw">def</span> build_model(input_shape<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">1</span>), dropout_rate<span class="op">=</span><span class="fl">0.6</span>):</span>
