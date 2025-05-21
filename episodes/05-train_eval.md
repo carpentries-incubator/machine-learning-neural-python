@@ -76,6 +76,35 @@ plt.show()
 
 ![](fig/training_curves.png){alt='Training curves' width="600px"}
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Examine the training and validation curves.
+
+A) What does it mean if the training loss continues to decrease, but the validation loss starts increasing?  
+B) Suggest two actions you could take to reduce overfitting in this situation.  
+C) Bonus: Try increasing the dropout rate in your model. What happens to the validation accuracy?
+
+:::::::::::::::  solution
+
+## Solution
+
+A) If the training loss decreases while the validation loss increases, the model is **overfitting** — it’s learning the training data too well and struggling to generalize to unseen data.
+
+B) You could:
+- **Increase regularization** (e.g. by raising the dropout rate)
+- **Add more training data**
+- **Use data augmentation**
+- **Simplify the model** to reduce capacity
+
+C) Increasing dropout may lower performance slightly but improve generalization. Always compare the training and validation accuracy/loss to decide.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 ## Evaluating your model on the held-out test set
 
 In this step, we present the unseen test dataset to our trained network and evaluate the performance.
