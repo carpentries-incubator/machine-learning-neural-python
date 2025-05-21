@@ -346,7 +346,9 @@
 <div class="card-body">
 <div class="inner">
 <h3 class="card-title">Questions</h3>
-<ul><li>How do I train a neural network?</li>
+<ul><li>How is a neural network trained to make better predictions?</li>
+<li>What do training loss and accuracy tell us?</li>
+<li>How do we evaluate a model’s performance on unseen data?</li>
 </ul></div>
 </div>
 </div>
@@ -354,8 +356,12 @@
 <div class="card-body">
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
-<ul><li>Train a convolutational neural network for classification.</li>
-<li>Evalute the network’s performance on a test set.</li>
+<ul><li>Compile a neural network with a suitable loss function and
+optimizer.</li>
+<li>Train a convolutional neural network using batches of data.</li>
+<li>Monitor model performance during training using training and
+validation loss and accuracy.</li>
+<li>Evaluate a trained model on a held-out test set.</li>
 </ul></div>
 </div>
 </div>
@@ -450,8 +456,16 @@ our test data.</p>
 <div class="callout-inner">
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
-<ul><li>During the training process we iteratively update the model to
-minimise error.</li>
+<ul><li>Neural networks are trained by adjusting weights to minimize a loss
+function using optimization algorithms like Adam.</li>
+<li>Training is done in batches over multiple epochs to gradually
+improve performance.</li>
+<li>Validation data helps detect overfitting and track generalization
+during training.</li>
+<li>The best model can be selected by monitoring validation loss and
+saved for future use.</li>
+<li>Final performance should be evaluated on a separate test set that
+the model has not seen during training.</li>
 </ul></div>
 </div>
 </div>

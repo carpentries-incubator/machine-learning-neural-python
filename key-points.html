@@ -371,39 +371,75 @@
 <section id="01-xrays"><h2 class="section-heading"><a href="01-xrays.html">Introduction</a></h2>
 <hr class="half-width">
 <ul>
-<li>Algorithms can be used to detect disease in chest X-rays.</li>
+<li>Chest X-rays are widely used to identify lung, heart, and bone
+abnormalities.</li>
+<li>Pleural effusion is a condition where excess fluid builds up around
+the lungs, visible in chest X-rays.</li>
+<li>Large public datasets like the NIH ChestX-ray dataset enable the
+development of machine learning models to detect disease.</li>
+<li>In this lesson, we will train a neural network to classify chest
+X-rays as either “normal” or showing pleural effusion.</li>
+<li>We begin by loading a balanced dataset of labeled chest X-ray
+images.</li>
 </ul></section><section id="02-visualisation"><h2 class="section-heading"><a href="02-visualisation.html">Visualisation</a></h2>
 <hr class="half-width">
 <ul>
-<li>In NumPy, RGB images are usually stored as 3-dimensional
-arrays.</li>
+<li>Chest X-rays can be visualized and interpreted using standard image
+libraries like OpenCV and Matplotlib.</li>
+<li>In NumPy, grayscale images are stored as 2D arrays and RGB images as
+3D arrays.</li>
+<li>Visual inspection helps us understand how disease features appear in
+imaging data.</li>
+<li>Preprocessing steps such as resizing and normalization are essential
+before training models.</li>
 </ul></section><section id="03-data_prep"><h2 class="section-heading"><a href="03-data_prep.html">Data preparation</a></h2>
 <hr class="half-width">
 <ul>
-<li>Data augmentation can help to avoid overfitting.</li>
+<li>Data should be split into separate sets for training, validation,
+and testing to fairly evaluate model performance.</li>
+<li>TensorFlow expects input images in the shape (batch, height, width,
+channels).</li>
+<li>Data augmentation increases the variety of training data by applying
+random transformations.</li>
+<li>Augmented images help reduce overfitting and improve generalization
+to new data.</li>
 </ul></section><section id="04-create_net"><h2 class="section-heading"><a href="04-create_net.html">Neural networks</a></h2>
 <hr class="half-width">
 <ul>
-<li>Dense layers, also known as fully connected layers, are an important
-building block in most neural network architectures. In a dense layer,
-each neuron is connected to every neuron in the preceeding layer.</li>
-<li>Dropout is a method that helps to prevent overfitting by temporarily
-removing neurons from the network.</li>
-<li>The Rectified Linear Unit (ReLU) is an activation function that
-outputs an input if it is positive, and outputs zero if it is not.</li>
-<li>Convolutional neural networks are typically used for imaging
-tasks.</li>
+<li>Neural networks are composed of layers of neurons that transform
+inputs into outputs through learnable parameters.</li>
+<li>Activation functions introduce non-linearity and help neural
+networks learn complex patterns.</li>
+<li>Dense (fully connected) layers connect every neuron from one layer
+to the next and are commonly used in classification tasks.</li>
+<li>Convolutional layers apply filters to extract spatial features from
+images and are the core of convolutional neural networks (CNNs).</li>
+<li>Dropout helps reduce overfitting by randomly disabling neurons
+during training.</li>
 </ul></section><section id="05-train_eval"><h2 class="section-heading"><a href="05-train_eval.html">Training and evaluation</a></h2>
 <hr class="half-width">
 <ul>
-<li>During the training process we iteratively update the model to
-minimise error.</li>
+<li>Neural networks are trained by adjusting weights to minimize a loss
+function using optimization algorithms like Adam.</li>
+<li>Training is done in batches over multiple epochs to gradually
+improve performance.</li>
+<li>Validation data helps detect overfitting and track generalization
+during training.</li>
+<li>The best model can be selected by monitoring validation loss and
+saved for future use.</li>
+<li>Final performance should be evaluated on a separate test set that
+the model has not seen during training.</li>
 </ul></section><section id="06-explainability"><h2 class="section-heading"><a href="06-explainability.html">Explainability</a></h2>
 <hr class="half-width">
 <ul>
-<li>Saliency maps are a popular form of explainability for imaging
-models.</li>
-<li>Saliency maps should be used cautiously.</li>
+<li>Saliency maps visualize which parts of an image contribute most to a
+model’s prediction.</li>
+<li>GradCAM++ and ScoreCAM are commonly used techniques for generating
+saliency maps in convolutional models.</li>
+<li>Saliency maps can help build trust in a model, but they may not
+always reflect true model behavior.</li>
+<li>Explainability methods should be interpreted cautiously and
+validated carefully.</li>
 </ul></section>
 </div>
     </main>

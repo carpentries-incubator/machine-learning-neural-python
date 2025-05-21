@@ -372,7 +372,7 @@
         
 <section id="aio-01-xrays"><p>Content from <a href="01-xrays.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2025-05-05 |
+<p>Last updated on 2025-05-21 |
 
         <a href="https://github.com/carpentries-incubator/machine-learning-neural-python/edit/main/episodes/01-xrays.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -387,8 +387,10 @@
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What kinds of diseases can be observed in chest X-rays?</li>
-<li>What is pleural effusion?</li>
+<li>What kinds of conditions can be detected in chest X-rays?</li>
+<li>How does pleural effusion appear on a chest X-ray?</li>
+<li>How can chest X-ray data be used to train a machine learning
+model?</li>
 </ul>
 </div>
 </div>
@@ -398,8 +400,13 @@
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Gain awareness of the NIH ChestX-ray dataset.</li>
-<li>Load a subset of labelled chest X-rays.</li>
+<li>Understand what chest X-rays show and how they are used in
+diagnosis.</li>
+<li>Recognize pleural effusion as a condition visible on chest
+X-rays.</li>
+<li>Gain familiarity with the NIH ChestX-ray dataset.</li>
+<li>Load and explore a balanced set of labeled chest X-rays for model
+training.</li>
 </ul>
 </div>
 </div>
@@ -500,14 +507,23 @@ Number of normal cases:  350</code></pre>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Algorithms can be used to detect disease in chest X-rays.</li>
+<li>Chest X-rays are widely used to identify lung, heart, and bone
+abnormalities.</li>
+<li>Pleural effusion is a condition where excess fluid builds up around
+the lungs, visible in chest X-rays.</li>
+<li>Large public datasets like the NIH ChestX-ray dataset enable the
+development of machine learning models to detect disease.</li>
+<li>In this lesson, we will train a neural network to classify chest
+X-rays as either “normal” or showing pleural effusion.</li>
+<li>We begin by loading a balanced dataset of labeled chest X-ray
+images.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section><section id="aio-02-visualisation"><p>Content from <a href="02-visualisation.html">Visualisation</a></p>
 <hr>
-<p>Last updated on 2025-05-05 |
+<p>Last updated on 2025-05-21 |
 
         <a href="https://github.com/carpentries-incubator/machine-learning-neural-python/edit/main/episodes/02-visualisation.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -522,9 +538,10 @@ Number of normal cases:  350</code></pre>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How does an image with pleural effusion differ from one
-without?</li>
-<li>How is image data represented in a NumPy array?</li>
+<li>How does a chest X-ray with pleural effusion differ from a normal
+X-ray?</li>
+<li>How is an image represented and manipulated as a NumPy array?</li>
+<li>What steps are needed to prepare images for machine learning?</li>
 </ul>
 </div>
 </div>
@@ -534,10 +551,13 @@ without?</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Visually compare normal X-rays with those labelled with pleural
+<li>Visually compare chest X-rays with and without pleural
 effusion.</li>
-<li>Understand how to use NumPy to store and manipulate image data.</li>
-<li>Compare a slice of numerical data to its corresponding image.</li>
+<li>Understand how images are represented as arrays in NumPy.</li>
+<li>Learn to load and preprocess image data for use in machine
+learning.</li>
+<li>Practice displaying image slices and understanding their pixel-level
+structure.</li>
 </ul>
 </div>
 </div>
@@ -622,7 +642,7 @@ accuracy, check the solution below).</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Accuracy is the fraction of predictions that were correct (correct
@@ -769,15 +789,21 @@ e.g., we can plot the first image in the dataset with:</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>In NumPy, RGB images are usually stored as 3-dimensional
-arrays.</li>
+<li>Chest X-rays can be visualized and interpreted using standard image
+libraries like OpenCV and Matplotlib.</li>
+<li>In NumPy, grayscale images are stored as 2D arrays and RGB images as
+3D arrays.</li>
+<li>Visual inspection helps us understand how disease features appear in
+imaging data.</li>
+<li>Preprocessing steps such as resizing and normalization are essential
+before training models.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section><section id="aio-03-data_prep"><p>Content from <a href="03-data_prep.html">Data preparation</a></p>
 <hr>
-<p>Last updated on 2025-05-05 |
+<p>Last updated on 2025-05-21 |
 
         <a href="https://github.com/carpentries-incubator/machine-learning-neural-python/edit/main/episodes/03-data_prep.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -792,8 +818,10 @@ arrays.</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What is the purpose of data augmentation?</li>
-<li>What types of transform can be applied in data augmentation?</li>
+<li>Why do we divide data into training, validation, and test sets?</li>
+<li>What is data augmentation, and why is it useful for small
+datasets?</li>
+<li>How can random transformations help improve model performance?</li>
 </ul>
 </div>
 </div>
@@ -803,8 +831,13 @@ arrays.</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Generate an augmented dataset</li>
-<li>Partition data into training and test sets.</li>
+<li>Split the dataset into training, validation, and test sets.</li>
+<li>Prepare image and label arrays in the format expected by
+TensorFlow.</li>
+<li>Apply basic image augmentation to increase training data
+diversity.</li>
+<li>Understand the role of data preprocessing in model
+generalization.</li>
 </ul>
 </div>
 </div>
@@ -916,14 +949,21 @@ model.</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Data augmentation can help to avoid overfitting.</li>
+<li>Data should be split into separate sets for training, validation,
+and testing to fairly evaluate model performance.</li>
+<li>TensorFlow expects input images in the shape (batch, height, width,
+channels).</li>
+<li>Data augmentation increases the variety of training data by applying
+random transformations.</li>
+<li>Augmented images help reduce overfitting and improve generalization
+to new data.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section><section id="aio-04-create_net"><p>Content from <a href="04-create_net.html">Neural networks</a></p>
 <hr>
-<p>Last updated on 2025-05-05 |
+<p>Last updated on 2025-05-21 |
 
         <a href="https://github.com/carpentries-incubator/machine-learning-neural-python/edit/main/episodes/04-create_net.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -938,10 +978,11 @@ model.</p>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What is a neural network?</li>
-<li>What are the characteristics of a dense layer?</li>
-<li>What is an activation function?</li>
-<li>What is a convolutional neural network?</li>
+<li>What is a neural network and how is it structured?</li>
+<li>What role do activation functions play in learning?</li>
+<li>What is the difference between dense and convolutional layers?</li>
+<li>Why are convolutional neural networks effective for image
+classification?</li>
 </ul>
 </div>
 </div>
@@ -951,8 +992,11 @@ model.</p>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Become familiar with key components of a neural network.</li>
-<li>Create the architecture for a convolutational neural network.</li>
+<li>Understand the structure and components of a neural network.</li>
+<li>Identify the purpose of activation functions and dense layers.</li>
+<li>Explain how convolutional layers extract features from images.</li>
+<li>Construct a convolutional neural network using TensorFlow and
+Keras.</li>
 </ul>
 </div>
 </div>
@@ -1168,15 +1212,16 @@ _________________________________________________________________</code></pre>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Dense layers, also known as fully connected layers, are an important
-building block in most neural network architectures. In a dense layer,
-each neuron is connected to every neuron in the preceeding layer.</li>
-<li>Dropout is a method that helps to prevent overfitting by temporarily
-removing neurons from the network.</li>
-<li>The Rectified Linear Unit (ReLU) is an activation function that
-outputs an input if it is positive, and outputs zero if it is not.</li>
-<li>Convolutional neural networks are typically used for imaging
-tasks.</li>
+<li>Neural networks are composed of layers of neurons that transform
+inputs into outputs through learnable parameters.</li>
+<li>Activation functions introduce non-linearity and help neural
+networks learn complex patterns.</li>
+<li>Dense (fully connected) layers connect every neuron from one layer
+to the next and are commonly used in classification tasks.</li>
+<li>Convolutional layers apply filters to extract spatial features from
+images and are the core of convolutional neural networks (CNNs).</li>
+<li>Dropout helps reduce overfitting by randomly disabling neurons
+during training.</li>
 </ul>
 </div>
 </div>
@@ -1198,7 +1243,9 @@ tasks.</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>How do I train a neural network?</li>
+<li>How is a neural network trained to make better predictions?</li>
+<li>What do training loss and accuracy tell us?</li>
+<li>How do we evaluate a model’s performance on unseen data?</li>
 </ul>
 </div>
 </div>
@@ -1208,8 +1255,12 @@ tasks.</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Train a convolutational neural network for classification.</li>
-<li>Evalute the network’s performance on a test set.</li>
+<li>Compile a neural network with a suitable loss function and
+optimizer.</li>
+<li>Train a convolutional neural network using batches of data.</li>
+<li>Monitor model performance during training using training and
+validation loss and accuracy.</li>
+<li>Evaluate a trained model on a held-out test set.</li>
 </ul>
 </div>
 </div>
@@ -1310,15 +1361,23 @@ our test data.</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>During the training process we iteratively update the model to
-minimise error.</li>
+<li>Neural networks are trained by adjusting weights to minimize a loss
+function using optimization algorithms like Adam.</li>
+<li>Training is done in batches over multiple epochs to gradually
+improve performance.</li>
+<li>Validation data helps detect overfitting and track generalization
+during training.</li>
+<li>The best model can be selected by monitoring validation loss and
+saved for future use.</li>
+<li>Final performance should be evaluated on a separate test set that
+the model has not seen during training.</li>
 </ul>
 </div>
 </div>
 </div>
 </section></section><section id="aio-06-explainability"><p>Content from <a href="06-explainability.html">Explainability</a></p>
 <hr>
-<p>Last updated on 2025-05-05 |
+<p>Last updated on 2025-05-21 |
 
         <a href="https://github.com/carpentries-incubator/machine-learning-neural-python/edit/main/episodes/06-explainability.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 30 minutes</p>
@@ -1333,8 +1392,11 @@ minimise error.</li>
 <div class="inner">
 <h3 class="card-title">Questions</h3>
 <ul>
-<li>What is a saliency map?</li>
-<li>What aspects of an image contribute to predictions?</li>
+<li>What is a saliency map, and how is it used to explain model
+predictions?</li>
+<li>How do different explainability methods (e.g., GradCAM++
+vs. ScoreCAM) compare?</li>
+<li>What are the limitations of saliency maps in practice?</li>
 </ul>
 </div>
 </div>
@@ -1344,7 +1406,12 @@ minimise error.</li>
 <div class="inner bordered">
 <h3 class="card-title">Objectives</h3>
 <ul>
-<li>Review model performance with saliency maps.</li>
+<li>Understand how saliency maps highlight regions that influence model
+predictions.</li>
+<li>Generate saliency maps using GradCAM++ and ScoreCAM.</li>
+<li>Compare explainability methods and assess their reliability.</li>
+<li>Reflect on the strengths and limitations of visual explanation
+techniques.</li>
 </ul>
 </div>
 </div>
@@ -1497,9 +1564,14 @@ shortcomings in their approaches.</p>
 <h3 class="callout-title">Key Points</h3>
 <div class="callout-content">
 <ul>
-<li>Saliency maps are a popular form of explainability for imaging
-models.</li>
-<li>Saliency maps should be used cautiously.</li>
+<li>Saliency maps visualize which parts of an image contribute most to a
+model’s prediction.</li>
+<li>GradCAM++ and ScoreCAM are commonly used techniques for generating
+saliency maps in convolutional models.</li>
+<li>Saliency maps can help build trust in a model, but they may not
+always reflect true model behavior.</li>
+<li>Explainability methods should be interpreted cautiously and
+validated carefully.</li>
 </ul>
 </div>
 </div>
