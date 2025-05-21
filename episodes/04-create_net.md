@@ -243,6 +243,26 @@ _________________________________________________________________
 
 ## Exercise
 
+A) What is the purpose of using multiple convolutional layers in a neural network?  
+B) What would happen if you skipped the pooling layers entirely?  
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Stacking convolutional layers allows the network to learn increasingly abstract features — early layers detect edges and textures, while later layers detect shapes or patterns.
+
+B) Skipping pooling layers means the model retains high-resolution spatial information, but it increases computational cost and can lead to overfitting.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
 Increase the number of filters in the first convolutional layer from 8 to 16.  
 
 - How does this affect the number of parameters in the model?
