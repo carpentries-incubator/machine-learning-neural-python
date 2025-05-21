@@ -699,7 +699,7 @@ predictions.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Your accuracy is the fraction of correct predictions (e.g. 6 out of
 10 = 60%).<br>
@@ -880,7 +880,7 @@ effusion and 350 normal), each with dimensions 256×256.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Shape after resizing: <code>dataset[0].shape</code> (256, 256)</li>
@@ -1069,7 +1069,7 @@ the following:</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Here’s an example:</li>
@@ -1131,7 +1131,7 @@ Can you still tell they are chest X-rays?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>The augmented images may appear rotated, zoomed, or flipped.<br>
@@ -1323,6 +1323,70 @@ low-importance details</li>
 our network to gradually reduce the size of the feature maps and focus
 on the most prominent features.</p>
 </div>
+</section><section><h2 class="section-heading" id="dropout">Dropout<a class="anchor" aria-label="anchor" href="#dropout"></a>
+</h2>
+<hr class="half-width">
+<p>When training neural networks, a common problem is overfitting — the
+model learns to perform very well on the training data but fails to
+generalize to new, unseen examples.</p>
+<p>Dropout is a regularization technique that helps reduce overfitting.
+During training, dropout temporarily “drops out” (sets to zero) a random
+subset of neurons in a layer. This forces the network to learn redundant
+representations and prevents it from becoming too reliant on any single
+path through the network.</p>
+<p>In practice:</p>
+<ul>
+<li>During training: a random set of neurons is deactivated at each
+step.</li>
+<li>During inference (prediction), all neurons are used, and the outputs
+are scaled accordingly.</li>
+</ul>
+<p>For example:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> Dropout</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>x <span class="op">=</span> Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Drop 50% of neurons during training</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>x <span class="op">=</span> Dropout(<span class="fl">0.5</span>)(x)</span></code></pre>
+</div>
+<p>The value 0.5 is the dropout rate — the fraction of neurons to
+disable.</p>
+<div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<ol style="list-style-type: upper-alpha">
+<li>Why is dropout helpful during training?</li>
+<li>What effect do you expect from reducing or removing the dropout rate
+during training?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha">
+<li><p>Dropout randomly disables neurons during training, forcing the
+network to not rely too heavily on any one path. This helps prevent
+overfitting and improves generalization.</p></li>
+<li><p>With lower or no dropout, training accuracy may rise faster, but
+validation accuracy may stagnate or decline, indicating
+overfitting.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="creating-a-convolutional-neural-network">Creating a convolutional neural network<a class="anchor" aria-label="anchor" href="#creating-a-convolutional-neural-network"></a>
 </h2>
 <hr class="half-width">
@@ -1343,86 +1407,121 @@ medical imaging applications. But for a small dataset and classroom
 setting, our custom architecture is ideal for learning.</p>
 <p>To make this process modular and reusable, we’ll write a function
 called <code>build_model()</code> using TensorFlow and Keras.</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Model</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> (</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    Input, Conv2D, MaxPool2D,</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    GlobalAveragePooling2D, Dense, Dropout</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>)</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="kw">def</span> build_model(input_shape<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">1</span>), dropout_rate<span class="op">=</span><span class="fl">0.6</span>):</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    <span class="co">"""</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="co">    Build and return a convolutional neural network with explanatory comments.</span></span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="co">    Args:</span></span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a><span class="co">        input_shape (tuple): Shape of the input images (H, W, Channels).</span></span>
-<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a><span class="co">        dropout_rate (float): Dropout rate to use before final dense layers.</span></span>
-<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co">    Returns:</span></span>
-<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="co">        model (tf.keras.Model): Compiled Keras model.</span></span>
-<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="co">    """</span></span>
-<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>    <span class="co"># Define the input layer matching the shape of the images.</span></span>
-<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>    inputs <span class="op">=</span> Input(shape<span class="op">=</span>input_shape)</span>
-<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>    <span class="co"># First convolutional layer: applies 8 filters (3x3), followed by max pooling</span></span>
-<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>    <span class="co"># Padding='same' keeps the output size the same as the input.</span></span>
-<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span>
-<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
-<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a></span>
-<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    <span class="co"># Add a second convolutional layer + pooling</span></span>
-<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
-<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>    <span class="co"># Add two more convolutional layers with 12 filters, extracting more complex features</span></span>
-<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">12</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
-<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">12</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
-<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>    <span class="co"># Increase the filter size and depth (20 filters, 5x5 kernel)</span></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">20</span>, kernel_size<span class="op">=</span><span class="dv">5</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
-<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">20</span>, kernel_size<span class="op">=</span><span class="dv">5</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-40"><a href="#cb3-40" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
-<span id="cb3-41"><a href="#cb3-41" tabindex="-1"></a></span>
-<span id="cb3-42"><a href="#cb3-42" tabindex="-1"></a>    <span class="co"># Final convolutional layer with 50 filters</span></span>
-<span id="cb3-43"><a href="#cb3-43" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">50</span>, kernel_size<span class="op">=</span><span class="dv">5</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-44"><a href="#cb3-44" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" tabindex="-1"></a>    <span class="co"># Global average pooling reduces each feature map to a single value</span></span>
-<span id="cb3-46"><a href="#cb3-46" tabindex="-1"></a>    x <span class="op">=</span> GlobalAveragePooling2D()(x)</span>
-<span id="cb3-47"><a href="#cb3-47" tabindex="-1"></a></span>
-<span id="cb3-48"><a href="#cb3-48" tabindex="-1"></a>    <span class="co"># Dense (fully connected) layer with 128 neurons for classification</span></span>
-<span id="cb3-49"><a href="#cb3-49" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-50"><a href="#cb3-50" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" tabindex="-1"></a>    <span class="co"># Dropout randomly disables 60% of neurons during training to reduce overfitting</span></span>
-<span id="cb3-52"><a href="#cb3-52" tabindex="-1"></a>    x <span class="op">=</span> Dropout(dropout_rate)(x)</span>
-<span id="cb3-53"><a href="#cb3-53" tabindex="-1"></a></span>
-<span id="cb3-54"><a href="#cb3-54" tabindex="-1"></a>    <span class="co"># Another dense layer with 32 neurons</span></span>
-<span id="cb3-55"><a href="#cb3-55" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
-<span id="cb3-56"><a href="#cb3-56" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" tabindex="-1"></a>    <span class="co"># Final output layer: a single neuron with sigmoid activation (for binary classification)</span></span>
-<span id="cb3-58"><a href="#cb3-58" tabindex="-1"></a>    outputs <span class="op">=</span> Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>)(x)</span>
-<span id="cb3-59"><a href="#cb3-59" tabindex="-1"></a></span>
-<span id="cb3-60"><a href="#cb3-60" tabindex="-1"></a>    <span class="co"># Build the model</span></span>
-<span id="cb3-61"><a href="#cb3-61" tabindex="-1"></a>    model <span class="op">=</span> Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs)</span>
-<span id="cb3-62"><a href="#cb3-62" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre>
-</div>
-<p>Now let’s build the model and view its architecture:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">from</span> tensorflow.random <span class="im">import</span> set_seed</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co"># Set the seed for reproducibility</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>set_seed(<span class="dv">42</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># Call the build_model function to create the model</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>model <span class="op">=</span> build_model(input_shape<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">1</span>), dropout_rate<span class="op">=</span><span class="fl">0.6</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co"># View the model architecture</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>model.summary()</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> Model</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.layers <span class="im">import</span> (</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    Input, Conv2D, MaxPool2D,</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    GlobalAveragePooling2D, Dense, Dropout</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="kw">def</span> build_model(input_shape<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">1</span>), dropout_rate<span class="op">=</span><span class="fl">0.6</span>):</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="co">    Build and return a convolutional neural network with explanatory comments.</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="co">        input_shape (tuple): Shape of the input images (H, W, Channels).</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="co">        dropout_rate (float): Dropout rate to use before final dense layers.</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="co">        model (tf.keras.Model): Compiled Keras model.</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a>    <span class="co"># Define the input layer matching the shape of the images.</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a>    inputs <span class="op">=</span> Input(shape<span class="op">=</span>input_shape)</span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a>    <span class="co"># First convolutional layer: applies 8 filters (3x3), followed by max pooling</span></span>
+<span id="cb4-22"><a href="#cb4-22" tabindex="-1"></a>    <span class="co"># Padding='same' keeps the output size the same as the input.</span></span>
+<span id="cb4-23"><a href="#cb4-23" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span>
+<span id="cb4-24"><a href="#cb4-24" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
+<span id="cb4-25"><a href="#cb4-25" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" tabindex="-1"></a>    <span class="co"># Add a second convolutional layer + pooling</span></span>
+<span id="cb4-27"><a href="#cb4-27" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-28"><a href="#cb4-28" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
+<span id="cb4-29"><a href="#cb4-29" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" tabindex="-1"></a>    <span class="co"># Add two more convolutional layers with 12 filters, extracting more complex features</span></span>
+<span id="cb4-31"><a href="#cb4-31" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">12</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-32"><a href="#cb4-32" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
+<span id="cb4-33"><a href="#cb4-33" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">12</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-34"><a href="#cb4-34" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
+<span id="cb4-35"><a href="#cb4-35" tabindex="-1"></a></span>
+<span id="cb4-36"><a href="#cb4-36" tabindex="-1"></a>    <span class="co"># Increase the filter size and depth (20 filters, 5x5 kernel)</span></span>
+<span id="cb4-37"><a href="#cb4-37" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">20</span>, kernel_size<span class="op">=</span><span class="dv">5</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-38"><a href="#cb4-38" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
+<span id="cb4-39"><a href="#cb4-39" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">20</span>, kernel_size<span class="op">=</span><span class="dv">5</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-40"><a href="#cb4-40" tabindex="-1"></a>    x <span class="op">=</span> MaxPool2D()(x)</span>
+<span id="cb4-41"><a href="#cb4-41" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" tabindex="-1"></a>    <span class="co"># Final convolutional layer with 50 filters</span></span>
+<span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>    x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">50</span>, kernel_size<span class="op">=</span><span class="dv">5</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a></span>
+<span id="cb4-45"><a href="#cb4-45" tabindex="-1"></a>    <span class="co"># Global average pooling reduces each feature map to a single value</span></span>
+<span id="cb4-46"><a href="#cb4-46" tabindex="-1"></a>    x <span class="op">=</span> GlobalAveragePooling2D()(x)</span>
+<span id="cb4-47"><a href="#cb4-47" tabindex="-1"></a></span>
+<span id="cb4-48"><a href="#cb4-48" tabindex="-1"></a>    <span class="co"># Dense (fully connected) layer with 128 neurons for classification</span></span>
+<span id="cb4-49"><a href="#cb4-49" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">128</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-50"><a href="#cb4-50" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" tabindex="-1"></a>    <span class="co"># Dropout randomly disables 60% of neurons during training to reduce overfitting</span></span>
+<span id="cb4-52"><a href="#cb4-52" tabindex="-1"></a>    x <span class="op">=</span> Dropout(dropout_rate)(x)</span>
+<span id="cb4-53"><a href="#cb4-53" tabindex="-1"></a></span>
+<span id="cb4-54"><a href="#cb4-54" tabindex="-1"></a>    <span class="co"># Another dense layer with 32 neurons</span></span>
+<span id="cb4-55"><a href="#cb4-55" tabindex="-1"></a>    x <span class="op">=</span> Dense(<span class="dv">32</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(x)</span>
+<span id="cb4-56"><a href="#cb4-56" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" tabindex="-1"></a>    <span class="co"># Final output layer: a single neuron with sigmoid activation (for binary classification)</span></span>
+<span id="cb4-58"><a href="#cb4-58" tabindex="-1"></a>    outputs <span class="op">=</span> Dense(<span class="dv">1</span>, activation<span class="op">=</span><span class="st">'sigmoid'</span>)(x)</span>
+<span id="cb4-59"><a href="#cb4-59" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" tabindex="-1"></a>    <span class="co"># Build the model</span></span>
+<span id="cb4-61"><a href="#cb4-61" tabindex="-1"></a>    model <span class="op">=</span> Model(inputs<span class="op">=</span>inputs, outputs<span class="op">=</span>outputs)</span>
+<span id="cb4-62"><a href="#cb4-62" tabindex="-1"></a>    <span class="cf">return</span> model</span></code></pre>
+</div>
+<div id="exercise" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="exercise" class="callout-inner">
+<h3 class="callout-title">Exercise</h3>
+<div class="callout-content">
+<ol style="list-style-type: upper-alpha">
+<li>What is the purpose of using multiple convolutional layers in a
+neural network?<br>
+</li>
+<li>What would happen if you skipped the pooling layers entirely?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div class="accordion-body">
+<ol style="list-style-type: upper-alpha">
+<li><p>Stacking convolutional layers allows the network to learn
+increasingly abstract features — early layers detect edges and textures,
+while later layers detect shapes or patterns.</p></li>
+<li><p>Skipping pooling layers means the model retains high-resolution
+spatial information, but it increases computational cost and can lead to
+overfitting.</p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<p>Now let’s build the model and view its architecture:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">from</span> tensorflow.random <span class="im">import</span> set_seed</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Set the seed for reproducibility</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>set_seed(<span class="dv">42</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a><span class="co"># Call the build_model function to create the model</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>model <span class="op">=</span> build_model(input_shape<span class="op">=</span>(<span class="dv">256</span>, <span class="dv">256</span>, <span class="dv">1</span>), dropout_rate<span class="op">=</span><span class="fl">0.6</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="co"># View the model architecture</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>model.summary()</span></code></pre>
 </div>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -1482,41 +1581,6 @@ Trainable params: 54,627
 Non-trainable params: 0
 _________________________________________________________________</code></pre>
 </div>
-<div id="exercise" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div id="exercise" class="callout-inner">
-<h3 class="callout-title">Exercise</h3>
-<div class="callout-content">
-<ol style="list-style-type: upper-alpha">
-<li>What is the purpose of using multiple convolutional layers in a
-neural network?<br>
-</li>
-<li>What would happen if you skipped the pooling layers entirely?</li>
-</ol>
-</div>
-</div>
-</div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
-</button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
-<div class="accordion-body">
-<ol style="list-style-type: upper-alpha">
-<li><p>Stacking convolutional layers allows the network to learn
-increasingly abstract features — early layers detect edges and textures,
-while later layers detect shapes or patterns.</p></li>
-<li><p>Skipping pooling layers means the model retains high-resolution
-spatial information, but it increases computational cost and can lead to
-overfitting.</p></li>
-</ol>
-</div>
-</div>
-</div>
-</div>
 <div id="exercise-1" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1534,24 +1598,24 @@ learning capacity?</li>
 </div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>In the <code>build_model()</code> function, locate this line:</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span></code></pre>
-</div>
-<p>Change it to:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">16</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span></code></pre>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">8</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span></code></pre>
+</div>
+<p>Change it to:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>x <span class="op">=</span> Conv2D(filters<span class="op">=</span><span class="dv">16</span>, kernel_size<span class="op">=</span><span class="dv">3</span>, padding<span class="op">=</span><span class="st">'same'</span>, activation<span class="op">=</span><span class="st">'relu'</span>)(inputs)</span></code></pre>
 </div>
 <p>This increases the number of filters (feature detectors), and
 therefore increases the number of learnable parameters. The model may be
