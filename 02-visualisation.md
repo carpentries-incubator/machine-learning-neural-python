@@ -80,17 +80,19 @@ print(f"The answer is: {coin_flip}!")
 
 ## Exercise
 
-A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a
-reminder of the formula for accuracy, check the solution below).
+Use the coin-flip X-ray viewer to classify 10 chest X-rays.
+
+- Record whether you think each image is "Normal" or "Effusion".
+- After viewing the answer, mark whether you were correct.
+- Calculate your accuracy: correct predictions ÷ total predictions.
 
 :::::::::::::::  solution
 
 ## Solution
 
-A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions).
-If you made 10 predictions and 5 were correct, your accuracy is 50%.  
-
-
+Your accuracy is the fraction of correct predictions (e.g. 6 out of 10 = 60%).  
+Remember the number! 
+Later, we'll use it as baseline for evaluating a neural network.
 
 :::::::::::::::::::::::::
 
@@ -178,18 +180,22 @@ dataset = [cv2.resize(img, (256,256)) for img in dataset]
 
 # Check the size of the reshaped images
 print(dataset[0].shape)
-
-# Normalize the data
-# Subtract the mean, divide by the standard deviation.
-for i in range(len(dataset)):
-  dataset[i] = (dataset[i] - np.average(dataset[i], axis= (0, 1))) / np.std(dataset[i], axis= (0, 1)) 
 ```
 
 ```output
 (256, 256)
 ```
 
-Finally, we'll convert our dataset from a list to an array. We are expecting it to be (700, 256, 256). That is 700 images (350 effusion cases and 350 normal),  each with a dimension of 256 by 256.
+Before training a model, it's important to scale input data. A common approach is standardization, which adjusts the pixel values so that each image has zero mean and unit variance. This helps neural networks learn more effectively by ensuring that the input data is centered and scaled.
+
+```python
+# Standardize the data
+# For each image: subtract the mean and divide by the standard deviation
+for i in range(len(dataset)):
+  dataset[i] = (dataset[i] - np.mean(dataset[i])) / np.std(dataset[i])
+```
+
+Finally, we'll convert our dataset from a list to an array. We are expecting it to be (700, 256, 256), representing 700 images (350 effusion and 350 normal), each with dimensions 256×256.
 
 ```python
 dataset = np.asarray(dataset, dtype=np.float32)
@@ -214,10 +220,10 @@ plt.imshow(dataset[idx], cmap='gray', vmin=min(vals), vmax=max(vals))
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Chest X-rays can be visualized and interpreted using standard image libraries like OpenCV and Matplotlib.
-- In NumPy, grayscale images are stored as 2D arrays and RGB images as 3D arrays.
+- X-ray images can be loaded and visualized using Python libraries like OpenCV and NumPy.
+- Images are stored as 2D arrays (grayscale) or 3D arrays (RGB).
 - Visual inspection helps us understand how disease features appear in imaging data.
-- Preprocessing steps such as resizing and normalization are essential before training models.
+- Preprocessing steps like resizing and standardization prepare data for machine learning.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
