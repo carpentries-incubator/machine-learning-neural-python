@@ -197,12 +197,19 @@
                   <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         Summary and Schedule
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#introduction">Introduction</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -311,13 +318,17 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Schedule</h1>
       
-
-<p>This lesson gives an introduction to artificial neural networks. We
-begin by an outlining an important application of machine learning in
-healthcare: the development of algorithms for classification of chest
-X-ray images. During the lesson we explore how to prepare and visualise
-data for algorithm development, and construct a neural net that is able
-to classify disease.</p>
+<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a></h2>
+<hr class="half-width"><p>This lesson introduces the core concepts of <strong>artificial neural
+networks</strong> through a practical application in healthcare:
+training a model to classify chest X-ray images.</p>
+<p>You’ll learn how to: - Load and visualize medical imaging data -
+Prepare images for use in machine learning - Build and train a
+convolutional neural network - Evaluate model performance - Explore
+explainability techniques using saliency maps</p>
+<p>By the end of the lesson, you’ll have constructed a neural network
+capable of detecting pleural effusion in chest X-rays — a real-world
+example of how machine learning can assist clinical decision-making.</p>
 <div id="prerequisites" class="callout prereq">
 <div class="callout-square">
 <i class="callout-icon" data-feather="check"></i>
@@ -337,9 +348,7 @@ instructions.</p>
 <p>To get started, follow the setup instructions mentioned to download
 data and install a Python interpreter.</p>
 </div>
-
-
-      <section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
+</section><section id="schedule"><table class="table table schedule table-striped" role="presentation"><tbody><tr><td></td><td><a href="#setup">Setup Instructions</a></td><td> Download files required for the lesson</td>
           </tr><tr><td>
 <span class="visually-hidden">Duration: </span>00h 00m
 </td>
