@@ -6,15 +6,18 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Gain awareness of the NIH ChestX-ray dataset.
-- Load a subset of labelled chest X-rays.
+- Understand what chest X-rays show and how they are used in diagnosis.
+- Recognize pleural effusion as a condition visible on chest X-rays.
+- Gain familiarity with the NIH ChestX-ray dataset.
+- Load and explore a balanced set of labeled chest X-rays for model training.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- What kinds of diseases can be observed in chest X-rays?
-- What is pleural effusion?
+- What kinds of conditions can be detected in chest X-rays?
+- How does pleural effusion appear on a chest X-ray?
+- How can chest X-ray data be used to train a machine learning model?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -79,7 +82,11 @@ Number of normal cases:  350
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Algorithms can be used to detect disease in chest X-rays.
+- Chest X-rays are widely used to identify lung, heart, and bone abnormalities.
+- Pleural effusion is a condition where excess fluid builds up around the lungs, visible in chest X-rays.
+- Large public datasets like the NIH ChestX-ray dataset enable the development of machine learning models to detect disease.
+- In this lesson, we will train a neural network to classify chest X-rays as either “normal” or showing pleural effusion.
+- We begin by loading a balanced dataset of labeled chest X-ray images.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
