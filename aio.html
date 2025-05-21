@@ -476,7 +476,7 @@ learning setting.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Possible challenges include:</li>
@@ -644,7 +644,36 @@ as “pleural effusion”. Let’s take a look at some of the images.</p>
 <span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co"># Plot a record labelled with effusion</span></span>
 <span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>plot_example(random.choice(effusion_list), <span class="st">"Effusion"</span>, <span class="dv">1</span>)</span></code></pre>
 </div>
-<figure><img src="fig/example_records.png" alt="Example X-rays" width="600" class="figure mx-auto d-block"></figure><div id="exercise" class="callout challenge">
+<figure><img src="fig/example_records.png" alt="Example X-rays" width="600" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="can-we-detect-effusion">Can we detect effusion?<a class="anchor" aria-label="anchor" href="#can-we-detect-effusion"></a>
+</h2>
+<hr class="half-width">
+<p>Run the following code to flip a coin to select an x-ray from our
+collection.</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Effusion or not?"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># flip a coin</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>coin_flip <span class="op">=</span> random.choice([<span class="st">"Effusion"</span>, <span class="st">"Normal"</span>])</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="cf">if</span> coin_flip <span class="op">==</span> <span class="st">"Normal"</span>:</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(normal_list)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(effusion_list)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># plot the image</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>image <span class="op">=</span> cv2.imread(fn)</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>plt.imshow(image)</span></code></pre>
+</div>
+<p>Show the answer:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Jupyter doesn't allow us to print the image until the cell has run,</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># so we'll print in a new cell.</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The answer is: </span><span class="sc">{</span>coin_flip<span class="sc">}</span><span class="ss">!"</span>)</span></code></pre>
+</div>
+<div id="exercise" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -674,35 +703,6 @@ correct, your accuracy is 50%.</li>
 </div>
 </div>
 </div>
-</div>
-</section><section><h2 class="section-heading" id="can-we-detect-effusion">Can we detect effusion?<a class="anchor" aria-label="anchor" href="#can-we-detect-effusion"></a>
-</h2>
-<hr class="half-width">
-<p>Run the following code to flip a coin to select an x-ray from our
-collection.</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Effusion or not?"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="co"># flip a coin</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>coin_flip <span class="op">=</span> random.choice([<span class="st">"Effusion"</span>, <span class="st">"Normal"</span>])</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="cf">if</span> coin_flip <span class="op">==</span> <span class="st">"Normal"</span>:</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(normal_list)</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    fn <span class="op">=</span> random.choice(effusion_list)</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="co"># plot the image</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>image <span class="op">=</span> cv2.imread(fn)</span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>plt.imshow(image)</span></code></pre>
-</div>
-<p>Show the answer:</p>
-<div class="codewrapper sourceCode" id="cb3">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Jupyter doesn't allow us to print the image until the cell has run,</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="co"># so we'll print in a new cell.</span></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The answer is: </span><span class="sc">{</span>coin_flip<span class="sc">}</span><span class="ss">!"</span>)</span></code></pre>
 </div>
 </section><section><h2 class="section-heading" id="how-does-a-computer-see-an-image">How does a computer see an image?<a class="anchor" aria-label="anchor" href="#how-does-a-computer-see-an-image"></a>
 </h2>
@@ -1609,7 +1609,7 @@ to the validation accuracy?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li><p>If the training loss decreases while the validation loss
