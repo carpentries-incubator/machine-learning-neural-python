@@ -218,6 +218,26 @@ print(f"Matrix Dimensions: {dataset.shape}")
 (700, 256, 256)
 ```
 
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+Pick any grayscale image from your dataset (hint: `dataset[idx]`) and inspect the following:
+
+A) What is the new shape of the image array?  
+B) What are the mean and standard deviation of the pixel values?  
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Shape after resizing: `dataset[0].shape` (256, 256)
+B) The mean is 0 (`dataset[0].mean()`) and the standard deviation is 1 (`dataset[0].std()`)
+
+:::::::::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::
+
 We could plot the images by indexing them on `dataset`, e.g., we can plot the first image in the dataset with:
 
 ```python
