@@ -79,7 +79,33 @@ datagen = ImageDataGenerator(
     horizontal_flip=False)
 ```
 
-For the sake of interest, let's take a look at some examples of the augmented images!
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+A) Modify the `ImageDataGenerator` to include one or more of the following:
+   - `rotation_range=20`
+   - `zoom_range=0.2`
+   - `horizontal_flip=True`
+
+:::::::::::::::  solution
+
+## Solution
+
+A) Here's an example:
+
+```python
+datagen = ImageDataGenerator(
+    rotation_range=20,
+    zoom_range=0.2,
+    horizontal_flip=True
+)
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Now let's view the affect on our X-rays!:
 
 ```python
 # specify path to source data
@@ -105,7 +131,24 @@ plot_images(augmented_images)
 
 ![](fig/xray_augmented.png){alt='X-ray augmented' width="1200px"}
 
-The images look a little strange, but that's the idea! When our model sees something unusual in real-life, it will be better adapted to deal with it.
+:::::::::::::::::::::::::::::::::::::::  challenge
+
+## Exercise
+
+A) How do the new augmentations affect the appearance of the X-rays?  
+Can you still tell they are chest X-rays?
+
+:::::::::::::::  solution
+
+## Solution
+
+A) You should see images that are rotated, flipped, or zoomed.
+While they may look distorted, these changes are realistic enough to help the model learn robustness.
+However, for medical images, care must be taken — some transformations (like flipping) may alter anatomical meaning if not used correctly.
+
+:::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::::
 
 Now we have some data to work with, let's start building our model.
 
