@@ -6,19 +6,23 @@ exercises: 10
 
 ::::::::::::::::::::::::::::::::::::::: objectives
 
-- Become familiar with key components of a neural network.
-- Create the architecture for a convolutational neural network.
+- Understand the structure and components of a neural network.
+- Identify the purpose of activation functions and dense layers.
+- Explain how convolutional layers extract features from images.
+- Construct a convolutional neural network using TensorFlow and Keras.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 :::::::::::::::::::::::::::::::::::::::: questions
 
-- What is a neural network?
-- What are the characteristics of a dense layer?
-- What is an activation function?
-- What is a convolutional neural network?
+- What is a neural network and how is it structured?
+- What role do activation functions play in learning?
+- What is the difference between dense and convolutional layers?
+- Why are convolutional neural networks effective for image classification?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
+
 
 ## What is a neural network?
 
@@ -190,10 +194,11 @@ _________________________________________________________________
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
-- Dense layers, also known as fully connected layers, are an important building block in most neural network architectures. In a dense layer, each neuron is connected to every neuron in the preceeding layer.
-- Dropout is a method that helps to prevent overfitting by temporarily removing neurons from the network.
-- The Rectified Linear Unit (ReLU) is an activation function that outputs an input if it is positive, and outputs zero if it is not.
-- Convolutional neural networks are typically used for imaging tasks.
+- Neural networks are composed of layers of neurons that transform inputs into outputs through learnable parameters.
+- Activation functions introduce non-linearity and help neural networks learn complex patterns.
+- Dense (fully connected) layers connect every neuron from one layer to the next and are commonly used in classification tasks.
+- Convolutional layers apply filters to extract spatial features from images and are the core of convolutional neural networks (CNNs).
+- Dropout helps reduce overfitting by randomly disabling neurons during training.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
