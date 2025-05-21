@@ -80,21 +80,21 @@ print(f"The answer is: {coin_flip}!")
 
 ## Exercise
 
-A) Manually classify 10 X-rays using the coin flip code. Make a note of your predictive accuracy (hint: for a
-reminder of the formula for accuracy, check the solution below).
+Use the coin-flip X-ray viewer to classify 10 chest X-rays.
+
+- Record whether you think each image is "Normal" or "Effusion".
+- After viewing the answer, mark whether you were correct.
+- Calculate your accuracy: correct predictions ÷ total predictions.
 
 :::::::::::::::  solution
 
 ## Solution
 
-A) Accuracy is the fraction of predictions that were correct (correct predictions / total predictions).
-If you made 10 predictions and 5 were correct, your accuracy is 50%.  
-
-
+Your accuracy is the fraction of correct predictions (e.g. 6 out of 10 = 60%).  
+Remember the number! 
+Later, we'll use it as baseline for evaluating a neural network.
 
 :::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## How does a computer see an image?
 
