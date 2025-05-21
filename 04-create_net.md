@@ -153,8 +153,8 @@ To make this process modular and reusable, we’ll write a function called `buil
 ```python
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import (
-    BatchNormalization, Conv2D, Dense, Dropout,
-    GlobalAveragePooling2D, Input, MaxPool2D, 
+    Activation, BatchNormalization, Conv2D, Dense,
+    Dropout, GlobalAveragePooling2D, Input, MaxPool2D
 )
 
 def build_model(input_shape=(256, 256, 1), dropout_rate=0.6):
