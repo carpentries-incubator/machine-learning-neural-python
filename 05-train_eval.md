@@ -71,7 +71,7 @@ checkpointer = ModelCheckpoint(filepath='best_model.keras', monitor='val_loss',
                                verbose=1, save_best_only=True)
 
 # Training parameters
-batch_size = 32
+batch_size = 16
 steps_per_epoch = len(dataset_train) // batch_size
 epochs=10
 
