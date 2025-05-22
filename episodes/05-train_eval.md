@@ -72,7 +72,6 @@ checkpointer = ModelCheckpoint(filepath='best_model.keras', monitor='val_loss',
 
 # Training parameters
 batch_size = 16
-steps_per_epoch = len(dataset_train) // batch_size
 epochs=10
 
 # Start the timer
@@ -80,8 +79,7 @@ start_time = time.time()
 
 # Now train our network!
 # steps_per_epoch = len(dataset_train)//batch_size
-hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=batch_size), 
-                 steps_per_epoch=steps_per_epoch, 
+hist = model.fit(datagen.flow(dataset_train, labels_train, batch_size=batch_size),
                  epochs=epochs, 
                  validation_data=(dataset_val, labels_val), 
                  callbacks=[checkpointer])
