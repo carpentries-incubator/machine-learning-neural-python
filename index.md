@@ -8,6 +8,7 @@ site: sandpaper::sandpaper_site
 This lesson introduces the core concepts of **artificial neural networks** through a practical application in healthcare: training a model to classify chest X-ray images. 
 
 You’ll learn how to:
+
 - Load and visualize medical imaging data
 - Prepare images for use in machine learning
 - Build and train a convolutional neural network
