@@ -200,29 +200,6 @@ Remember to retrain your model after making this change.
 
 :::::::::::::::::::::::::::::::::::::::
 
-## Evaluating your model on the held-out test set
-
-In this step, we present the unseen test dataset to our trained network and evaluate the performance.
-
-```python
-from tensorflow.keras.models import load_model 
-
-# Open the best model saved during training
-best_model = load_model('best_model.keras')
-print('\nNeural network weights updated to the best epoch.')
-```
-
-Now that we've loaded the best model, we can evaluate the accuracy on our test data.
-
-```python
-# We use the evaluate function to evaluate the accuracy of our model in the test group
-print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, verbose=0)[1]}")
-```
-
-```output
-Accuracy in test group: 0.80
-```
-
 ## Choosing and modifying the architecture
 
 There is no single “correct” architecture for a neural network. The best design depends on your data, task, and computational constraints. Here is a systematic approach to designing and improving your model architecture:
@@ -262,6 +239,29 @@ To reduce overfitting, consider:
 - Dropout layers
 - Data augmentation
 - Early stopping
+
+## Evaluating your model on the held-out test set
+
+In this step, we present the unseen test dataset to our trained network and evaluate the performance.
+
+```python
+from tensorflow.keras.models import load_model 
+
+# Open the best model saved during training
+best_model = load_model('best_model.keras')
+print('\nNeural network weights updated to the best epoch.')
+```
+
+Now that we've loaded the best model, we can evaluate the accuracy on our test data.
+
+```python
+# We use the evaluate function to evaluate the accuracy of our model in the test group
+print(f"Accuracy in test group: {best_model.evaluate(dataset_test, labels_test, verbose=0)[1]}")
+```
+
+```output
+Accuracy in test group: 0.80
+```
 
 :::::::::::::::::::::::::::::::::::::::: keypoints
 
