@@ -370,7 +370,7 @@
         
 <section id="aio-01-xrays"><p>Content from <a href="01-xrays.html">Introduction</a></p>
 <hr>
-<p>Last updated on 2025-05-21 |
+<p>Last updated on 2025-05-22 |
 
         <a href="https://github.com/carpentries-incubator/machine-learning-neural-python/edit/main/episodes/01-xrays.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
@@ -437,24 +437,7 @@ overlooked.</p>
 Wang et al</a>. It illustrates eight common diseases that the authors
 noted could be be detected and even spatially-located in front chest
 x-rays with the use of modern machine learning algorithms.</p>
-<figure><img src="fig/wang_et_al.png" alt="Chest X-ray diseases" width="600" class="figure mx-auto d-block"></figure></section><section><h2 class="section-heading" id="pleural-effusion">Pleural effusion<a class="anchor" aria-label="anchor" href="#pleural-effusion"></a>
-</h2>
-<hr class="half-width">
-<p>Thin membranes called “pleura” line the lungs and facilitate
-breathing. Normally there is a small amount of fluid present in the
-pleura, but certain conditions can cause excess build-up of fluid. This
-build-up is known as pleural effusion, sometimes referred to as “water
-on the lungs”.</p>
-<p>Causes of pleural effusion vary widely, ranging from mild viral
-infections to serious conditions such as congestive heart failure and
-cancer. In an upright patient, fluid gathers in the lowest part of the
-chest, and this build up is visible to an expert.</p>
-<p>For the remainder of this lesson, we will develop an algorithm to
-detect pleural effusion in chest X-rays. Specifically, using a set of
-chest X-rays labelled as either “normal” or “pleural effusion”, we will
-train a neural network to classify unseen chest X-rays into one of these
-classes.</p>
-<div id="exercise" class="callout challenge">
+<figure><img src="fig/wang_et_al.png" alt="Chest X-ray diseases" width="600" class="figure mx-auto d-block"></figure><div id="exercise" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
 </div>
@@ -509,6 +492,23 @@ robust validation are critical in medical machine learning.</p>
 </div>
 </div>
 </div>
+</section><section><h2 class="section-heading" id="pleural-effusion">Pleural effusion<a class="anchor" aria-label="anchor" href="#pleural-effusion"></a>
+</h2>
+<hr class="half-width">
+<p>Thin membranes called “pleura” line the lungs and facilitate
+breathing. Normally there is a small amount of fluid present in the
+pleura, but certain conditions can cause excess build-up of fluid. This
+build-up is known as pleural effusion, sometimes referred to as “water
+on the lungs”.</p>
+<p>Causes of pleural effusion vary widely, ranging from mild viral
+infections to serious conditions such as congestive heart failure and
+cancer. In an upright patient, fluid gathers in the lowest part of the
+chest, and this build up is visible to an expert.</p>
+<p>For the remainder of this lesson, we will develop an algorithm to
+detect pleural effusion in chest X-rays. Specifically, using a set of
+chest X-rays labelled as either “normal” or “pleural effusion”, we will
+train a neural network to classify unseen chest X-rays into one of these
+classes.</p>
 </section><section><h2 class="section-heading" id="loading-the-dataset">Loading the dataset<a class="anchor" aria-label="anchor" href="#loading-the-dataset"></a>
 </h2>
 <hr class="half-width">
@@ -695,7 +695,7 @@ predictions.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Your accuracy is the fraction of correct predictions (e.g. 6 out of
 10 = 60%).<br>
@@ -876,7 +876,7 @@ effusion and 350 normal), each with dimensions 256×256.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Shape after resizing: <code>dataset[0].shape</code> (256, 256)</li>
@@ -1818,7 +1818,7 @@ to the validation accuracy?</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li><p>If the training loss decreases while the validation loss
@@ -1900,7 +1900,7 @@ Compare:</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <ol style="list-style-type: upper-alpha">
 <li>Adding batch normalization can improve training stability and
