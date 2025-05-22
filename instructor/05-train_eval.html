@@ -254,8 +254,8 @@
       <div class="accordion-body">
         <ul><li><a href="#compile-and-train-your-model">Compile and train your model</a></li>
 <li><a href="#batch-normalization">Batch normalization</a></li>
-<li><a href="#evaluating-your-model-on-the-held-out-test-set">Evaluating your model on the held-out test set</a></li>
 <li><a href="#choosing-and-modifying-the-architecture">Choosing and modifying the architecture</a></li>
+<li><a href="#evaluating-your-model-on-the-held-out-test-set">Evaluating your model on the held-out test set</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -583,31 +583,6 @@ before the activation:</p>
 </div>
 </div>
 </div>
-</section><section><h2 class="section-heading" id="evaluating-your-model-on-the-held-out-test-set">Evaluating your model on the held-out test set<a class="anchor" aria-label="anchor" href="#evaluating-your-model-on-the-held-out-test-set"></a></h2>
-<hr class="half-width"><p>In this step, we present the unseen test dataset to our trained
-network and evaluate the performance.</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> load_model </span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Open the best model saved during training</span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>best_model <span class="op">=</span> load_model(<span class="st">'best_model.keras'</span>)</span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Neural network weights updated to the best epoch.'</span>)</span></code></pre>
-</div>
-<p>Now that we’ve loaded the best model, we can evaluate the accuracy on
-our test data.</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># We use the evaluate function to evaluate the accuracy of our model in the test group</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy in test group: </span><span class="sc">{</span>best_model<span class="sc">.</span>evaluate(dataset_test, labels_test, verbose<span class="op">=</span><span class="dv">0</span>)[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre>
-</div>
-<div class="codewrapper">
-<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="output" tabindex="0"><code>Accuracy in test group: 0.80</code></pre>
-</div>
 </section><section><h2 class="section-heading" id="choosing-and-modifying-the-architecture">Choosing and modifying the architecture<a class="anchor" aria-label="anchor" href="#choosing-and-modifying-the-architecture"></a></h2>
 <hr class="half-width"><p>There is no single “correct” architecture for a neural network. The
 best design depends on your data, task, and computational constraints.
@@ -653,7 +628,33 @@ validation)?</li>
 <ul><li>Dropout layers</li>
 <li>Data augmentation</li>
 <li>Early stopping</li>
-</ul><div id="keypoints1" class="callout keypoints">
+</ul></div>
+</section><section><h2 class="section-heading" id="evaluating-your-model-on-the-held-out-test-set">Evaluating your model on the held-out test set<a class="anchor" aria-label="anchor" href="#evaluating-your-model-on-the-held-out-test-set"></a></h2>
+<hr class="half-width"><p>In this step, we present the unseen test dataset to our trained
+network and evaluate the performance.</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.models <span class="im">import</span> load_model </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Open the best model saved during training</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>best_model <span class="op">=</span> load_model(<span class="st">'best_model.keras'</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'</span><span class="ch">\n</span><span class="st">Neural network weights updated to the best epoch.'</span>)</span></code></pre>
+</div>
+<p>Now that we’ve loaded the best model, we can evaluate the accuracy on
+our test data.</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># We use the evaluate function to evaluate the accuracy of our model in the test group</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Accuracy in test group: </span><span class="sc">{</span>best_model<span class="sc">.</span>evaluate(dataset_test, labels_test, verbose<span class="op">=</span><span class="dv">0</span>)[<span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>)</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Accuracy in test group: 0.80</code></pre>
+</div>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -671,7 +672,6 @@ saved for future use.</li>
 <li>Final performance should be evaluated on a separate test set that
 the model has not seen during training.</li>
 </ul></div>
-</div>
 </div>
 </div>
 </section></div> <!-- / div.lesson-content -->
