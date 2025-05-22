@@ -36,14 +36,6 @@ The following figure is from a study by [Xiaosong Wang et al](https://openaccess
 
 ![](fig/wang_et_al.png){alt='Chest X-ray diseases' width="600px"}
 
-## Pleural effusion
-
-Thin membranes called "pleura" line the lungs and facilitate breathing. Normally there is a small amount of fluid present in the pleura, but certain conditions can cause excess build-up of fluid. This build-up is known as pleural effusion, sometimes referred to as "water on the lungs".
-
-Causes of pleural effusion vary widely, ranging from mild viral infections to serious conditions such as congestive heart failure and cancer. In an upright patient, fluid gathers in the lowest part of the chest, and this build up is visible to an expert.
-
-For the remainder of this lesson, we will develop an algorithm to detect pleural effusion in chest X-rays. Specifically, using a set of chest X-rays labelled as either "normal" or "pleural effusion", we will train a neural network to classify unseen chest X-rays into one of these classes.
-
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Exercise
@@ -70,6 +62,13 @@ These challenges highlight why data curation, domain expertise, and robust valid
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
 
+## Pleural effusion
+
+Thin membranes called "pleura" line the lungs and facilitate breathing. Normally there is a small amount of fluid present in the pleura, but certain conditions can cause excess build-up of fluid. This build-up is known as pleural effusion, sometimes referred to as "water on the lungs".
+
+Causes of pleural effusion vary widely, ranging from mild viral infections to serious conditions such as congestive heart failure and cancer. In an upright patient, fluid gathers in the lowest part of the chest, and this build up is visible to an expert.
+
+For the remainder of this lesson, we will develop an algorithm to detect pleural effusion in chest X-rays. Specifically, using a set of chest X-rays labelled as either "normal" or "pleural effusion", we will train a neural network to classify unseen chest X-rays into one of these classes.
 
 ## Loading the dataset
 
